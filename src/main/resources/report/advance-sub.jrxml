@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="advance-sub" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="fa29e797-bc4e-4b3e-9acb-2f2cd4afd70e">
+	<property name="ireport.zoom" value="8.140274938684001"/>
+	<property name="ireport.x" value="3557"/>
+	<property name="ireport.y" value="0"/>
+	<field name="amount" class="java.math.BigDecimal"/>
+	<field name="detail" class="java.lang.String"/>
+	<field name="financeChargeCode" class="com.necl.core.model.FinanceChargeCode"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<textField pattern="#,##0.00">
+				<reportElement x="446" y="1" width="104" height="10" uuid="76154fcf-d2ea-4f58-9673-d89838eb8f54"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="1" width="31" height="10" uuid="21fc9c53-c9da-448a-8881-a7f378a65b64"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="239" y="1" width="198" height="10" uuid="ef684b10-0442-4465-ac5a-0cc90e3377bf"/>
+				<textElement textAlignment="Left">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{detail}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="40" y="1" width="187" height="10" uuid="2cb0b530-e80c-4628-b58b-53226799aa7f"/>
+				<textElement textAlignment="Left">
+					<font fontName="TH Sarabun New" size="9" isBold="true" pdfFontName="TH Sarabun New" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{financeChargeCode}.getDescription()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

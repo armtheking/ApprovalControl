@@ -1,0 +1,118 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" trimDirectiveWhitespaces="true" %>
+<div class="container" style="margin-top:20px">
+    <div class="row">
+        <div class="page-header">
+            <!--<h1> Approval  <small> Control V 1.0 </small></h1>-->
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button class="navbar-toggle collapsed" 
+                    data-toggle="collapse"
+                    data-target="#id_nav1"
+                    >
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/home">
+                <i class="fa fa-home"> HOME </i>
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="id_nav1">
+            <ul class="nav navbar-nav">
+                <li <c:if test="${active eq 'entertain'}">class="active"</c:if> >  <a href="${pageContext.request.contextPath}/entertain">
+                    <i class="fa fa-cutlery"></i> Entertain
+                </a> </li>
+<!--                <li <c:if test="${active eq 'advance'}">class="active"</c:if> > <a href="${pageContext.request.contextPath}/advance">
+                    Advance
+                </a> </li>
+                <li <c:if test="${active eq 'pettycash'}">class="active"</c:if> > <a href="${pageContext.request.contextPath}/pettycash">
+                    Petty Cash
+                </a> </li>-->
+                <li class="dropdown">
+                    <a class="dropdown-toggle"
+                       data-toggle="dropdown"
+                       href=""> Training <span class="caret"></span></a> 
+                    <ul class="dropdown-menu">
+                        <li> <a href="${pageContext.request.contextPath}/training"> Create Ticket </a></li>
+                        <li> <a href="${pageContext.request.contextPath}/training/viewBudget"> View Budget </a></li>
+
+                    </ul>
+                </li>
+
+                <sec:authorize access="hasRole('DBA')">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle"
+                           data-toggle="dropdown"
+                           href=""> Admin <span class="caret"></span></a> 
+                        <ul class="dropdown-menu">
+                            <li> <a href="${pageContext.request.contextPath}/newUser"> Add Member </a></li>
+                            <li> <a href="${pageContext.request.contextPath}/dba"> DBA </a></li>
+                            <li> <a href="#"> All Ticket </a></li>
+                        </ul>
+                    </li>
+                </sec:authorize>
+
+                <sec:authorize access="hasRole('ADMIN') or hasRole('DBA')">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle"
+                           data-toggle="dropdown"
+                           href=""> Finance <span class="caret"></span></a> 
+                        <ul class="dropdown-menu">
+                            <li> <a href="${pageContext.request.contextPath}/finance/entertain"> Entertain </a></li>
+                            <li> <a href="${pageContext.request.contextPath}/finance/advance"> Advance </a></li>
+                            <li> <a href="#"> Petty cash </a></li>
+                            <li> <a href="#"> View Data </a></li>
+                        </ul>
+                    </li>
+                </sec:authorize>
+                            
+            </ul>
+
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+            <ul class="nav navbar-nav navbar-right">
+                <li <c:if test="${active eq 'viewdata'}"></c:if> >  <a href="${pageContext.request.contextPath}/viewdata_all/">
+                    <i class="fa fa-bars"></i> View data
+                </a> 
+                </li>
+                
+                
+                   <li class="dropdown">
+                        <a class="dropdown-toggle"
+                           data-toggle="dropdown"
+                           href=""><span class="glyphicon glyphicon-cog"></span> Settings </a> 
+                        <ul class="dropdown-menu">
+                            <li> <a href="${pageContext.request.contextPath}/downloadManual">Manual</a></li>  
+                            <li> <a href="${pageContext.request.contextPath}/downloadApprovalCriteria">Approval Criteria</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li> <a href="${pageContext.request.contextPath}/resetPassword">Reset Password</a></li>
+                               
+                        </ul>
+                    </li>
+
+                <p class="navbar-form navbar-left" style="font-weight: bold">
+
+                <sec:authorize access="isAuthenticated()"> 
+                    <!--<sec:authentication property="principal.username" />-->
+                    <sec:authentication var="principal" property="principal" />
+                    ${principal.username}
+                    <span>
+                        <a class="btn btn-danger" role="button" href="<c:url value="/logout" />">Logout</a>
+                </sec:authorize > 
+                </p>
+
+
+            </ul>
+        </div>
+    </div>
+</nav>

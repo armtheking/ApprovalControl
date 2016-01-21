@@ -1,0 +1,67 @@
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name=viewport content="width=device-width, initial-scale=1.0">
+    <meta http-equiv=X-UA-Compatible content="IE=Edge">
+    <title>Approval Control V.2</title>
+    <link rel="shortcut icon" type="image/png" href="<c:url value='/resources/img/favicon.png' />"/>
+
+    <link href="<c:url value='/resources/css/bootstrap.css' />" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css" rel="stylesheet"/> 
+    <link href="<c:url value='/resources/css/style.css' />" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" >
+
+    <!--Merge Project 22/12/15-->
+    <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
+    <link href="<c:url value='/resources/css/jquery-ui-timepicker-addon.css' />" rel="stylesheet">
+
+    <script src="<c:url value='/resources/js/bootstrap.min.js' />"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+
+    <script src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.10/js/dataTables.bootstrap.min.js"></script>
+
+    <script src="<c:url value='/resources/js/app.js' />"></script>
+
+    <!--Merge Project 22/12/15-->
+    <script src="<c:url value='/resources/js/training.js' />" type="text/javascript"></script>
+    <script type="text/javascript" src="<c:url value='/resources/js/bootstrap-filestyle.min.js' />"></script>
+    <script src="<c:url value='/resources/js/jquery-ui.min.js' />" type="text/javascript"></script>
+    <script src="<c:url value='/resources/js/jquery-ui-timepicker-addon.js' />" type="text/javascript"></script>
+
+    <script src="<c:url value='/resources/js/advance.js' />" type="text/javascript"></script>
+
+    <script>
+                function goBack() {
+                    window.history.back();
+                }
+    </script>
+    <style>
+        .error {
+            color: red; font-weight: bold;
+        }
+        * {
+            font-family: sans-serif;
+            font-size: 15px;
+        }
+        .doubleUnderline {
+            text-decoration:underline;
+            border-bottom: 1px solid #000;
+            font: bold;
+        }
+        .table_legenda {
+            table-layout: fixed;
+        }
+        .table_legenda th {
+            word-wrap: break-word;
+        }
+        #example td {
+                    max-width: 210px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+        }
+
+    </style>
+</head>

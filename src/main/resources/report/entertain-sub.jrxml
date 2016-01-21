@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="550" pageHeight="133" whenNoDataType="AllSectionsNoDetail" columnWidth="550" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="9bb81e21-ee65-4681-bf39-319ef1a011fe">
+	<property name="ireport.zoom" value="1.6105100000000014"/>
+	<property name="ireport.x" value="187"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="Table Dataset 2" uuid="071dcb7b-6019-4e7e-92f4-2ab5bc736726"/>
+	<queryString language="SQL">
+		<![CDATA[]]>
+	</queryString>
+	<field name="itemFIN" class="java.lang.String"/>
+	<field name="detail" class="java.lang.String"/>
+	<field name="place" class="java.lang.String"/>
+	<field name="amount" class="java.math.BigDecimal"/>
+	<field name="financeChargeCode" class="com.necl.core.model.FinanceChargeCode"/>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="356" y="5" width="116" height="16" uuid="f0e7322e-49a3-4c22-ba45-94931dd0df8a"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{detail}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement x="483" y="5" width="64" height="16" uuid="50536a67-cb7f-42b4-86b1-041119211d9e"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="5" width="26" height="16" uuid="610b4096-0b69-4e85-b0d4-12a76fc3bf39"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="35" y="5" width="61" height="16" uuid="b82bd9e7-907d-4b9a-aa66-d4789e47047e"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{financeChargeCode}.getAccessCode()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="287" y="5" width="50" height="16" uuid="249fa8b6-3e32-4142-8271-b139189d0306"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{place}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="103" y="5" width="160" height="16" forecolor="#000000" uuid="b8403f83-9043-466a-a7cf-1508694ec749"/>
+				<textElement textAlignment="Center">
+					<font fontName="THSarabunNew" size="10" isBold="true" pdfFontName="THSarabunNewBold" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{financeChargeCode}.getDescription()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

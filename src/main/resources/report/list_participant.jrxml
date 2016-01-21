@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fb2b7e31-d726-46c2-baa3-02c440e7a17f">
+	<property name="ireport.zoom" value="1.7715610000000188"/>
+	<property name="ireport.x" value="245"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\P.Samart\\NetBeans\\spring-mvc-maven_new\\src\\main\\resources\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<field name="ticketHeader.trainingParticipant" class="java.util.List"/>
+	<field name="totalPerson" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="29" width="555" height="20" uuid="a768449c-f6cb-443e-8e07-dde05679af74"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH Sarabun New" size="14" isBold="true" pdfFontName="TH Sarabun New" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[รายชื่อผู้เข้าอบรม ( List of Participants )]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="1" width="50" height="26" uuid="46e0f31e-7268-44ca-8e4e-3250fdb7cc61"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[NO.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="413" y="1" width="142" height="26" uuid="ae9b380f-3747-40d8-8862-609f56db64d9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Section]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="1" width="120" height="26" uuid="2e8f084a-abd0-43e5-b5fd-915794fdb07a"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Employee ID]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="451eaad3-2ddf-48d0-bdac-c207f5171808"/>
+			</line>
+			<line>
+				<reportElement x="0" y="1" width="1" height="25" uuid="e37f6735-f552-4095-be45-be966012d966"/>
+			</line>
+			<line>
+				<reportElement x="50" y="1" width="1" height="25" uuid="44c24d54-b45b-4c62-b388-b30111695cf8"/>
+			</line>
+			<line>
+				<reportElement x="169" y="1" width="1" height="25" uuid="882d0f5a-6809-4046-8f5e-7ccea73aff0e"/>
+			</line>
+			<line>
+				<reportElement x="0" y="26" width="555" height="1" uuid="e6866a9e-5788-4dc2-9fb6-c4ce989c28b6"/>
+			</line>
+			<staticText>
+				<reportElement x="170" y="1" width="244" height="26" uuid="987a4562-22a5-47a1-b247-6b2bd1a2042b"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Name - Lastname]]></text>
+			</staticText>
+			<line>
+				<reportElement x="413" y="1" width="1" height="25" uuid="b46a05e3-5e22-4ed2-9a2f-9397e2e95963"/>
+			</line>
+			<line>
+				<reportElement x="554" y="1" width="1" height="25" uuid="bfcb86f6-e854-456d-8b78-c24b02f07c1c"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="624" splitType="Stretch">
+			<subreport>
+				<reportElement x="1" y="2" width="552" height="519" uuid="4a6cd520-a6ae-4dab-bd09-114a17ab96d6"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{ticketHeader.trainingParticipant})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "list_participant-sub.jasper"]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement x="0" y="-1" width="1" height="599" uuid="67e4e05d-8e32-44eb-af6d-463bbc2cc6ca"/>
+			</line>
+			<line>
+				<reportElement x="554" y="-1" width="1" height="599" uuid="8f9dba41-6ea2-4899-829a-4ea975adbe22"/>
+			</line>
+			<line>
+				<reportElement x="50" y="-1" width="1" height="577" uuid="38b4c492-26fa-449e-a8c5-ebf81f92037f"/>
+			</line>
+			<line>
+				<reportElement x="169" y="-1" width="1" height="577" uuid="739baa22-a23c-487c-b2cc-df12420c2975"/>
+			</line>
+			<line>
+				<reportElement x="413" y="-1" width="1" height="599" uuid="0dca5a5c-546f-4cb7-bfdd-a813bbddd343"/>
+			</line>
+			<line>
+				<reportElement x="0" y="598" width="555" height="1" uuid="7df40022-07ca-48ab-81c3-f7c9d7f770a6"/>
+			</line>
+			<line>
+				<reportElement x="1" y="576" width="555" height="1" uuid="9ee0d99b-78da-4d4e-8928-66d1c7936733"/>
+			</line>
+			<staticText>
+				<reportElement x="338" y="579" width="75" height="20" uuid="49a2d185-e215-4d7d-a954-7c6445a43bd2"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Persons:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="421" y="579" width="132" height="20" uuid="5a35b25e-ae94-438c-9286-2595b2dc10fa"/>
+				<textFieldExpression><![CDATA[$F{totalPerson}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
