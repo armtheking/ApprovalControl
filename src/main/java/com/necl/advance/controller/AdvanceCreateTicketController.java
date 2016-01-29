@@ -2,6 +2,7 @@ package com.necl.advance.controller;
 
 import com.necl.core.controller.CreateTicketController;
 import com.necl.core.function.CalculateCost;
+import com.necl.core.function.RedirectPageByType;
 import com.necl.core.function.RunConfigNumber;
 import com.necl.core.model.ConfigSystem;
 import com.necl.core.model.FinanceChargeCode;
@@ -22,10 +23,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.validation.Valid;
+import org.apache.log4j.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,9 +63,18 @@ public class AdvanceCreateTicketController {
 
     private ConfigSystem configSystem;
 
+    private static final Logger LOGGER = Logger.getLogger(CreateTicketController.class);
+
     @RequestMapping(value = "/advance/preview", method = RequestMethod.POST)
     public ModelAndView previewTicket(@ModelAttribute(value = "ticketHeader") TicketHeader ticketHeader, BindingResult result, RedirectAttributes attr) {
         try {
+
+            if (result.hasErrors()) {
+                attr.addFlashAttribute("org.springframework.validation.BindingResult.ticketHeader", result);
+                attr.addFlashAttribute("ticketHeader", ticketHeader);
+                LOGGER.debug("preview page is hasErrors redirect!");
+                return new ModelAndView(RedirectPageByType.getPageByType(ticketHeader.getTicketType()));
+            }
 
             List<FinanceChargeCode> fc = new ArrayList<>();
             for (Iterator<TicketDetail> iter = ticketHeader.getTicketdetail().listIterator(); iter.hasNext();) {
@@ -262,9 +274,11 @@ public class AdvanceCreateTicketController {
         System.out.println("xx:" + ticketHeader);
         System.out.println("check1+" + ticketHeader.getTicketNo());
         try {
-
+            TicketHeader ticketHeader2 = new TicketHeader();
+            ticketHeader2 = ticketHeaderService.findById(ticketHeader.getTicketNo());
+            ticketHeader2.setTicketdetail(ticketHeader.getTicketdetail());
             List<FinanceChargeCode> fc = new ArrayList<>();
-            for (Iterator<TicketDetail> iter = ticketHeader.getTicketdetail().listIterator(); iter.hasNext();) {
+            for (Iterator<TicketDetail> iter = ticketHeader2.getTicketdetail().listIterator(); iter.hasNext();) {
                 TicketDetail td = iter.next();
                 //ถ้า ไม่ได้เลือก dropdown ให้ลบ row ตัวนั้น
                 if (td.getFinanceChargeCode().getId() == 0 || td.getAmount() == null) {
@@ -279,29 +293,29 @@ public class AdvanceCreateTicketController {
 
             for (int i = 0; i < fc.size(); i++) {
                 //set ค่าใน list ไว้ใน header
-                ticketHeader.getTicketdetail().get(i).setFinanceChargeCode(fc.get(i));
+                ticketHeader2.getTicketdetail().get(i).setFinanceChargeCode(fc.get(i));
             }
             System.out.println("check2");
             // การ edit ticket ไม่จำเป้นต้อง run ticket ใหม่
-            String ticketNo = ticketHeader.getTicketNo();
+            String ticketNo = ticketHeader2.getTicketNo();
             System.out.println("check3:" + ticketNo);
-            String oldItem = ticketHeader.getItem();
+            String oldItem = ticketHeader2.getItem();
             System.out.println("check4");
-            String oldStatus = ticketHeader.getTicketFinished();
+            String oldStatus = ticketHeader2.getTicketFinished();
             System.out.println("check5");
-            setDetailTicketHeaderBeforeSave(ticketHeader);
+            setDetailTicketHeaderBeforeSave(ticketHeader2);
             System.out.println("check6: " + ticketNo);
-            ticketHeader.setTicketNo(ticketNo);
+            ticketHeader2.setTicketNo(ticketNo);
             System.out.println("check7");
-            ticketHeaderService.save(ticketHeader);
+            ticketHeaderService.save(ticketHeader2);
             System.out.println("check8");
-            setNameWaitingApprove1(ticketHeader);
+            setNameWaitingApprove1(ticketHeader2);
             System.out.println("check9");
-            ticketHeaderService.save(ticketHeader);
+            ticketHeaderService.save(ticketHeader2);
             System.out.println("check10");
-            if (!oldItem.equals(ticketHeader.getItem()) || oldStatus.equals("R")) {
+            if (!oldItem.equals(ticketHeader2.getItem()) || oldStatus.equals("R")) {
 
-                sendMailService.sendMailUserApprove(ticketHeader);
+                sendMailService.sendMailUserApprove(ticketHeader2);
 
             }
 
@@ -356,8 +370,8 @@ public class AdvanceCreateTicketController {
     @RequestMapping(value = "/advance/preview_clear", method = RequestMethod.POST)
     public ModelAndView previewTicketAdvance(@ModelAttribute("ticketHeader") @Valid TicketHeader ticketHeader, final BindingResult result, RedirectAttributes attr) {
         try {
-               System.out.println("ADV_NAME1: "+ticketHeader.getApplicationName());
-            System.out.println("check1:"+ticketHeader.getItem());
+            System.out.println("ADV_NAME1: " + ticketHeader.getApplicationName());
+            System.out.println("check1:" + ticketHeader.getItem());
             ModelAndView model = new ModelAndView();
             List<FinanceChargeCode> fc = new ArrayList<>();
             for (Iterator<TicketDetail> iter = ticketHeader.getTicketdetail().listIterator(); iter.hasNext();) {
@@ -402,10 +416,10 @@ public class AdvanceCreateTicketController {
                 number2.add(number);
             }
             System.out.println("check6");
-          //  attr.addFlashAttribute("ticketHeader", ticketHeader);
+            //  attr.addFlashAttribute("ticketHeader", ticketHeader);
 
             TicketHeader ticketHeaderNonClear = ticketHeaderService.findById(ticketHeader.getTicketNo());
-            System.out.println("ADV_NAME: "+ticketHeader.getApplicationName());
+            System.out.println("ADV_NAME: " + ticketHeader.getApplicationName());
             setDetailTicketHeaderBeforeSave(ticketHeader, ticketHeaderNonClear.getReqTotalAmt());
             System.out.println("check7");
             handlerFileUpload.handleFileUploadToPath(ticketHeader.getFile(), ticketHeader.getTicketNo());
@@ -426,8 +440,7 @@ public class AdvanceCreateTicketController {
     }
 
     private void setDetailTicketHeaderBeforeSave(TicketHeader ticketHeader, BigDecimal reqTotal) throws Exception {
-       
-        
+
         ticketHeader.setRefTicketNo(ticketHeader.getTicketNo());
         String numberTicket = ticketHeader.getTicketNo() + "-C";
 
@@ -447,33 +460,40 @@ public class AdvanceCreateTicketController {
 
     @RequestMapping(value = "/advance/save_clear", method = RequestMethod.POST)
     public String saveTicket(@ModelAttribute("ticketHeaderS") TicketHeader ticketHeader, SessionStatus status) {
-       try{
-        System.out.println("GGG:"+ticketHeader.getApplicationName());
-        TicketHeader ticketHeaderNonClear = ticketHeaderService.findById(ticketHeader.getRefTicketNo());
+        try {
+            System.out.println("GGG:" + ticketHeader.getApplicationName());
+            TicketHeader ticketHeaderNonClear = ticketHeaderService.findById(ticketHeader.getRefTicketNo());
 
-        System.out.println("@" + ticketHeader.toString());
-        ticketHeaderService.save(ticketHeader);
+            System.out.println("@" + ticketHeader.toString());
+            ticketHeaderService.save(ticketHeader);
 
-        System.out.println("@2");
-        setNameWaitingApprove1(ticketHeader);
+            System.out.println("@2");
+            setNameWaitingApprove1(ticketHeader);
 
-        System.out.println("@3");
-        ticketHeaderService.save(ticketHeader);
+            System.out.println("@3");
+            ticketHeaderService.save(ticketHeader);
 
-        System.out.println("@4");
-        ticketHeaderNonClear.setTicketFinished("C");
+            System.out.println("@4");
+            ticketHeaderNonClear.setTicketFinished("C");
 
-        System.out.println("@5");
-        ticketHeaderService.save(ticketHeaderNonClear);
+            System.out.println("@5");
+            ticketHeaderService.save(ticketHeaderNonClear);
 
-        System.out.println("@6");
-        sendMailService.sendMailUserApprove(ticketHeader);
-        status.setComplete();
-        return "redirect:/home";}
-       catch(Exception e){
-           e.printStackTrace();
-       }
-       return null;
+            System.out.println("@6");
+            sendMailService.sendMailUserApprove(ticketHeader);
+            status.setComplete();
+            return "redirect:/home";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
+    @RequestMapping(value = "/advance/previous", method = RequestMethod.GET)
+    public String previousTicket(@ModelAttribute("ticketHeaderS") @Valid TicketHeader ticketHeader, RedirectAttributes attr, ModelMap model) throws Exception {
+
+        attr.addFlashAttribute("ticketHeader", ticketHeader);
+        LOGGER.debug("previous page is hasErrors redirect!");
+        return RedirectPageByType.getPageByType(ticketHeader.getTicketType());
+    }
 }

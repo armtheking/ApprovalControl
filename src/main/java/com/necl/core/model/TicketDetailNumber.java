@@ -2,12 +2,14 @@ package com.necl.core.model;
 
 import java.io.Serializable;
 
-public class TicketDetailNumber implements Serializable{
+public class TicketDetailNumber implements Serializable {
+
     private String description;
     private String detail;
     private String amount;
     private String place;
-    
+    private String receiptNo;
+
     public String getDescription() {
         return description;
     }
@@ -39,6 +41,15 @@ public class TicketDetailNumber implements Serializable{
     public void setPlace(String place) {
         this.place = place;
     }
+
+    public String getReceiptNo() {
+        return receiptNo;
+    }
+
+    public void setReceiptNo(String receiptNo) {
+        this.receiptNo = receiptNo;
+    }
+
     
-    
+
 }

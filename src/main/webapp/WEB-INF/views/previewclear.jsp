@@ -36,14 +36,14 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label> Topic </label>
+                                            <label> Customer's Name </label>
                                             <div class="well">
                                                 ${ticketHeader.detailHeader}
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
-                                            <label> Remark </label>
+                                            <label> Purpose / Reason </label>
                                             <div class="well">
                                                 ${ticketHeader.remarkHeader}
                                             </div>
@@ -76,7 +76,7 @@
                                                                 <th> No </th>
                                                                 <th> Ticket No </th>
                                                                 <th> Description </th>
-                                                                <th> Detail </th>
+                                                                <th> Number & List of Participant </th>
                                                                 <th> Amount </th>
                                                             </tr>
                                                         </thead>

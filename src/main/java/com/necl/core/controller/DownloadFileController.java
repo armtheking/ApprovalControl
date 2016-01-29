@@ -35,15 +35,19 @@ public class DownloadFileController {
 
     @RequestMapping(value = "/download", method = RequestMethod.GET)
     public void downloadFile(HttpServletResponse response, @RequestParam String id) throws IOException, Exception {
+        String pre_year = "20";
+        String post_year= id.substring (3, 5);
+        String full_year = pre_year + post_year + "/";
         String keyFind = "PATH";
         ConfigSystem configSystem = configSystemService.findByKey(keyFind);
-        String saveDirectory = configSystem.getConfigText() + configSystem.getConfigPrefix();
-
+        String saveDirectory = configSystem.getConfigText() + full_year;
+        System.out.println("directory: "+saveDirectory);
         File file = null;
 
         String name = id.replace("/", "_");
         String type = ".pdf";
         String pathDirectory = saveDirectory+name+type;
+        System.out.println("path:"+pathDirectory);
             file = new File(pathDirectory);
             
         if (!file.exists()) {

@@ -330,6 +330,63 @@ public class ReportController {
         return null;
     }
 
+        @RequestMapping(value = "/download/pdf_pettycash", method = RequestMethod.GET)
+    public ModelAndView reportPettycash(ModelAndView modelAndView, @RequestParam String id) throws Exception {
+        try{
+        logger.debug("Received request to download PDF report");
+
+        TicketHeader ticketHeaderById = ticketHeaderService.findById(id);
+
+        String ownerPositionName = positionService.findById(ticketHeaderById.getApplicationPosition()).getPositionName();
+        String ownerDivision = divisionService.findById(ticketHeaderById.getDivisionCode()).getDivisionName();
+        String ownerSection = sectionService.findById(ticketHeaderById.getDivisionCode(), ticketHeaderById.getSectionCode()).getSectionName();
+
+        String firstApprovePositionName = null;
+
+        Position find_position = positionService.findById(ticketHeaderById.getApprovedPosition1());
+
+        if (find_position == null) {
+            firstApprovePositionName = "-";
+        } else {
+            firstApprovePositionName = find_position.getPositionName();
+        }
+        String secondApprovePositionName = positionService.findById(ticketHeaderById.getApprovedPosition2()).getPositionName();
+
+        ticketHeaderById.setApplicationPosition(ownerPositionName);
+        ticketHeaderById.setDivisionCode(ownerDivision);
+        ticketHeaderById.setSectionCode(ownerSection);
+
+        ticketHeaderById.setApprovedPosition1(firstApprovePositionName);
+        ticketHeaderById.setApprovedPosition2(secondApprovePositionName);
+
+        List<TicketHeader> ticketHeader = new ArrayList<>();
+        ticketHeader.add(ticketHeaderById);
+
+        JRDataSource datasource = new JRBeanCollectionDataSource(ticketHeader);
+
+        // In order to use Spring's built-in Jasper support, 
+        // We are required to pass our datasource as a map parameter
+        // parameterMap is the Model of our application
+        Map<String, Object> parameterMap = new HashMap<String, Object>();
+        parameterMap.put("datasource", datasource);
+
+        // pdfReport is the View of our application
+        // This is declared inside the /WEB-INF/jasper-views.xml
+        if (id.contains("PTC")) {
+            modelAndView = new ModelAndView("pettycashReport", parameterMap);
+        } else {
+            System.out.println("Report Fail");
+        }
+
+        // Return the View and the Model combined
+        return modelAndView;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     @RequestMapping(value = "/download/xls", method = RequestMethod.GET)
     public ModelAndView doSalesReportXLS(ModelAndView modelAndView) {
         logger.debug("Received request to download Excel report");

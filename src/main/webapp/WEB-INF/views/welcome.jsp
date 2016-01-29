@@ -17,7 +17,7 @@
             <div class="row">
                 <!-- Table Condensed -->
                 <div class="panel panel-success">
-                    <table class="table table-striped" id="example">
+                    <table class="table table-striped" id="example2">
                         <div class="panel-heading">
                             <h3 class="panel-title">List of your approval request.</h3>
                         </div>
@@ -52,10 +52,13 @@
                                             <c:if test="${ticketHeader.ticketType eq 'ADV'}">
                                                 <a href="<c:url value='advance/show?id=${ticketHeader.ticketNo}'/>" class="btn btn-danger">show</a>
                                             </c:if>
+                                            <c:if test="${ticketHeader.ticketType eq 'PTC'}">
+                                                <a href="<c:url value='pettycash/show?id=${ticketHeader.ticketNo}'/>" class="btn btn-danger">show</a>
+                                            </c:if>
                                         </td>
                                         <td>${ticketHeader.ticketNo}</td>
                                         <td>${ticketHeader.applicationDate}</td>
-                                        <td>${ticketHeader.detailHeader}</td>
+                                        <td id="something">${ticketHeader.detailHeader}</td>
                                         <td>${ticketHeader.applicationName}</td>
                                         <td><c:if test="${not ticketHeader.approvedStatus1}">
                                                 <a href="#" data-toggle="tooltip" title="${ticketHeader.approvedName1}!">Waiting</a>
@@ -117,11 +120,14 @@
                                         </c:if>
                                         <c:if test="${ticketHeader.ticketType eq 'ADV'}">
                                             <a href="<c:url value='advance/show?id=${ticketHeader.ticketNo}'/>" class="btn btn-danger">show</a>
-                                        </c:if>    
+                                        </c:if>   
+                                        <c:if test="${ticketHeader.ticketType eq 'PTC'}">
+                                            <a href="<c:url value='pettycash/show?id=${ticketHeader.ticketNo}'/>" class="btn btn-danger">show</a>
+                                        </c:if>
                                     </td>
                                     <td>${ticketHeader.ticketNo}</td>
                                     <td>${ticketHeader.applicationDate}</td>
-                                    <td>${ticketHeader.detailHeader}</td>
+                                    <td id="something">${ticketHeader.detailHeader}</td>
                                     <td>${ticketHeader.applicationName}</td>
                                     <td><c:if test="${not ticketHeader.approvedStatus1}">
                                             <a href="#" data-toggle="tooltip" title="${ticketHeader.approvedName1}!">Waiting</a>
@@ -142,7 +148,6 @@
                                     <td>
 
                                         <c:if test="${ticketHeader.ticketType eq 'TRN' and ticketHeader.ticketFinished eq 'P'}">
-
                                             <a href="<c:url value='training/print?id=${ticketHeader.ticketNo}'/>" class="btn btn-info btn-sm " target="_blank">Print</a> 
                                         </c:if>
 
@@ -153,7 +158,7 @@
                                         <c:if test="${ticketHeader.ticketFinished eq 'P' and fn:contains(ticketHeader.ticketNo, 'C') and ticketHeader.ticketType eq 'ENT'}"> 
                                             <a href="<c:url value='/report/download/pdfEntertainC?id=${ticketHeader.ticketNo}'/>" class="btn btn-info btn-sm " target="_blank"> Print <span class="fa fa-hand-pointer-o"></span></a>
                                         </c:if>
-                                            
+
                                         <c:if test="${ticketHeader.ticketFinished eq 'P' and !fn:contains(ticketHeader.ticketNo, 'C') and ticketHeader.ticketType eq 'ADV'}"> 
                                             <a href="<c:url value='/report/download/pdf_advance?id=${ticketHeader.ticketNo}'/>" class="btn btn-info btn-sm " target="_blank"> Print <span class="fa fa-hand-pointer-o"></span></a>
                                         </c:if>
@@ -162,9 +167,13 @@
                                             <a href="<c:url value='/report/download/pdf_advanceC?id=${ticketHeader.ticketNo}'/>" class="btn btn-info btn-sm " target="_blank"> Print <span class="fa fa-hand-pointer-o"></span></a>
                                         </c:if>    
 
+                                        <c:if test="${ticketHeader.ticketType eq 'PTC' and ticketHeader.ticketFinished eq 'P'}">
+                                            <a href="<c:url value='/report/download/pdf_pettycash?id=${ticketHeader.ticketNo}'/>" class="btn btn-info btn-sm " target="_blank"> Print <span class="fa fa-hand-pointer-o"></span></a>
+                                        </c:if> 
+
                                         <c:if test="${ticketHeader.ticketFinished eq 'W'}"> 
                                             <a href="<c:url value='/clearticket?id=${ticketHeader.ticketNo}'/>" class="btn btn-success btn-sm "> Clear <span class="fa fa-hand-pointer-o"></span></a>
-                                            </c:if>
+                                        </c:if>
 
                                         <c:if test="${ticketHeader.ticketFinished eq 'R'}"> 
                                             <font style="color: red;font-weight: bold"> Reject </font> 

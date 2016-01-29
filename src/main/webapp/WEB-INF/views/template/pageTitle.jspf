@@ -24,19 +24,19 @@
         </div>
         <div class="collapse navbar-collapse" id="id_nav1">
             <ul class="nav navbar-nav">
+                <li <c:if test="${active eq 'advance'}">class="active"</c:if> > <a href="${pageContext.request.contextPath}/advance">
+                    Advance(TEST)
+                </a> </li>
+                <li <c:if test="${active eq 'pettycash'}">class="active"</c:if> > <a href="${pageContext.request.contextPath}/pettycash">
+                    Petty Cash(TEST)
+                </a> </li>
                 <li <c:if test="${active eq 'entertain'}">class="active"</c:if> >  <a href="${pageContext.request.contextPath}/entertain">
                     <i class="fa fa-cutlery"></i> Entertain
                 </a> </li>
-<!--                <li <c:if test="${active eq 'advance'}">class="active"</c:if> > <a href="${pageContext.request.contextPath}/advance">
-                    Advance
-                </a> </li>
-                <li <c:if test="${active eq 'pettycash'}">class="active"</c:if> > <a href="${pageContext.request.contextPath}/pettycash">
-                    Petty Cash
-                </a> </li>-->
                 <li class="dropdown">
                     <a class="dropdown-toggle"
                        data-toggle="dropdown"
-                       href=""> Training <span class="caret"></span></a> 
+                       href=""> <i class="fa fa-book"></i> Training <span class="caret"></span></a> 
                     <ul class="dropdown-menu">
                         <li> <a href="${pageContext.request.contextPath}/training"> Create Ticket </a></li>
                         <li> <a href="${pageContext.request.contextPath}/training/viewBudget"> View Budget </a></li>
@@ -65,40 +65,40 @@
                         <ul class="dropdown-menu">
                             <li> <a href="${pageContext.request.contextPath}/finance/entertain"> Entertain </a></li>
                             <li> <a href="${pageContext.request.contextPath}/finance/advance"> Advance </a></li>
-                            <li> <a href="#"> Petty cash </a></li>
-                            <li> <a href="#"> View Data </a></li>
+                            <li> <a href="${pageContext.request.contextPath}/finance/pettycash"> Petty Cash </a></li>
+                            <li> <a href="${pageContext.request.contextPath}/finance/viewData"> View Data </a></li>
                         </ul>
                     </li>
                 </sec:authorize>
-                            
+
             </ul>
 
-                            
-                            
-                            
-                            
-                            
-                            
-                            
+
+
+
+
+
+
+
             <ul class="nav navbar-nav navbar-right">
                 <li <c:if test="${active eq 'viewdata'}"></c:if> >  <a href="${pageContext.request.contextPath}/viewdata_all/">
                     <i class="fa fa-bars"></i> View data
                 </a> 
                 </li>
-                
-                
-                   <li class="dropdown">
-                        <a class="dropdown-toggle"
-                           data-toggle="dropdown"
-                           href=""><span class="glyphicon glyphicon-cog"></span> Settings </a> 
-                        <ul class="dropdown-menu">
-                            <li> <a href="${pageContext.request.contextPath}/downloadManual">Manual</a></li>  
-                            <li> <a href="${pageContext.request.contextPath}/downloadApprovalCriteria">Approval Criteria</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li> <a href="${pageContext.request.contextPath}/resetPassword">Reset Password</a></li>
-                               
-                        </ul>
-                    </li>
+
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle"
+                       data-toggle="dropdown"
+                       href=""><span class="glyphicon glyphicon-cog"></span> Settings </a> 
+                    <ul class="dropdown-menu">
+                        <li> <a href="${pageContext.request.contextPath}/downloadManual">Manual</a></li>  
+                        <li> <a href="${pageContext.request.contextPath}/downloadApprovalCriteria">Approval Criteria</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li> <a href="${pageContext.request.contextPath}/resetPassword">Reset Password</a></li>
+
+                    </ul>
+                </li>
 
                 <p class="navbar-form navbar-left" style="font-weight: bold">
 

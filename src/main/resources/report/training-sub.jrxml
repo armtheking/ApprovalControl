@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Training_Finance_subreport" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a321f0be-f1c4-4450-9082-7cb2b6e749a7">
-	<property name="ireport.zoom" value="6.1159090448414855"/>
+	<property name="ireport.zoom" value="3.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<field name="amount" class="java.math.BigDecimal"/>
@@ -10,34 +10,34 @@
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="15" splitType="Stretch">
+		<band height="14" splitType="Stretch">
 			<textField pattern="#,##0.00">
-				<reportElement x="452" y="2" width="99" height="10" uuid="9ba29d2f-f76a-4d6f-b26a-d37d5d0a6f97"/>
+				<reportElement x="452" y="0" width="99" height="13" uuid="9ba29d2f-f76a-4d6f-b26a-d37d5d0a6f97"/>
 				<textElement textAlignment="Right">
-					<font size="7"/>
+					<font fontName="BrowalliaUPC" size="11" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="170" y="2" width="269" height="10" uuid="09d92929-db25-4dc6-a5b4-2c683efc0385"/>
+				<reportElement x="172" y="0" width="269" height="13" uuid="09d92929-db25-4dc6-a5b4-2c683efc0385"/>
 				<textElement textAlignment="Left">
-					<font size="7"/>
+					<font fontName="BrowalliaUPC" size="11" isBold="false" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{budgetDetail}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1" y="2" width="43" height="10" uuid="51765398-b37c-4836-ac89-be96bdd321d8"/>
+				<reportElement x="1" y="0" width="43" height="13" uuid="51765398-b37c-4836-ac89-be96bdd321d8"/>
 				<textElement textAlignment="Center">
-					<font size="7"/>
+					<font fontName="BrowalliaUPC" size="11" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="55" y="2" width="105" height="10" uuid="adbc6c32-75fd-4c93-9314-30adbdc17280"/>
+				<reportElement x="55" y="0" width="109" height="13" uuid="adbc6c32-75fd-4c93-9314-30adbdc17280"/>
 				<textElement textAlignment="Left">
-					<font size="7"/>
+					<font fontName="BrowalliaUPC" size="11" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{item}]]></textFieldExpression>
 			</textField>

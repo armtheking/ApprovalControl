@@ -1,0 +1,16 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <body>
+        Dear All, <p/>
+        Your ticket was rejected !!. Please see in detail.<p/>
+        Ticket No : <b> ${ticketNo}    </b><p/>
+        TicketType : <b> ${ticketType}   </b><p/>
+        Create Application By :  <b> ${applicationName}   </b><p/>
+        
+        <a href="http://172.16.58.231/ApprovalControl/">Login Click</a>
+        <hr/><br/>
+        Thanks & Best Regards
+ 
+    </body>
+</html>

@@ -28,7 +28,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label> Objective / Reason </label>
-                                        <div class="well">
+                                        <div class="well" style="width:540px; word-wrap: break-word; display:block;">
                                             ${ticketHeader.detailHeader}
                                         </div>
                                     </div>
@@ -71,29 +71,27 @@
                                                 <h4>Detail</h4>
                                             </div>
                                             <div class="panel-body">
-                                                <table class="table table-striped">
+                                                 <table class="table table-striped">
                                                     <thead>
                                                         <tr>
                                                             <th class="col-md-1"> No </th>
                                                             <th class="col-md-4"> Description </th>
-                                                            <th class="col-md-2"> Place </th>
-                                                            <th class="col-md-4"> Detail </th>
+                                                            <th class="col-md-4"> Details </th>
                                                             <th class="col-md-1"> Amount </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <c:set var="count" value="0" scope="page" />
-                                                        <c:forEach var="ticketdetail" items="${ticketHeader.ticketdetail}">
+                                                        <c:forEach var="ticketdetail" items="${ticketDetail}">
                                                             <tr>
                                                                 <td><c:set var="count" value="${count + 1}" scope="page"/> 
                                                                     <c:out value="${count}" />
                                                                 </td>
-                                                                <td>${ticketdetail.financeChargeCode.description}</td>
-                                                                <td>${ticketdetail.place}</td>
-                                                                <td>
+                                                                <td>${ticketdetail.description}</td>
+                                                                <td style="max-width: 360px; word-wrap: break-word;">
                                                                     ${ticketdetail.detail}
                                                                 </td>
-                                                                <td>
+                                                                <td align="right">
                                                                     ${ticketdetail.amount}
                                                                 </td>
                                                             </tr>
@@ -192,7 +190,7 @@
                                                         <label  class="col-sm-3 control-label">Request Total Amount : </label>
 
                                                         <div class="col-sm-5">
-                                                            <ins><b>${ticketHeader.reqTotalAmt}</b></ins>
+                                                            <ins><b>${number_sumAmount}</b></ins>
                                                         </div>
                                                     </div>
 

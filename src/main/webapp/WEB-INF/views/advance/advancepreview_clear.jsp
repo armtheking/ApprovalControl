@@ -21,8 +21,8 @@
                 <fieldset>
                     <legend>Advance</legend>
                 </fieldset>
-                
-                
+
+
 
                 </br>
                 <div class="panel panel-info" style="width: 100%; margin: auto">
@@ -36,26 +36,22 @@
                                 <div class="col-sm-3">
                                     <b>Objective / Reason:</b> 
                                 </div>
-                                <div class="col-sm-9">
+                                <div class="col-sm-9"  style="width:840px; word-wrap: break-word; display:block;">
                                     <mark>${ticketHeader.detailHeader}</mark>
                                 </div>
                             </div>
                         </div>
 
-
-
                         <div class="row" style="margin: 0.5%;"> 
                             <div class="form-group form-group-sm">
                                 <div class="col-sm-3">
-                                    <b>Settlement Within: </b> 
+                                    <b>Remark:</b> 
                                 </div>
-                                <div class="col-sm-3">
-                                    <mark>${ticketHeader.dateAlert}</mark>
+                                <div class="col-sm-9"  style="width:840px; word-wrap: break-word; display:block;">
+                                    <mark>${ticketHeader.remarkHeader}</mark>
                                 </div>
                             </div>
-                        </div>
-
-
+                        </div>       
 
                         <div class="row" style="margin: 0.5%;"> 
                             <div class="form-group form-group-sm">
@@ -79,10 +75,10 @@
                         <table id="tb"  class="table table-bordered" cellspacing="0" width="100%">
                             <thead>
                                 <tr class="success">
-                                    <th>No</th>                               
-                                    <th>Description</th>
-                                    <th>Details</th>
-                                    <th>Amount</th>
+                                    <th width="30px">No</th>                               
+                                    <th width="300px">Description</th>
+                                    <th width="360px">Details</th>
+                                    <th width="100px">Amount</th>
                                 </tr>
                             </thead>
                             <tbody>   
@@ -91,7 +87,7 @@
                                         <c:if test="${ticketDetail.amount != null}">
                                             <td>${varStatus.count}</td>
                                             <td>${ticketDetail.description}</td> 
-                                            <td>${ticketDetail.detail}</td>                           
+                                            <td style="max-width: 360px; word-wrap: break-word;">${ticketDetail.detail}</td>                           
                                             <td align="right">${ticketDetail.amount}</td>
                                         </c:if>
                                     </tr>
@@ -101,7 +97,8 @@
                         <div style="margin-left: 82%"><font color="red"> <u>  Total Amount:  ${number_sumAmount} </u></font></div>
                     </div>
                     <center>
-                        <input type="submit" class="btn btn-success btn-lg" value="Submit" name="submit" />
+                        <input type="submit" class="btn btn-success" value="SUBMIT" name="submit" >
+                        <a href="<c:url value='previous'/>" class="btn btn-danger">PREVIOUS </a>
                     </center>
                 </div>
 

@@ -24,9 +24,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-danger">
-
                             <div class="panel-heading clearfix">
-                                <h3 class="panel-title pull-left" style="padding-top: 7.5px;">Ticket Number : ${ticketHeader.ticketNo}</h3>
+                                <h3 class="panel-title pull-left" style="padding-top: 15px; font-weight: bold;">Ticket Number : ${ticketHeader.ticketNo}</h3>
                                 <div class="btn-group pull-right">
 
                                     <c:if test="${(fn:contains(ticketHeader.ticketNo, '-C'))}"> 
@@ -63,7 +62,7 @@
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label> Topic </label>
+                                        <label> Customer's Name </label>
                                         <div class="well">
                                             ${ticketHeader.detailHeader}
                                         </div>
@@ -85,7 +84,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label> Reason </label>
+                                        <label> Purpose / Reason </label>
                                         <div class="well">
                                             ${ticketHeader.remarkHeader}
                                         </div>
@@ -118,54 +117,54 @@
                                     </div>
                                 </div>
 
-                          
 
-                          
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="panel panel-success">
-                                                <div class="panel-heading">
-                                                    <h4>Detail</h4>
-                                                </div>
-                                                <div class="panel-body">
-                                                    <table id="jack" class="table table-striped">
-                                                        <thead>
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-success">
+                                            <div class="panel-heading">
+                                                <h4 style=" font-weight: bold;">Detail</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <table id="jack" class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="col-md-1"> No </th>
+                                                            <th class="col-md-4"> Description </th>
+                                                            <th class="col-md-2"> Place </th>
+                                                            <th class="col-md-4"> Number & List of Participant </th>
+                                                            <th class="col-md-1"> Amount </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <c:set var="count" value="0" scope="page" />
+                                                        <c:forEach var="ticketdetail" items="${ticketDetail}">
                                                             <tr>
-                                                                <th class="col-md-1"> No </th>
-                                                                <th class="col-md-4"> Description </th>
-                                                                <th class="col-md-2"> Place </th>
-                                                                <th class="col-md-4"> Participant </th>
-                                                                <th class="col-md-1"> Amount </th>
+                                                                <td><c:set var="count" value="${count + 1}" scope="page"/> 
+                                                                    <c:out value="${count}" />
+                                                                </td>
+                                                                <td>${ticketdetail.description}</td>
+                                                                <td>${ticketdetail.place}</td>
+                                                                <td style="width:400px; word-wrap: break-word; display:block;">
+                                                                    ${ticketdetail.detail}
+                                                                </td>
+                                                                <td>
+                                                                    ${ticketdetail.amount}
+                                                                </td>
                                                             </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <c:set var="count" value="0" scope="page" />
-                                                            <c:forEach var="ticketdetail" items="${ticketDetail}">
-                                                                <tr>
-                                                                    <td><c:set var="count" value="${count + 1}" scope="page"/> 
-                                                                        <c:out value="${count}" />
-                                                                    </td>
-                                                                    <td>${ticketdetail.description}</td>
-                                                                    <td>${ticketdetail.place}</td>
-                                                                    <td style="width:400px; word-wrap: break-word; display:block;">
-                                                                        ${ticketdetail.detail}
-                                                                    </td>
-                                                                    <td>
-                                                                        ${ticketdetail.amount}
-                                                                    </td>
-                                                                </tr>
-                                                            </c:forEach>
+                                                        </c:forEach>
 
-                                                        </tbody>
+                                                    </tbody>
 
-                                                    </table>
-                                                </div>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
-                               
+                                </div>
 
-                            
+
+
 
                                 <div class="row text-right">
                                     <div class="col-xs-2 col-xs-offset-8">
@@ -188,7 +187,7 @@
                                     <div class="col-md-12">
                                         <div class="panel panel-warning">
                                             <div class="panel-heading">
-                                                <h4>Approval Status</h4>
+                                                <h4 style=" font-weight: bold;">Approval Status</h4>
                                             </div>
                                             <div class="panel-body">
 
@@ -237,20 +236,85 @@
 
                                                 </div>
 
-
-
-
-
-
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <sec:authorize access="hasRole('ADMIN') or hasRole('DBA')">
+                                    <c:if test="${ticketHeader.ticketFinished eq 'F'}">
+                                        <div class="row">
+
+                                            <div class="col-md-12">
+                                                <div class="panel panel-primary">
+                                                    <div class="panel-heading">
+                                                        <h4 style=" font-weight: bold;">Finance</h4>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label> Receiver By: </label>
+                                                                <div class="well well-sm">
+                                                                    ${ticketHeader.receiverBy}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label> Paid By: </label>
+                                                                <div class="well well-sm">
+                                                                    ${ticketHeader.paidBy}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label> Paid Date: </label>
+                                                                <div class="well well-sm">
+                                                                    ${ticketHeader.paidDate}
+                                                                </div>
+                                                            </div> 
+                                                        </div>  
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label> Request Total Amount: </label>
+                                                                <div class="well well-sm">
+                                                                    ${ticketHeader.reqTotalAmt + ticketHeader.payBack}
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <label> Paid Total Amount: </label>
+                                                                <div class="well well-sm">
+                                                                    ${ticketHeader.reqTotalAmt}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label> Balance / Refund </label>
+                                                                <div class="well well-sm">
+                                                                    ${ticketHeader.payBack}
+                                                                </div>
+                                                            </div> 
+                                                        </div>              
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label> Payment: </label>
+                                                                <div class="well well-sm">
+                                                                    ${ticketHeader.payment}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <label> Paid Note: </label>
+                                                                <div class="well well-sm" style="width:706 px; word-wrap: break-word; display:block;">
+                                                                    ${ticketHeader.paidRemark}
+                                                                </div>
+                                                            </div> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </c:if>
+                                </sec:authorize>
                             </div>
                             <div class = "panel-footer">
                                 <button class="btn btn-primary" onclick="goBack()">Go Back</button>
-                                  <c:if test="${principal.username eq ticketHeader.applicationName and ticketHeader.approvedStatus1 eq false or ticketHeader.ticketFinished eq 'R'}"> 
+                                <c:if test="${principal.username eq ticketHeader.applicationName and ticketHeader.approvedStatus1 eq false or ticketHeader.ticketFinished eq 'R'}"> 
 
                                     <a style="margin-left: 81%" href="<c:url value='/createticket/delete?id=${ticketHeader.ticketNo}'/>" class="btn btn-danger btn-delete btn-lg" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i> Delete</a>&nbsp;
                                 </c:if>

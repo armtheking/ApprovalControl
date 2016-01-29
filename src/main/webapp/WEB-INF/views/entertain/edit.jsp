@@ -30,7 +30,7 @@
                           <label for="detailHeader" class="col-sm-3 control-label"> Customer's Name : </label>
                         <div class="col-sm-4">
 
-                            <form:input type="text" path="detailHeader" id="detailHeader" class="form-control" placeholder="Topic" autofocus="autofocus"/>
+                            <form:input type="text" path="detailHeader" id="detailHeader" class="form-control" placeholder="Customer's Name" autofocus="autofocus"/>
 
                             <div class="has-error">
                                 <form:errors path="detailHeader" class="help-inline" cssClass="error"/>
@@ -44,7 +44,7 @@
                     <div class="form-group">
                          <label for="remarkHeader" class="col-sm-3 control-label">Purpose / Reason : </label>
                         <div class="col-sm-4">
-                            <form:input type="text" path="remarkHeader" class="form-control" placeholder="Reason"/>
+                            <form:input type="text" path="remarkHeader" class="form-control" placeholder="Purpose / Reason"/>
                             <div class="has-error">
                                 <form:errors path="remarkHeader" class="help-inline" cssClass="error"/>
                             </div>
@@ -57,7 +57,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="dateAlert" class="col-md-3 control-label">Clear Ticket Within : </label>
+                        <label for="dateAlert" class="col-md-3 control-label">Settlement Within : </label>
                         <div class="col-sm-2">
                             <form:select path="dateAlert" class="form-control input-sm">
 
@@ -77,7 +77,7 @@
                                     <th scope="col"> No </th>
                                     <th scope="col"> Description </th>
                                     <th scope="col"> Place </th>
-                                    <th scope="col"> Detail (Max 120 Char) </th>
+                                    <th scope="col"> Number & List of Participant </th>
                                     <th scope="col"> Amount </th>
                                 </tr>
                             </thead>
@@ -96,13 +96,13 @@
 
                                     </td>
                                     <td class="col-sm-2">
-                                        <form:input type="text" path="ticketdetail[0].place"  class="form-control col-sm-12" placeholder="Place"/>
+                                        <form:textarea type="text" rows="4" path="ticketdetail[0].place" class="form-control col-sm-12" placeholder="Name of restaurant / Golf Course, Location, etc."/>
                                         <div class="has-error">
                                             <form:errors path="ticketdetail[0].place" class="help-inline" cssClass="error"/>
                                         </div>
                                     </td>
                                     <td class="col-sm-3">
-                                        <form:textarea type="text" path="ticketdetail[0].detail" class="form-control col-sm-12" placeholder="Detail"/>
+                                        <form:textarea type="text" path="ticketdetail[0].detail" class="form-control col-sm-12" placeholder="Participant" rows="5"/>
                                         <div class="has-error">
                                             <form:errors path="ticketdetail[0].detail" class="help-inline" cssClass="error"/>
                                         </div>

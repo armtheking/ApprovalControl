@@ -37,26 +37,29 @@
           p:reportDataKey="datasource" />
     
     <bean id="trainingReport2"
-              class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
-              p:url="classpath:report/training_finance.jrxml"
-              p:reportDataKey="datasource" />    
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+          p:url="classpath:report/training_finance.jrxml"
+          p:reportDataKey="datasource" />    
     
-        <bean id="training_participant"
+    <bean id="training_participant"
               class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
               p:url="classpath:report/list_participant.jrxml"
               p:reportDataKey="datasource" />   
               
-      <bean id="advanceReport"
-          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
-          p:url="classpath:report/advance.jrxml"
-          p:reportDataKey="datasource" />
+    <bean id="advanceReport"
+            class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+            p:url="classpath:report/advance.jrxml"
+            p:reportDataKey="datasource" />
       
-          <bean id="advanceClearReport"
-          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
-          p:url="classpath:report/advance_C.jrxml"
-          p:reportDataKey="datasource" />
-      
-        
+    <bean id="advanceClearReport"
+                class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+                p:url="classpath:report/advance_C.jrxml"
+                p:reportDataKey="datasource" />
+    <bean id="pettycashReport"
+                class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+                p:url="classpath:report/pettycash.jrxml"
+                p:reportDataKey="datasource" />
+
                
                 
     <bean id="xlsReport"

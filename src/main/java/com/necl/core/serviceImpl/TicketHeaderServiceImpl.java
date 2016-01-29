@@ -48,7 +48,6 @@ public class TicketHeaderServiceImpl implements TicketHeaderService {
 
     @Override
     public boolean save(TicketHeader ticketHeader) throws Exception {
-
         return ticketHeaderDao.save(setTicketH(ticketHeader));
     }
 
@@ -104,6 +103,11 @@ public class TicketHeaderServiceImpl implements TicketHeaderService {
     @Override
     public List<TicketHeader> findByUser(String user) throws Exception {
         return ticketHeaderDao.findByUser(user);
+    }
+
+    @Override
+    public List<TicketHeader> findFinish() throws Exception {
+        return ticketHeaderDao.findFinish();
     }
 
 }

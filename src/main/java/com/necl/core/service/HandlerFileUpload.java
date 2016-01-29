@@ -32,11 +32,16 @@ public class HandlerFileUpload {
         Calendar now = Calendar.getInstance();
         int year = now.get(Calendar.YEAR);
         String yearInString = String.valueOf(year);
-        
+
         String keyFind = "PATH";
         ConfigSystem configSystem = configSystemService.findByKey(keyFind);
         String saveDirectory = configSystem.getConfigText() + yearInString;
 
+//        File file = new File(saveDirectory + File.separator + convertNameAndTypeFile(fileUpload.getOriginalFilename(), numberTicket));
+//        System.out.println("file: "+file);
+//        file.delete();
+        
+        
         if (fileUpload != null && fileUpload.getSize() > 0) {
             File files = new File(saveDirectory + File.separator + convertNameAndTypeFile(fileUpload.getOriginalFilename(), numberTicket));
             if (!files.exists()) {
@@ -47,6 +52,7 @@ public class HandlerFileUpload {
             }
 
         }
+       
 
         // returns to the view "Result"
     }

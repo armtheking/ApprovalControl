@@ -1,11 +1,14 @@
 package com.necl.ptc.controller;
 
 import com.necl.core.model.FinanceChargeCode;
+import com.necl.core.model.TicketDetailNumber;
 import com.necl.core.model.TicketHeader;
 import com.necl.core.model.User;
 import com.necl.core.service.FinChargeCodeService;
 import com.necl.core.service.TicketHeaderService;
 import com.necl.core.service.UserService;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,11 +18,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value = "/pettycash")
 public class PettyCashPageController {
+
     @Autowired
     FinChargeCodeService finChargeCodeService;
 
@@ -61,4 +66,70 @@ public class PettyCashPageController {
         User user = userService.findBySso(userName);
         return user.getBranchId();
     }
+
+    @RequestMapping(value = "/show", method = RequestMethod.GET)
+    public ModelAndView showTicket(@RequestParam String id) {
+        try {
+
+            ModelAndView model = new ModelAndView();
+            TicketHeader ticketHeader = ticketHeaderService.findById(id);
+
+            String number_sumAmount;
+            DecimalFormat numFormat;
+            numFormat = new DecimalFormat("#,##0.00");
+
+            number_sumAmount = numFormat.format(ticketHeader.getReqTotalAmt());
+
+            List<TicketDetailNumber> number2 = new ArrayList<>();
+
+            for (int i = 0; i < ticketHeader.getTicketdetail().size(); i++) {
+
+                System.out.println("scscsc" + ticketHeader.getTicketdetail().get(i).getFinanceChargeCode().getDescription());
+                TicketDetailNumber number = new TicketDetailNumber();
+                number.setDescription(ticketHeader.getTicketdetail().get(i).getFinanceChargeCode().getDescription());
+                number.setDetail(ticketHeader.getTicketdetail().get(i).getDetail());
+                number.setAmount(numFormat.format(ticketHeader.getTicketdetail().get(i).getAmount()));
+                number.setReceiptNo(ticketHeader.getTicketdetail().get(i).getDescription());
+                number2.add(number);
+
+            }
+
+            model.addObject("ticketDetail", number2);
+            model.addObject("ticketHeader", ticketHeader);
+            model.addObject("number_sumAmount", number_sumAmount);
+
+            if (ticketHeader == null) {
+                model.addObject("search", "No results found for " + id);
+                model.setViewName("redirect:/home");
+            } else {
+                model.setViewName("showpettycash");
+            }
+
+            return model;
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @RequestMapping(value = {"/edit"}, method = RequestMethod.GET)
+    public ModelAndView editTicket(@RequestParam String id) {
+        try {
+
+            TicketHeader ticketHeader = ticketHeaderService.findById(id);
+
+            ModelAndView model = new ModelAndView();
+            model.addObject("ticketHeader", ticketHeader);
+
+            model.setViewName("pettycash/pettycashedit");
+            return model;
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

@@ -67,16 +67,31 @@ public class SendMailService {
         Map<String, Object> modelMap = new HashMap<>();
         String message;
 
+        String typeName="";
+        if(ticketHeader.getTicketType().equals("ENT")){
+            typeName="Entertain";
+        }
+        else if(ticketHeader.getTicketType().equals("TRN")){
+            typeName="Training";
+        }
+         else if(ticketHeader.getTicketType().equals("ADV")){
+            typeName="Advance";
+        }
+         else if(ticketHeader.getTicketType().equals("PTC")){
+            typeName="Petty Cash";
+        }
+        
+        
         //set variable show in vm file
         modelMap.put("ticketNo", ticketHeader.getTicketNo());
-        modelMap.put("ticketType", ticketHeader.getTicketType());
+        modelMap.put("ticketType", typeName);
         modelMap.put("applicationName", ticketHeader.getApplicationName());
 
         //set detail Mail Object
         mail.setMailFrom(mail.getMailFrom());
         mail.setMailTo(emailTo);
-        mail.setMailSubject("You have a request !!. Please see in detail.");
-        mail.setTemplateName("/mail/my.vm");
+        mail.setMailSubject("Request for Approval Control. ( "+ticketHeader.getTicketNo()+" )");
+        mail.setTemplateName("/mail/approve.vm");
 
         //set body message
         message = VelocityEngineUtils.mergeTemplateIntoString(
@@ -113,12 +128,14 @@ public class SendMailService {
         
         // 29/12/58
         if (ticketHeader.getTicketFinished().equals("R")) {
-            mail.setMailSubject("Your ticket was rejected. Please see in detail.");
+            mail.setMailSubject("Your request was rejected. ( "+ticketHeader.getTicketNo()+" )");
+            mail.setTemplateName("/mail/reject.vm");
         } else {
-            mail.setMailSubject("Your Ticket already approved. You can print report now.");
+            mail.setMailSubject("Your request already approved. ( "+ticketHeader.getTicketNo()+" )");
+            mail.setTemplateName("/mail/print.vm");
         }
 
-        mail.setTemplateName("/mail/my.vm");
+       
 
         //set body message
         String message = VelocityEngineUtils.mergeTemplateIntoString(

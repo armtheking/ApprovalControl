@@ -24,7 +24,8 @@
                             <div class="form-group">
                                 <label class="filter-col" style="margin-right:0;" for="pref-perpage"> Month :</label>
                                 <select id="pref-perpage" class="form-control" name="month">
-                                    <option selected="selected" value="1">January</option>
+                                    <option selected="selected" value="0">--SELECT--</option>
+                                    <option value="1">January</option>
                                     <option value="2">February</option>
                                     <option value="3">March</option>
                                     <option value="4">April</option>
@@ -43,10 +44,11 @@
                             <div class="form-group">
                                 <label class="filter-col" style="margin-right:0;" for="pref-perpage"> Year :</label>
                                 <select id="pref-perpage" class="form-control" name="year">
-                                    <option value="2015">2013</option>
-                                    <option value="2015">2014</option>
+                                    <option selected="selected" value="0">--SELECT--</option>
+                                    <option value="2013">2013</option>
+                                    <option value="2014">2014</option>
                                     <option value="2015">2015</option>
-                                    <option selected="selected" value="2016">2016</option>
+                                    <option value="2016">2016</option>
 
                                 </select>                                
                             </div>
@@ -62,19 +64,19 @@
                 <!-- Table Condensed -->
                 <div class="panel panel-success">
                     <table class="table table-striped" id="example">
-                        <div class="panel-heading">
-                            <h3>View Data In Your Division (Month)</h3>
+                        <div class="panel-heading ">
+                            <h3>View Data In Your Division [${month}, ${year}]</h3>
+                          
                         </div>
-
 
                         <thead>
                             <tr>
                                 <th width="10px"> # </th>
-                                <th width="120px"> Ticket No </th>
+                                <th width="140px"> Ticket No </th>
                                 <th width="20px"> Type </th>
                                 <th width="80px"> Date </th>
                                 <th> Topic </th>
-                                <th width="120px"> Amount </th>
+                                <th width="100px"> Amount </th>
                                 <th width="110px"> Application By </th>
                                 <th width="110px"> 1st Approval </th>
                                 <th width="110px"> 2nd Approval </th>
@@ -88,13 +90,26 @@
 
                                 <tr>
                                     <td> <c:if test="${ticketHeader.ticketType eq 'ENT'}">
-                                            <a href="<c:url value='/createticket/show?id=${ticketHeader.ticketNo}'/>" class="btn btn-danger">show</a>
-                                        </c:if>
-                                        <c:if test="${ticketHeader.ticketType eq 'TRN'}">
-                                            <a href="<c:url value='/training/show?id=${ticketHeader.ticketNo}'/>" class="btn btn-danger">show</a>
-                                        </c:if></td>
+                                                <a href="<c:url value='/createticket/show?id=${ticketHeader.ticketNo}'/>" class="btn btn-danger" target="_blank">show</a>
+                                            </c:if>
+                                            <c:if test="${ticketHeader.ticketType eq 'TRN'}">
+                                                <a href="<c:url value='/training/show?id=${ticketHeader.ticketNo}'/>" class="btn btn-danger" target="_blank">show</a>
+                                            </c:if>
+                                            <c:if test="${ticketHeader.ticketType eq 'ADV'}">
+                                                <a href="<c:url value='/advance/show?id=${ticketHeader.ticketNo}'/>" class="btn btn-danger" target="_blank">show</a>
+                                            </c:if>
+                                            <c:if test="${ticketHeader.ticketType eq 'PTC'}">
+                                                <a href="<c:url value='/pettycash/show?id=${ticketHeader.ticketNo}'/>" class="btn btn-danger" target="_blank">show</a>
+                                            </c:if>
+                                    
+                                    
+                                    </td>
                                     
                                     <td>${ticketHeader.ticketNo} &nbsp;
+                                         <c:if test="${!fn:contains(ticketHeader.ticketNo, '-C')}">
+                                              &nbsp;&nbsp;
+                                         </c:if>
+                                      
                                         <c:if test="${ticketHeader.ticketFinished eq 'F'}">
                                             <sup><img src="<c:url value='/resources/img/success.png' />" alt="Mountain View" style="width:16px;height:16px;"></sup>
 
@@ -111,7 +126,7 @@
                                     </td>
                                     <td>${ticketHeader.ticketType}</td>
                                     <td>${ticketHeader.applicationDate}</td>
-                                    <td>${ticketHeader.detailHeader}</td>
+                                    <td id="something">${ticketHeader.detailHeader}</td>
                                     <td>${ticketHeader.reqTotalAmt}</td>
                                     <td>${ticketHeader.applicationName}</td>
                                     <td><c:if test="${not ticketHeader.approvedStatus1}">

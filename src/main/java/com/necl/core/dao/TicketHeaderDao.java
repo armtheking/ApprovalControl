@@ -20,7 +20,7 @@ public interface TicketHeaderDao {
     public List<TicketHeader> findAll() throws Exception;
 
     public boolean save(TicketHeader ticketHeader) throws Exception;
-
+    
     public boolean update(TicketHeader ticketHeader) throws Exception;
 
     public boolean delete(TicketHeader ticketHeader) throws Exception;
@@ -34,5 +34,7 @@ public interface TicketHeaderDao {
     public List<TicketHeader> findMonthYear(int month, int year, String division) throws Exception;
     
     public List<TicketHeader> findByUser(String user) throws Exception;
+    
+    public List<TicketHeader> findFinish() throws Exception;
 
 }

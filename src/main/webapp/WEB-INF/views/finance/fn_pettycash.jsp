@@ -23,8 +23,8 @@
                             <h3 class="panel-title">Finance Approve</h3>
                         </div>
 
-
-                        <thead>
+                         
+                       <thead>
                             <tr>
                                 <th> # </th>
                                 <th> Ticket No </th>
@@ -41,7 +41,7 @@
 
                   
                                     <tr>
-                                        <td> <a href="<c:url value='show?id=${ticketHeader.ticketNo}'/>" class="btn btn-danger">show</a></td>
+                                        <td> <a href="<c:url value='showPettycash?id=${ticketHeader.ticketNo}'/>" class="btn btn-danger">show</a></td>
                                         <td>${ticketHeader.ticketNo}</td>
                                         <td>${ticketHeader.applicationDate}</td>
                                         <td>${ticketHeader.detailHeader}</td>
@@ -61,12 +61,7 @@
 
                                                 ${ticketHeader.approvedName2}
                                             </c:if></td>
-                                        <td>${ticketHeader.ticketFinished}
-
-                                            <c:if test="${ticketHeader.ticketFinished eq 'W'}"> 
-                                                <a href="<c:url value='/clearticket?id=${ticketHeader.ticketNo}'/>" class="btn btn-info btn-sm "> Clear <span class="fa fa-hand-pointer-o"></span></a>
-                                                </c:if>
-
+                                        <td>${ticketHeader.ticketFinished} 
                                         </td>
                                     </tr>
                             </c:forEach>

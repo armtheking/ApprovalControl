@@ -56,11 +56,17 @@
         .table_legenda th {
             word-wrap: break-word;
         }
-        #example td {
-                    max-width: 210px;
+/*        #preview_advance td {
+                    max-width: 220px;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
+        }*/
+        #something {
+            max-width: 220px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
     </style>

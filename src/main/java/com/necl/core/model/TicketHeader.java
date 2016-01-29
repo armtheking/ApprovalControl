@@ -24,6 +24,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.Valid;
+import javax.validation.constraints.Size;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -44,10 +45,12 @@ public class TicketHeader implements Serializable {
     @Column(name = "TicketType", length = 3)
     private String ticketType;
 
+    @Size(max = 150)
     @Column(name = "DetailHeader", length = 150)
     @NotEmpty
     private String detailHeader;
 
+    @Size(max = 150)
     @Column(name = "RemarkHeader", length = 150)
     private String remarkHeader;
 
@@ -151,7 +154,7 @@ public class TicketHeader implements Serializable {
     @Column(name = "CheckDate")
     private Calendar checkDate;
 
-    @Column(name = "CheckStatus", columnDefinition = "BIT default 0", nullable = false)
+    @Column(name = "CheckStatus", columnDefinition = "BIT default 0")
     private Boolean checkStatus = false;
 
     // Section 5 ReceiverBy (Finance input)
@@ -177,6 +180,7 @@ public class TicketHeader implements Serializable {
     @Column(name = "PaidRemark", length = 150)
     private String paidRemark;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "PaidDate")
     private Calendar paidDate;
 
@@ -199,7 +203,7 @@ public class TicketHeader implements Serializable {
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinColumn(name = "TicketNo")
     private List<TrainingParticipant> trainingParticipant = new ArrayList<>();
-    
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinColumn(name = "TicketNo")
@@ -384,9 +388,6 @@ public class TicketHeader implements Serializable {
         this.trainingParticipant = trainingParticipant;
     }
 
-    
-    
-    
     public List<MultipartFile> getFiles() {
         return files;
     }
@@ -625,8 +626,8 @@ public class TicketHeader implements Serializable {
         this.paidRemark = paidRemark;
     }
 
-    public Calendar getPaidDate() {
-        return paidDate;
+    public String getPaidDate() {
+        return convertCalendar(this.paidDate);
     }
 
     public void setPaidDate(Calendar paidDate) {
@@ -648,7 +649,7 @@ public class TicketHeader implements Serializable {
     public void setRemarkOverRequestAmount(String remarkOverRequestAmount) {
         this.remarkOverRequestAmount = remarkOverRequestAmount;
     }
-
+    
     @PrePersist
     public void prePersist() {
         Calendar now = Calendar.getInstance();

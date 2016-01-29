@@ -19,7 +19,7 @@
                        modelAttribute="ticketHTraining" method="post" action="training/createticket?${_csrf.parameterName}=${_csrf.token}" >
 
                 <fieldset>
-                    <legend>Training</legend>
+                    <legend><i class="fa fa-book"></i> Training</legend>
                 </fieldset>
                 <input type="hidden" name="ticketHeader.ticketType" value="TRN"/>
                 <div class="form-group form-group-sm">
@@ -160,7 +160,7 @@
 
                                 <th scope="col">No</th>
                                 <th scope="col">Item</th>
-                                <th scope="col">Detail</th>
+                                <th scope="col">Details</th>
                                 <th scope="col">Amount</th>
                                 <th scope="col"></th>
                             </tr>
@@ -226,7 +226,7 @@
                             </tr>
                                <tr>
                                 <td>6</td>
-                                <td><input type="hidden" id="item5" name="ticketHeader.ticketDTraining[5].item" value="Training Fee (External Training)"/>Training Fee (External Training)</td>
+                                <td><input type="hidden" id="item5" name="ticketHeader.ticketDTraining[5].item" value="Training Fee ( External Training )"/>Training Fee ( External Training )</td>
                                 <td> 
                                     <textarea class="form-control" id="budgetDetail5" name="ticketHeader.ticketDTraining[5].budgetDetail" style=" resize: none;">  </textarea> 
                                 </td>

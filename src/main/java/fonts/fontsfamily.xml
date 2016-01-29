@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fontFamilies>
+   <fontFamily name="AngsanaUPC">
+       <normal><![CDATA[fonts/angsau.ttf]]></normal>
+       <bold><![CDATA[fonts/angsaub.ttf]]></bold>
+       <italic><![CDATA[fonts/angsaui.ttf]]></italic>
+      <boldItalic><![CDATA[fonts/angsauz.ttf]]></boldItalic>
+       <pdfEncoding><![CDATA[Identity-H]]></pdfEncoding>
+       <pdfEmbedded><![CDATA[true]]></pdfEmbedded>
+   </fontFamily>
+</fontFamilies>

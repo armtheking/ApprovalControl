@@ -19,32 +19,40 @@
                 <legend>Petty Cash</legend>
             </fieldset>
             <form:form id="form1" class="form-horizontal" enctype="multipart/form-data"
-                       modelAttribute="ticketHeader" method="post" action="advance/preview?${_csrf.parameterName}=${_csrf.token}" >
+                       modelAttribute="ticketHeader" method="post" action="pettycash/preview?${_csrf.parameterName}=${_csrf.token}" >
 
                 <input type="hidden" name="ticketType" value="PTC"/>
-                <input type="hidden" name="dateAlert" value="7"/>
+
                 <div class="form-group form-group-sm">
 
                     <label for="detailHeader" class="col-sm-2 control-label"><FONT color="red">*</FONT>Objective / Reason:</label>
                     <div class="col-sm-4">
-                        <form:input type="text"  path="detailHeader" class="form-control" placeholder="Objective / Reason" />
+                        <form:input type="text"  path="detailHeader" class="form-control" placeholder="Objective / Reason"  maxlength="100" required="required"/>
                         <div class="has-error">
                             <form:errors path="detailHeader" class="help-inline"/>
                         </div>
                     </div>    
                     <div class="col-sm-5">
-                        <label><span style="color: red;"> ** </span> Car license (In case for driver), Submit job to customs /Month Meeting /Training /Support working at branch 
-                            , Contact Officer /Customer  </label>
+                         <label><span style="color: red;"> ** </span> Car license ( In case for driver ), Submit job to customs / Month Meeting / Support working at branch 
+                            , Contact Officer / Customer  </label>
                     </div>
 
                 </div>
+
+                <div class="form-group form-group-sm">
+                    <label for="dateAlert" class="col-sm-2 control-label">Remark: </label>
+                    <div class="col-sm-4">
+                        <form:textarea type="text" rows="4" path="remarkHeader" class="form-control col-sm-4" placeholder="Remark"/>
+                    </div>
+                </div> 
+
                 <div class="form-group form-group-sm">
                     <label for="dateAlert" class="col-sm-2 control-label">Settlement Within: </label>
                     <div class="col-sm-2">
                         <form:select path="dateAlert" class="form-control input-sm">
 
-                            <form:option value="7">7 Day</form:option>
-                            <form:option value="14">14 Day</form:option>
+                            <form:option value="7">7 Days</form:option>
+                            <form:option value="14">14 Days</form:option>
                         </form:select>
                         <div class="has-error">
                             <form:errors path="dateAlert" class="help-inline" cssClass="error"/>
@@ -52,9 +60,19 @@
                     </div>
                 </div>
 
+                <div class="form-group form-group-sm">
+                    <label for="dateAlert" class="col-sm-2 control-label"><FONT color="red">*</FONT>File Input: </label>
+                    <div class="col-sm-3">
+                        <input type="file" class="filestyle" id="file" name="file" accept="application/pdf"  required   />
+                      </div>
 
-
-
+                </div>   
+                <div class="form-group form-group-sm">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-5">
+                        <label><span style="color: green;"> ########## Budget 0-5,000 baht only ########## </span></label>
+                    </div>
+                </div>
 
                 <div class="col-sm-12">
                     <table class="table" id="tbbudget">
@@ -63,7 +81,8 @@
                                 <th scope="col">No</th>
                                 <th scope="col" width="420px">Description <FONT color="red">**Don't duplicate each line</FONT></th>
                                 <th scope="col">Details</th>
-                                <th scope="col" width="200px">Amount</th>
+                                <th scope="col" width="200px">Receipt No</th>
+                                <th scope="col" width="180px">Amount</th>
                             </tr>
                         </thead>
                         <tbody id="mybody2">
@@ -78,7 +97,10 @@
                                     </div>
                                 </td>
                                 <td> 
-                                    <form:textarea type="text" rows="5" path="ticketdetail[0].detail" class="form-control col-sm-12" placeholder="Details"/>
+                                    <form:textarea type="text" rows="5" path="ticketdetail[0].detail" class="form-control col-sm-12" placeholder="Details" maxlength="140"/>
+                                </td>
+                                <td> 
+                                    <form:input type="text" path="ticketdetail[0].description" class="form-control col-sm-12" placeholder="Receipt No"/>
                                 </td>
                                 <td>
                                     <form:input type="text" path="ticketdetail[0].amount" class="form-control" placeholder="Amount" />
@@ -95,7 +117,10 @@
                                     </div>
                                 </td>
                                 <td> 
-                                    <form:textarea type="text" rows="5" path="ticketdetail[1].detail" class="form-control col-sm-12" placeholder="Details"/>
+                                    <form:textarea type="text" rows="5" path="ticketdetail[1].detail" class="form-control col-sm-12" placeholder="Details"  maxlength="140"/>
+                                </td>
+                                <td> 
+                                    <form:input type="text" path="ticketdetail[1].description" class="form-control col-sm-12" placeholder="Receipt No"/>
                                 </td>
                                 <td>
                                     <form:input type="text" path="ticketdetail[1].amount" class="form-control" placeholder="Amount" />
@@ -112,7 +137,10 @@
                                     </div>
                                 </td>
                                 <td> 
-                                    <form:textarea type="text" rows="5" path="ticketdetail[2].detail" class="form-control col-sm-12" placeholder="Details"/>
+                                    <form:textarea type="text" rows="5" path="ticketdetail[2].detail" class="form-control col-sm-12" placeholder="Details"  maxlength="140"/>
+                                </td>
+                                <td> 
+                                    <form:input type="text" path="ticketdetail[2].description" class="form-control col-sm-12" placeholder="Receipt No"/>
                                 </td>
                                 <td>
                                     <form:input type="text" path="ticketdetail[2].amount" class="form-control" placeholder="Amount" /></td>
@@ -128,7 +156,10 @@
                                     </div>
                                 </td>
                                 <td> 
-                                    <form:textarea type="text" rows="5" path="ticketdetail[3].detail" class="form-control col-sm-12" placeholder="Details"/>
+                                    <form:textarea type="text" rows="5" path="ticketdetail[3].detail" class="form-control col-sm-12" placeholder="Details"  maxlength="140"/>
+                                </td>
+                                <td> 
+                                    <form:input type="text" path="ticketdetail[3].description" class="form-control col-sm-12" placeholder="Receipt No"/>
                                 </td>
                                 <td>
                                     <form:input type="text" path="ticketdetail[3].amount" class="form-control" placeholder="Amount" />
@@ -142,22 +173,13 @@
                 </div>
 
                 <center>
+
                     <input type="submit" class="btn btn-primary" value="NEXT"  style="width: 70px;"/>
                     <button type="reset" class="btn btn-danger">CANCEL</button>
                 </center>
             </form:form>
 
-
-
-
         </div>
-
-
-
-
-
-
-
 
 
         <%@ include file="../template/footer.jspf" %>

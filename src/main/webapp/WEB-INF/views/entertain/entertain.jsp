@@ -95,7 +95,8 @@
 
                                     </td>
                                     <td class="col-sm-2">
-                                        <form:input type="text" path="ticketdetail[0].place"  class="form-control col-sm-12" placeholder="Place"/>
+                                        
+                                        <form:textarea type="text" rows="4" path="ticketdetail[0].place" class="form-control col-sm-12" placeholder="Name of restaurant / Golf Course, Location, etc."/>
                                         <div class="has-error">
                                             <form:errors path="ticketdetail[0].place" class="help-inline" cssClass="error"/>
                                         </div>

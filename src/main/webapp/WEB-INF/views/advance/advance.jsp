@@ -22,22 +22,28 @@
                        modelAttribute="ticketHeader" method="post" action="advance/preview?${_csrf.parameterName}=${_csrf.token}" >
 
                 <input type="hidden" name="ticketType" value="ADV"/>
-                       <input type="hidden" name="dateAlert" value="7"/>
+                <input type="hidden" name="dateAlert" value="7"/>
                 <div class="form-group form-group-sm">
 
                     <label for="detailHeader" class="col-sm-2 control-label"><FONT color="red">*</FONT>Objective / Reason:</label>
                     <div class="col-sm-4">
-                        <form:input type="text"  path="detailHeader" class="form-control" placeholder="Objective / Reason" />
+                        <form:input type="text" id="detailHeader" path="detailHeader" class="form-control" placeholder="Objective / Reason" autofocus="autofocus" maxlength="100" required="required"/>
                         <div class="has-error">
-                            <form:errors path="detailHeader" class="help-inline"/>
+                            <form:errors path="detailHeader" class="help-inline" cssClass="error"/>
                         </div>
                     </div>    
                     <div class="col-sm-5">
-                        <label><span style="color: red;"> ** </span> Car license (In case for driver), Submit job to customs /Month Meeting /Training /Support working at branch 
-                            , Contact Officer /Customer  </label>
+                        <label><span style="color: red;"> ** </span> Car license ( In case for driver ), Submit job to customs / Month Meeting / Support working at branch 
+                            , Contact Officer / Customer  </label>
                     </div>
 
                 </div>
+                <div class="form-group form-group-sm">
+                    <label for="dateAlert" class="col-sm-2 control-label">Remark: </label>
+                    <div class="col-sm-4">
+                        <form:textarea type="text" rows="4" path="remarkHeader" class="form-control col-sm-4" placeholder="Remark" maxlength="140"/>
+                    </div>
+                </div>        
                 <div class="form-group form-group-sm">
                     <label for="dateAlert" class="col-sm-2 control-label">Settlement Within: </label>
                     <div class="col-sm-2">
@@ -71,7 +77,7 @@
                                     </div>
                                 </td>
                                 <td> 
-                                    <form:textarea type="text" rows="5" path="ticketdetail[0].detail" class="form-control col-sm-12" placeholder="Details"/>
+                                    <form:textarea type="text" rows="5" path="ticketdetail[0].detail" class="form-control col-sm-12" placeholder="Details" maxlength="140"/>
                                 </td>
                                 <td>
                                     <form:input type="text" path="ticketdetail[0].amount" class="form-control" placeholder="Amount" />
@@ -88,7 +94,7 @@
                                     </div>
                                 </td>
                                 <td> 
-                                    <form:textarea type="text" rows="5" path="ticketdetail[1].detail" class="form-control col-sm-12" placeholder="Details"/>
+                                    <form:textarea type="text" rows="5" path="ticketdetail[1].detail" class="form-control col-sm-12" placeholder="Details" maxlength="140"/>
                                 </td>
                                 <td>
                                     <form:input type="text" path="ticketdetail[1].amount" class="form-control" placeholder="Amount" />
@@ -105,7 +111,7 @@
                                     </div>
                                 </td>
                                 <td> 
-                                    <form:textarea type="text" rows="5" path="ticketdetail[2].detail" class="form-control col-sm-12" placeholder="Details"/>
+                                    <form:textarea type="text" rows="5" path="ticketdetail[2].detail" class="form-control col-sm-12" placeholder="Details" maxlength="140"/>
                                 </td>
                                 <td>
                                     <form:input type="text" path="ticketdetail[2].amount" class="form-control" placeholder="Amount" /></td>
@@ -121,7 +127,7 @@
                                     </div>
                                 </td>
                                 <td> 
-                                    <form:textarea type="text" rows="5" path="ticketdetail[3].detail" class="form-control col-sm-12" placeholder="Details"/>
+                                    <form:textarea type="text" rows="5" path="ticketdetail[3].detail" class="form-control col-sm-12" placeholder="Details" maxlength="140"/>
                                 </td>
                                 <td>
                                     <form:input type="text" path="ticketdetail[3].amount" class="form-control" placeholder="Amount" />
@@ -140,17 +146,7 @@
                 </center>
             </form:form>
 
-
-
-
         </div>
-
-
-
-
-
-
-
 
 
         <%@ include file="../template/footer.jspf" %>

@@ -32,6 +32,8 @@ public interface TicketHeaderService {
     public List<TicketHeader> findByType(String type) throws Exception;
 
     public List<TicketHeader> findMonthYear(int month, int year, String division) throws Exception;
-    
+
     public List<TicketHeader> findByUser(String user) throws Exception;
+
+    public List<TicketHeader> findFinish() throws Exception;
 }

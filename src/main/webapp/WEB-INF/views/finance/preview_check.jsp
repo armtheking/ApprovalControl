@@ -28,7 +28,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label> Topic </label>
-                                        <div class="well">
+                                        <div class="well" style="width:540px; word-wrap: break-word; display:block;">
                                             ${ticketHeader.detailHeader}
                                         </div>
                                     </div>
@@ -90,12 +90,12 @@
                                                     </thead>
                                                     <tbody>
                                                         <c:set var="count" value="0" scope="page" />
-                                                        <c:forEach var="ticketdetail" items="${ticketHeader.ticketdetail}">
+                                                        <c:forEach var="ticketdetail" items="${ticketDetail}">
                                                             <tr>
                                                                 <td><c:set var="count" value="${count + 1}" scope="page"/> 
                                                                     <c:out value="${count}" />
                                                                 </td>
-                                                                <td>${ticketdetail.financeChargeCode.description}</td>
+                                                                <td>${ticketdetail.description}</td>
                                                                 <td>${ticketdetail.place}</td>
                                                                 <td>
                                                                     ${ticketdetail.detail}
@@ -199,7 +199,7 @@
                                                         <label  class="col-sm-3 control-label">Request Total Amount : </label>
 
                                                         <div class="col-sm-5">
-                                                            <ins><b>${ticketHeader.reqTotalAmt}</b></ins>
+                                                            <ins><b>${number_sumAmount}</b></ins>
                                                         </div>
                                                     </div>
 

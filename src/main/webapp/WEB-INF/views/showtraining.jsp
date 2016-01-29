@@ -28,7 +28,7 @@
                     <div class="col-md-12">
                         <div class="panel panel-danger">
                             <div class="panel-heading clearfix">
-                                <h3 class="panel-title pull-left" style="padding-top: 7.5px;"><b>Ticket No: ${ticketHTraining.ticketHeader.ticketNo}</b></h3>
+                                <h3 class="panel-title pull-left" style="padding-top: 15px; font-weight: bold;">Ticket No: ${ticketHTraining.ticketHeader.ticketNo}</h3>
 
                                 <div class="btn-group pull-right">
                                     <c:if test="${principal.username eq ticketHTraining.ticketHeader.applicationName and ticketHTraining.ticketHeader.approvedStatus1 eq false or ticketHTraining.ticketHeader.ticketFinished eq 'R'}"> 
@@ -190,49 +190,51 @@
 
 
 
-                                <div class="row" style="margin: 0.5%;"> 
-                                    <div class="panel panel-danger">
-                                        <div class="panel-heading" >
-                                            <h4>List of Participant
-                                                <span class="btn-group pull-right">  <a href="<c:url value='/report/download/pdf_participant?id=${ticketHTraining.ticketHeader.ticketNo}'/>" class="btn btn-danger
-                                               " target="_blank">PRINT<span class="fa fa-print"></span></a> 
-                                                </span>
-                                            </h4>
-                                       
-                                         </div>
-                                        <div class="panel-body">
-                                            <table id="tb_participant"  class="table table-striped" cellspacing="0" width="100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th>No</th>                               
-                                                        <th>EmployeeID</th>
-                                                        <th>Firstname</th>
-                                                        <th>Lastname</th>
-                                                        <th>Section</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>  
+                                <div class="row"> 
+                                    <div class="col-md-12">
+                                        <div class="panel panel-danger">
+                                            <div class="panel-heading" >
+                                                <h4 style=" font-weight: bold;">List of Participant
+                                                    <span class="btn-group pull-right">  <a href="<c:url value='/report/download/pdf_participant?id=${ticketHTraining.ticketHeader.ticketNo}'/>" class="btn btn-danger
+                                                                                            " target="_blank">PRINT<span class="fa fa-print"></span></a> 
+                                                    </span>
+                                                </h4>
 
-                                                    <c:forEach varStatus="varStatus" var="trainingParticipant" items="${ticketHTraining.ticketHeader.trainingParticipant}">
-                                                        <tr>     
-                                                            <c:if test="${trainingParticipant.empID != ''}">
-                                                                <td>${varStatus.count}</td>
-                                                                <td>${trainingParticipant.empID}</td>
-                                                                <td>${trainingParticipant.firstName}</td>
-                                                                <td>${trainingParticipant.lastName}</td>
-                                                                <td>${trainingParticipant.section}</td>
-                                                            </c:if>
-                                                            <c:if test="${trainingParticipant.empID == ''}">
-                                                                <td>-</td>
-                                                                <td>-</td>
-                                                                <td>-</td>
-                                                                <td>-</td>
-                                                                <td>-</td>
-                                                            </c:if>   
+                                            </div>
+                                            <div class="panel-body">
+                                                <table id="tb_participant"  class="table table-striped" cellspacing="0" width="100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>                               
+                                                            <th>EmployeeID</th>
+                                                            <th>Firstname</th>
+                                                            <th>Lastname</th>
+                                                            <th>Section</th>
                                                         </tr>
-                                                    </c:forEach>
-                                                </tbody>
-                                            </table>
+                                                    </thead>
+                                                    <tbody>  
+
+                                                        <c:forEach varStatus="varStatus" var="trainingParticipant" items="${ticketHTraining.ticketHeader.trainingParticipant}">
+                                                            <tr>     
+                                                                <c:if test="${trainingParticipant.empID != ''}">
+                                                                    <td>${varStatus.count}</td>
+                                                                    <td>${trainingParticipant.empID}</td>
+                                                                    <td>${trainingParticipant.firstName}</td>
+                                                                    <td>${trainingParticipant.lastName}</td>
+                                                                    <td>${trainingParticipant.section}</td>
+                                                                </c:if>
+                                                                <c:if test="${trainingParticipant.empID == ''}">
+                                                                    <td>-</td>
+                                                                    <td>-</td>
+                                                                    <td>-</td>
+                                                                    <td>-</td>
+                                                                    <td>-</td>
+                                                                </c:if>   
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -243,7 +245,7 @@
                                     <div class="col-md-12">
                                         <div class="panel panel-success">
                                             <div class="panel-heading">
-                                                <h4>Detail</h4>
+                                                <h4 style=" font-weight: bold;">Detail</h4>
                                             </div>
                                             <div class="panel-body">
                                                 <table class="table table-striped">
@@ -251,7 +253,7 @@
                                                         <tr>
                                                             <th class="col-md-1"> No </th>
                                                             <th class="col-md-2"> Item </th>
-                                                            <th class="col-md-4"> Detail </th>
+                                                            <th class="col-md-4"> Details </th>
                                                             <th class="col-md-1"> Amount </th>
                                                         </tr>
                                                     </thead>
@@ -263,7 +265,7 @@
                                                                     <c:out value="${count}" />
                                                                 </td>
                                                                 <td>${ticketDTraining.item}</td>
-                                                                <td >
+                                                                <td style="max-width: 360px; word-wrap: break-word;">
                                                                     ${ticketDTraining.budgetDetail}
                                                                 </td>
                                                                 <td align="right">
@@ -319,7 +321,7 @@
                                     <div class="col-md-12">
                                         <div class="panel panel-warning">
                                             <div class="panel-heading">
-                                                <h4>Status Approve</h4>
+                                                <h4 style=" font-weight: bold;">Status Approve</h4>
                                             </div>
                                             <div class="panel-body">
 
@@ -378,6 +380,83 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <sec:authorize access="hasRole('ADMIN') or hasRole('DBA')">
+                                    <c:if test="${ticketHTraining.ticketHeader.ticketFinished eq 'F'}">
+                                        <div class="row">
+
+                                            <div class="col-md-12">
+                                                <div class="panel panel-primary">
+                                                    <div class="panel-heading">
+                                                        <h4 style=" font-weight: bold;">Finance</h4>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label> Receiver By: </label>
+                                                                <div class="well well-sm">
+                                                                    -
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label> Paid By: </label>
+                                                                <div class="well well-sm">
+                                                                    -
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label> Paid Date: </label>
+                                                                <div class="well well-sm">
+                                                                    -
+                                                                </div>
+                                                            </div> 
+                                                        </div>  
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label> Request Total Amount: </label>
+                                                                <div class="well well-sm">
+                                                                    ${ticketHTraining.ticketHeader.reqTotalAmt + ticketHTraining.ticketHeader.payBack}
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <label> Paid Total Amount: </label>
+                                                                <div class="well well-sm">
+                                                                    ${ticketHTraining.ticketHeader.reqTotalAmt}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label> Balance / Refund </label>
+                                                                <div class="well well-sm">
+                                                                    <c:if test="${ticketHTraining.ticketHeader.payBack eq null}">
+                                                                        0.00
+                                                                    </c:if>
+                                                                    <c:if test="${ticketHTraining.ticketHeader.payBack >= 0}">
+                                                                        ${ticketHTraining.ticketHeader.payBack}
+                                                                    </c:if>
+                                                                </div>
+                                                            </div> 
+                                                        </div>              
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label> Payment: </label>
+                                                                <div class="well well-sm">
+                                                                    -
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <label> Paid Note: </label>
+                                                                <div class="well well-sm" style="width:706 px; word-wrap: break-word; display:block;">
+                                                                    -
+                                                                </div>
+                                                            </div> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </c:if>
+                                </sec:authorize>
                             </div>
                             <div class = "panel-footer">
                                 <button class="btn btn-primary" onclick="goBack()">Go Back</button>

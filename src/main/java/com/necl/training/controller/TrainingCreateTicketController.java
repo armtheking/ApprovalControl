@@ -108,7 +108,12 @@ public class TrainingCreateTicketController extends HttpServlet {
 //    }
     @RequestMapping(value = "/training/createticket", method = RequestMethod.POST)
     public ModelAndView createTicket(@ModelAttribute(value = "ticketHTraining") TicketHTraining ticketHTraining, BindingResult result, RedirectAttributes attr, final @RequestParam CommonsMultipartFile mainfile, final @RequestParam CommonsMultipartFile listfile) throws Exception {
-        System.out.println("check1");
+         if (result.hasErrors()) {
+            attr.addFlashAttribute("org.springframework.validation.BindingResult.ticketHeader", result);
+            attr.addFlashAttribute("ticketHeader", ticketHTraining);
+            LOGGER.debug("preview page is hasErrors redirect!");
+            return new ModelAndView(RedirectPageByType.getPageByType(ticketHTraining.getTicketHeader().getTicketType()));
+        }
 
         String username = HomeController.getPrincipal();
 

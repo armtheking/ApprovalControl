@@ -117,4 +117,15 @@ public class TicketHeaderDaoImpl implements TicketHeaderDao {
         return results;
     }
 
+    @Override
+    public List<TicketHeader> findFinish() throws Exception {
+        String sql = "SELECT * FROM   tblTicketsH WHERE     (TicketsFinished = 'F'\n"
+                + ") AND(NOT(TicketNo LIKE '%-C%'\n"
+                + "))";
+        SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql);
+        query.addEntity(TicketHeader.class);
+        List results = query.list();
+        return results;
+    }
+
 }
