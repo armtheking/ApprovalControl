@@ -148,7 +148,7 @@
                                     <td>
 
                                         <c:if test="${ticketHeader.ticketType eq 'TRN' and ticketHeader.ticketFinished eq 'P'}">
-                                            <a href="<c:url value='training/print?id=${ticketHeader.ticketNo}'/>" class="btn btn-info btn-sm " target="_blank">Print</a> 
+                                            <a href="<c:url value='training/print?id=${ticketHeader.ticketNo}'/>" class="btn btn-info btn-sm " target="_blank">Print <span class="fa fa-hand-pointer-o"></span></a> 
                                         </c:if>
 
                                         <c:if test="${ticketHeader.ticketFinished eq 'P' and !fn:contains(ticketHeader.ticketNo, 'C') and ticketHeader.ticketType eq 'ENT'}"> 

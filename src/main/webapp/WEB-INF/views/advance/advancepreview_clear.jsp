@@ -95,11 +95,13 @@
                             </tbody>
                         </table>
                         <div style="margin-left: 82%"><font color="red"> <u>  Total Amount:  ${number_sumAmount} </u></font></div>
+
+                        <center>
+                            <input type="submit" class="btn btn-success" value="SUBMIT" name="submit" >
+                            <a href="<c:url value='previous'/>" class="btn btn-danger">PREVIOUS </a>
+                        </center>
                     </div>
-                    <center>
-                        <input type="submit" class="btn btn-success" value="SUBMIT" name="submit" >
-                        <a href="<c:url value='previous'/>" class="btn btn-danger">PREVIOUS </a>
-                    </center>
+
                 </div>
 
 

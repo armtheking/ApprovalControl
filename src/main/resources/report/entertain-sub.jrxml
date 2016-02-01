@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="550" pageHeight="133" whenNoDataType="AllSectionsNoDetail" columnWidth="550" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="9bb81e21-ee65-4681-bf39-319ef1a011fe">
-	<property name="ireport.zoom" value="1.6105100000000017"/>
+	<property name="ireport.zoom" value="1.210000000000001"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<subDataset name="Table Dataset 2" uuid="071dcb7b-6019-4e7e-92f4-2ab5bc736726"/>
@@ -17,7 +17,7 @@
 			<textField isStretchWithOverflow="true">
 				<reportElement x="347" y="5" width="116" height="16" uuid="f0e7322e-49a3-4c22-ba45-94931dd0df8a"/>
 				<textElement textAlignment="Left">
-					<font fontName="BrowalliaUPC" size="12" pdfEncoding="Identity-H"/>
+					<font fontName="BrowalliaUPC" size="12" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{detail}]]></textFieldExpression>
@@ -25,7 +25,7 @@
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement x="483" y="5" width="64" height="16" uuid="50536a67-cb7f-42b4-86b1-041119211d9e"/>
 				<textElement textAlignment="Right">
-					<font fontName="BrowalliaUPC" size="12" pdfEncoding="Identity-H"/>
+					<font fontName="BrowalliaUPC" size="12" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
@@ -33,7 +33,7 @@
 			<textField>
 				<reportElement x="1" y="5" width="26" height="16" uuid="610b4096-0b69-4e85-b0d4-12a76fc3bf39"/>
 				<textElement textAlignment="Center">
-					<font fontName="BrowalliaUPC" size="12" pdfEncoding="Identity-H"/>
+					<font fontName="BrowalliaUPC" size="12" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
@@ -41,7 +41,7 @@
 			<textField isStretchWithOverflow="true">
 				<reportElement x="28" y="5" width="61" height="16" uuid="b82bd9e7-907d-4b9a-aa66-d4789e47047e"/>
 				<textElement textAlignment="Center">
-					<font fontName="BrowalliaUPC" size="12" pdfEncoding="Identity-H"/>
+					<font fontName="BrowalliaUPC" size="12" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{financeChargeCode}.getAccessCode()]]></textFieldExpression>
@@ -49,7 +49,7 @@
 			<textField isStretchWithOverflow="true">
 				<reportElement x="278" y="5" width="50" height="16" uuid="249fa8b6-3e32-4142-8271-b139189d0306"/>
 				<textElement textAlignment="Left">
-					<font fontName="BrowalliaUPC" size="12" pdfEncoding="Identity-H"/>
+					<font fontName="BrowalliaUPC" size="12" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{place}]]></textFieldExpression>
@@ -57,7 +57,7 @@
 			<textField isStretchWithOverflow="true">
 				<reportElement x="99" y="5" width="160" height="16" forecolor="#000000" uuid="b8403f83-9043-466a-a7cf-1508694ec749"/>
 				<textElement textAlignment="Left">
-					<font fontName="BrowalliaUPC" size="12" isBold="false" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="BrowalliaUPC" size="12" isBold="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{financeChargeCode}.getDescription()]]></textFieldExpression>
