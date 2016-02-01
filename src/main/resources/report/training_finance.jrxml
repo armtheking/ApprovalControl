@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3d2a9b55-282a-4beb-b346-a92c2c7a120c">
 	<property name="ireport.zoom" value="1.3310000000000544"/>
-	<property name="ireport.x" value="67"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.x" value="68"/>
+	<property name="ireport.y" value="349"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -100,7 +100,7 @@
 					<font fontName="BrowalliaUPC" size="16" isBold="true" isUnderline="true" pdfEncoding="Identity-H"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[FOR FINANCE]]></text>
+				<text><![CDATA[FOR HR]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="485" y="-1" width="70" height="20" uuid="72d5f138-ce0f-42f6-b7da-d2ffbde6ae12"/>
@@ -867,7 +867,7 @@
 					<font fontName="BrowalliaUPC" size="10" isBold="true" isStrikeThrough="false" pdfEncoding="Identity-H"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Page 2/2]]></text>
+				<text><![CDATA[Page 1/2]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="218" y="102" width="120" height="20" uuid="5b4ccf4f-aba4-43a7-9aa4-f9f171bfb2bb"/>
