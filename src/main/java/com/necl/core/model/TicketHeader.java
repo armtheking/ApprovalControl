@@ -193,20 +193,22 @@ public class TicketHeader implements Serializable {
     @Transient
     private CommonsMultipartFile file;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
-    @JoinColumn(name = "TicketNo")
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @Fetch(value = FetchMode.SUBSELECT)
+//    @JoinColumn(name = "TicketNo")
+//    @Valid
+//    private List<TicketDetail> ticketdetail = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "ticketHeader")
+   @Fetch(value = FetchMode.SUBSELECT)
     @Valid
     private List<TicketDetail> ticketdetail = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
-    @JoinColumn(name = "TicketNo")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "ticketHeader")
+   @Fetch(value = FetchMode.SUBSELECT)
     private List<TrainingParticipant> trainingParticipant = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "ticketHeader")
     @Fetch(value = FetchMode.SUBSELECT)
-    @JoinColumn(name = "TicketNo")
     private List<TicketDTraining> ticketDTraining = new ArrayList<>();
 
 //    @OneToOne(mappedBy = "ticketHeader", cascade = CascadeType.ALL)
@@ -649,7 +651,7 @@ public class TicketHeader implements Serializable {
     public void setRemarkOverRequestAmount(String remarkOverRequestAmount) {
         this.remarkOverRequestAmount = remarkOverRequestAmount;
     }
-    
+
     @PrePersist
     public void prePersist() {
         Calendar now = Calendar.getInstance();

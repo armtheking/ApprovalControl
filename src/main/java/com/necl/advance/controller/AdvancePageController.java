@@ -73,7 +73,7 @@ public class AdvancePageController {
     @RequestMapping(value = "/show", method = RequestMethod.GET)
     public ModelAndView showTicket(@RequestParam String id) {
         try {
-
+            System.out.println("xxx: "+id);
             ModelAndView model = new ModelAndView();
             TicketHeader ticketHeader = ticketHeaderService.findById(id);
 

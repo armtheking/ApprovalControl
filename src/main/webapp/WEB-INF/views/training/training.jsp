@@ -174,7 +174,7 @@
                                     <textarea class="form-control" id="budgetDetail0" name="ticketHeader.ticketDTraining[0].budgetDetail" style=" resize: none;">  </textarea> 
                                 </td>
                                 <td>
-                                    <input type="text" id="amount0" name="ticketHeader.ticketDTraining[0].amount" class="form-control"  value="0" />
+                                    <input type="text" id="amount0" name="ticketHeader.ticketDTraining[0].amount" class="form-control"  value="0" required/>
                                 </td>
                                 <td><button id="addRow" class="btn btn-success" style="width: 35px; float: left"  type="button" onclick="addRowBudget();">+</button> 
                                     <button id="delRow" class="btn btn-danger"  style="width: 35px;"  type="button" onclick="deleteRowBudget();">-</button> 
@@ -187,7 +187,7 @@
                                     <textarea class="form-control" id="budgetDetail1" name="ticketHeader.ticketDTraining[1].budgetDetail" style=" resize: none;">  </textarea> 
                                 </td>
                                 <td>
-                                    <input type="text" id="amount1" name="ticketHeader.ticketDTraining[1].amount" class="form-control"  value="0"/>
+                                    <input type="text" id="amount1" name="ticketHeader.ticketDTraining[1].amount" class="form-control"  value="0" required/>
                                 </td>
                                 <td></td>
                             </tr>
@@ -198,7 +198,7 @@
                                     <textarea class="form-control" id="budgetDetail2" name="ticketHeader.ticketDTraining[2].budgetDetail" style=" resize: none;">  </textarea> 
                                 </td>
                                 <td>
-                                    <input type="text" id="amount2" name="ticketHeader.ticketDTraining[2].amount" class="form-control"   value="0"/>
+                                    <input type="text" id="amount2" name="ticketHeader.ticketDTraining[2].amount" class="form-control"   value="0" required/>
                                 </td>
                                 <td></td>
                             </tr>
@@ -209,7 +209,7 @@
                                     <textarea class="form-control" id="budgetDetail3" name="ticketHeader.ticketDTraining[3].budgetDetail" style=" resize: none;">  </textarea> 
                                 </td>
                                 <td>
-                                    <input type="text" id="amount3" name="ticketHeader.ticketDTraining[3].amount" class="form-control"   value="0"/>
+                                    <input type="text" id="amount3" name="ticketHeader.ticketDTraining[3].amount" class="form-control"   value="0" required/>
                                 </td>
                                 <td></td>
                             </tr>
@@ -220,7 +220,7 @@
                                     <textarea class="form-control" id="budgetDetail4" name="ticketHeader.ticketDTraining[4].budgetDetail" style=" resize: none;">  </textarea> 
                                 </td>
                                 <td>
-                                    <input type="text" id="amount4" name="ticketHeader.ticketDTraining[4].amount" class="form-control"   value="0"/>
+                                    <input type="text" id="amount4" name="ticketHeader.ticketDTraining[4].amount" class="form-control"   value="0" required/>
                                 </td>
                                 <td></td>
                             </tr>
@@ -231,7 +231,7 @@
                                     <textarea class="form-control" id="budgetDetail5" name="ticketHeader.ticketDTraining[5].budgetDetail" style=" resize: none;">  </textarea> 
                                 </td>
                                 <td>
-                                    <input type="text" id="amount5" name="ticketHeader.ticketDTraining[5].amount" class="form-control"   value="0"/>
+                                    <input type="text" id="amount5" name="ticketHeader.ticketDTraining[5].amount" class="form-control"   value="0" required/>
                                 </td>
                                 <td></td>
                             </tr>

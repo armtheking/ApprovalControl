@@ -14,6 +14,7 @@ import com.necl.core.service.ConfigSystemService;
 import com.necl.core.service.FinChargeCodeService;
 import com.necl.core.service.HandlerFileUpload;
 import com.necl.core.service.SendMailService;
+import com.necl.core.service.TicketDetailService;
 import com.necl.core.service.TicketHeaderService;
 import com.necl.core.service.UserService;
 import com.necl.login.controller.HomeController;
@@ -49,6 +50,9 @@ public class PettyCashController {
 
     @Autowired
     ConfigSystemService configSystemService;
+
+    @Autowired
+    TicketDetailService ticketDetailService;
 
     @Autowired
     @Qualifier("mailService")
@@ -190,6 +194,9 @@ public class PettyCashController {
 
             // Set TicketNumber & Type from database config
             ticketHeader.setTicketNo(numberTicket);
+            for (int i = 0; i < ticketHeader.getTicketdetail().size(); i++) {
+                ticketHeader.getTicketdetail().get(i).setTicketHeader(ticketHeader);
+            }
             ticketHeader.setTicketType(configSystem.getConfigPrefix());
 
             // Calculate Cost in founction 
@@ -290,14 +297,26 @@ public class PettyCashController {
 
     @RequestMapping(value = {"/pettycash/edit"}, method = RequestMethod.POST)
     public ModelAndView editTicketAdvance(@ModelAttribute("ticketHeader") TicketHeader ticketHeader) {
-        System.out.println("xx:" + ticketHeader);
-        System.out.println("check1+" + ticketHeader.getTicketNo());
+
         try {
+            TicketHeader ticketHeader2 = new TicketHeader();
+            ticketHeader2 = ticketHeaderService.findById(ticketHeader.getTicketNo());
+
+            for (int i = 0; i < ticketHeader2.getTicketdetail().size(); i++) {
+                System.out.println("checkWOI: " + ticketHeader2.getTicketdetail().get(i).getId());
+
+                if (ticketHeader.getTicketdetail().get(i).getFinanceChargeCode().getId() == 0 || ticketHeader.getTicketdetail().get(i).getAmount() == null) {
+                    ticketDetailService.delete(ticketHeader2.getTicketdetail().get(i).getId());
+                } else {
+                    ticketHeader.getTicketdetail().get(i).setId(ticketHeader2.getTicketdetail().get(i).getId());
+                }
+            }
 
             List<FinanceChargeCode> fc = new ArrayList<>();
             for (Iterator<TicketDetail> iter = ticketHeader.getTicketdetail().listIterator(); iter.hasNext();) {
                 TicketDetail td = iter.next();
                 //ถ้า ไม่ได้เลือก dropdown ให้ลบ row ตัวนั้น
+                System.out.println("fcharge: " + td.getFinanceChargeCode().getId());
                 if (td.getFinanceChargeCode().getId() == 0 || td.getAmount() == null) {
                     iter.remove();
                 } else {
@@ -310,7 +329,9 @@ public class PettyCashController {
 
             for (int i = 0; i < fc.size(); i++) {
                 //set ค่าใน list ไว้ใน header
+                System.out.println("i: " + i);
                 ticketHeader.getTicketdetail().get(i).setFinanceChargeCode(fc.get(i));
+                System.out.println("vv: " + ticketHeader.getTicketdetail().get(i).getFinanceChargeCode());
             }
             System.out.println("check2");
             // การ edit ticket ไม่จำเป้นต้อง run ticket ใหม่

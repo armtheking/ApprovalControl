@@ -7,6 +7,8 @@ package com.necl.core.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,10 +17,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "tblTicketsD")
@@ -40,8 +47,7 @@ public class TicketDetail implements Serializable {
 
     @Column(name = "Acc_Code", length = 6)
     private String accountCode;
-    
-    
+
     @Size(max = 150)
     @Column(name = "RemarkDetail", length = 150)
     private String detail;
@@ -60,6 +66,10 @@ public class TicketDetail implements Serializable {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ChargeCodeId")
     private FinanceChargeCode financeChargeCode;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "TicketNo")
+    private TicketHeader ticketHeader;
 
 //    @OneToOne(fetch = FetchType.EAGER)
 //    @PrimaryKeyJoinColumn
@@ -135,5 +145,17 @@ public class TicketDetail implements Serializable {
     public void setFinanceChargeCode(FinanceChargeCode financeChargeCode) {
         this.financeChargeCode = financeChargeCode;
     }
+
+    public TicketHeader getTicketHeader() {
+        return ticketHeader;
+    }
+
+    public void setTicketHeader(TicketHeader ticketHeader) {
+        this.ticketHeader = ticketHeader;
+    }
+
+ 
+
+    
 
 }

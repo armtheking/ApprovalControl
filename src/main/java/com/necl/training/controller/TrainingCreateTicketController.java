@@ -21,6 +21,7 @@ import com.necl.training.model.TrainingPayment;
 import com.necl.training.model.TrainingPlan;
 import com.necl.training.model.TrainingType;
 import com.necl.training.service.DivisionBudgetService;
+import com.necl.training.service.TicketDTrainingService;
 import com.necl.training.service.TicketHTrainingService;
 //import com.necl.training.service.TrainingBudgetDescriptionService;
 import com.necl.training.service.TrainingPaymentService;
@@ -73,6 +74,9 @@ public class TrainingCreateTicketController extends HttpServlet {
     TicketHeaderService ticketHeaderService;
 
     @Autowired
+    TicketDTrainingService ticketDTrainingService;
+
+    @Autowired
     @Qualifier("mailService")
     SendMailService sendMailService;
 
@@ -108,7 +112,7 @@ public class TrainingCreateTicketController extends HttpServlet {
 //    }
     @RequestMapping(value = "/training/createticket", method = RequestMethod.POST)
     public ModelAndView createTicket(@ModelAttribute(value = "ticketHTraining") TicketHTraining ticketHTraining, BindingResult result, RedirectAttributes attr, final @RequestParam CommonsMultipartFile mainfile, final @RequestParam CommonsMultipartFile listfile) throws Exception {
-         if (result.hasErrors()) {
+        if (result.hasErrors()) {
             attr.addFlashAttribute("org.springframework.validation.BindingResult.ticketHeader", result);
             attr.addFlashAttribute("ticketHeader", ticketHTraining);
             LOGGER.debug("preview page is hasErrors redirect!");
@@ -227,19 +231,30 @@ public class TrainingCreateTicketController extends HttpServlet {
         System.out.println("typeID" + ticketHTraining.getTrainingType().getTypeID());
         try {
 
+            TicketHeader ticketHeader2 = new TicketHeader();
+            ticketHeader2 = ticketHeaderService.findById(ticketHTraining.getTicketHeader().getTicketNo());
+
+            for (int i = 0; i < ticketHeader2.getTicketDTraining().size(); i++) {
+                System.out.println("i: "+i);
+                if (ticketHTraining.getTicketHeader().getTicketDTraining().size() <= i) {
+                    System.out.println("aoi");
+                    ticketDTrainingService.delete(ticketHeader2.getTicketDTraining().get(i).getId());
+                } else {
+                    ticketHTraining.getTicketHeader().getTicketDTraining().get(i).setId(ticketHeader2.getTicketDTraining().get(i).getId());
+                }
+            }
+
             // การ edit ticket ไม่จำเป้นต้อง run ticket ใหม่
             String ticketNo = ticketHTraining.getTicketHeader().getTicketNo();
             String oldItem = ticketHTraining.getTicketHeader().getItem();
-            
-            
-             handlerFileUpload.handleFileUploadToPath(mainfile, ticketNo);
 
+            handlerFileUpload.handleFileUploadToPath(mainfile, ticketNo);
 
             if (!listfile.isEmpty()) {
                 ticketHTraining.setFileParticipant("Y");
                 handlerFileUpload.handleFileUploadToPath(listfile, ticketNo + "-Participant");
             }
-        
+
             setDetailTicketHeaderBeforeSave(ticketHTraining);
             ticketHTraining.getTicketHeader().setTicketNo(ticketNo);
             LOGGER.info("save edit is exeuted!");
@@ -307,6 +322,11 @@ public class TrainingCreateTicketController extends HttpServlet {
 
         // Set TicketNumber & Type from database config
         ticketHTraining.getTicketHeader().setTicketNo(numberTicket);
+
+        for (int i = 0; i < ticketHTraining.getTicketHeader().getTicketDTraining().size(); i++) {
+            ticketHTraining.getTicketHeader().getTicketDTraining().get(i).setTicketHeader(ticketHTraining.getTicketHeader());
+        }
+
         ticketHTraining.getTicketHeader().setTicketType(configSystem.getConfigPrefix());
         ticketHTraining.getTicketHeader().setApplicationDate(Calendar.getInstance());
 //        ticketHeader.getTicketHTraining().setTicketHeader(ticketHeader);

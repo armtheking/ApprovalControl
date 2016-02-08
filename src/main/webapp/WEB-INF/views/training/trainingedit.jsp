@@ -231,7 +231,7 @@
                                     <form:textarea class="form-control" id="budgetDetail0" style=" resize: none;" path="ticketHeader.ticketDTraining[0].budgetDetail" value="${ticketHTraining.ticketHeader.ticketDTraining[0].budgetDetail}" />  
                                 </td>
                                 <td>
-                                    <input type="text" id="amount0" name="ticketHeader.ticketDTraining[0].amount" class="form-control"  value="${ticketHTraining.ticketHeader.ticketDTraining[0].amount}" />
+                                    <input type="text" id="amount0" name="ticketHeader.ticketDTraining[0].amount" class="form-control"  value="${ticketHTraining.ticketHeader.ticketDTraining[0].amount}" required/>
                                 </td>
                                 <td><button id="addRow" class="btn btn-success" style="width: 35px; float: left"  type="button" onclick="addRowBudget();">+</button> 
                                     <button id="delRow" class="btn btn-danger"  style="width: 35px;"  type="button" onclick="deleteRowBudget();">-</button> 
@@ -244,7 +244,7 @@
                                     <form:textarea class="form-control" id="budgetDetail1" style=" resize: none;" path="ticketHeader.ticketDTraining[1].budgetDetail" value="${ticketHTraining.ticketHeader.ticketDTraining[1].budgetDetail}" />   
                                 </td>
                                 <td>
-                                    <input type="text" id="amount1" name="ticketHeader.ticketDTraining[1].amount" class="form-control"  value="${ticketHTraining.ticketHeader.ticketDTraining[1].amount}"/>
+                                    <input type="text" id="amount1" name="ticketHeader.ticketDTraining[1].amount" class="form-control"  value="${ticketHTraining.ticketHeader.ticketDTraining[1].amount}" required/>
                                 </td>
                                 <td></td>
                             </tr>
@@ -255,7 +255,7 @@
                                     <form:textarea class="form-control" id="budgetDetail2" style=" resize: none;" path="ticketHeader.ticketDTraining[2].budgetDetail" value="${ticketHTraining.ticketHeader.ticketDTraining[2].budgetDetail}" />   
                                 </td>
                                 <td>
-                                    <input type="text" id="amount2" name="ticketHeader.ticketDTraining[2].amount" class="form-control"  value="${ticketHTraining.ticketHeader.ticketDTraining[2].amount}"/>
+                                    <input type="text" id="amount2" name="ticketHeader.ticketDTraining[2].amount" class="form-control"  value="${ticketHTraining.ticketHeader.ticketDTraining[2].amount}" required/>
                                 </td>
                                 <td></td>
                             </tr>
@@ -266,7 +266,7 @@
                                     <form:textarea class="form-control" id="budgetDetail3" style=" resize: none;" path="ticketHeader.ticketDTraining[3].budgetDetail" value="${ticketHTraining.ticketHeader.ticketDTraining[3].budgetDetail}" />
                                 </td>
                                 <td>
-                                    <input type="text" id="amount3" name="ticketHeader.ticketDTraining[3].amount" class="form-control"   value="${ticketHTraining.ticketHeader.ticketDTraining[3].amount}"/>
+                                    <input type="text" id="amount3" name="ticketHeader.ticketDTraining[3].amount" class="form-control"   value="${ticketHTraining.ticketHeader.ticketDTraining[3].amount}" required/>
                                 </td>
                                 <td></td>
                             </tr>
@@ -277,7 +277,7 @@
                                     <form:textarea class="form-control" id="budgetDetail4" style=" resize: none;" path="ticketHeader.ticketDTraining[4].budgetDetail" value="${ticketHTraining.ticketHeader.ticketDTraining[4].budgetDetail}" />  
                                 </td>
                                 <td>
-                                    <input type="text" id="amount4" name="ticketHeader.ticketDTraining[4].amount" class="form-control"   value="${ticketHTraining.ticketHeader.ticketDTraining[4].amount}" />
+                                    <input type="text" id="amount4" name="ticketHeader.ticketDTraining[4].amount" class="form-control"   value="${ticketHTraining.ticketHeader.ticketDTraining[4].amount}" required/>
                                 </td>
                                 <td></td>
                             </tr>
@@ -288,7 +288,7 @@
                                     <form:textarea class="form-control" id="budgetDetail5" style=" resize: none;" path="ticketHeader.ticketDTraining[5].budgetDetail" value="${ticketHTraining.ticketHeader.ticketDTraining[5].budgetDetail}" />  
                                 </td>
                                 <td>
-                                    <input type="text" id="amount5" name="ticketHeader.ticketDTraining[5].amount" class="form-control"   value="${ticketHTraining.ticketHeader.ticketDTraining[5].amount}" />
+                                    <input type="text" id="amount5" name="ticketHeader.ticketDTraining[5].amount" class="form-control"   value="${ticketHTraining.ticketHeader.ticketDTraining[5].amount}" required/>
                                 </td>
                                 <td></td>
                             </tr>
@@ -301,7 +301,7 @@
                                         <form:textarea id="budgetDetail${varStatus.index+6}" class="form-control"  style=" resize: none;" path="ticketHeader.ticketDTraining[${varStatus.index+6}].budgetDetail" value="${ticketDTraining.budgetDetail}" />
                                     </td>
                                     <td>
-                                        <input type="text" id="amount${varStatus.index+6}" name="ticketHeader.ticketDTraining[${varStatus.index+6}].amount" class="form-control"   value="${ticketDTraining.amount}"/>
+                                        <input type="text" id="amount${varStatus.index+6}" name="ticketHeader.ticketDTraining[${varStatus.index+6}].amount" class="form-control"   value="${ticketDTraining.amount}" required/>
                                     </td>
                                     <td></td>
                                 </tr>     
