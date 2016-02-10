@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3d2a9b55-282a-4beb-b346-a92c2c7a120c">
-	<property name="ireport.zoom" value="1.61051000000015"/>
-	<property name="ireport.x" value="46"/>
-	<property name="ireport.y" value="81"/>
+	<property name="ireport.zoom" value="1.1000000000001022"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="105"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -47,6 +47,7 @@
 	<field name="ticketdetail" class="java.util.List"/>
 	<field name="reqTotalAmt" class="java.math.BigDecimal"/>
 	<field name="remarkHeader" class="java.lang.String"/>
+	<field name="payBack" class="java.math.BigDecimal"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -80,20 +81,6 @@
 				<reportElement x="-370" y="10" width="93" height="25" uuid="1d0eb8ec-fcfe-499f-8df2-c34fc45ed202"/>
 				<imageExpression><![CDATA[$P{SUBREPORT_DIR} +"logo-1.JPG"]]></imageExpression>
 			</image>
-			<textField>
-				<reportElement x="478" y="0" width="77" height="20" uuid="ffbac996-9d91-473b-8739-0ed4b285ab03"/>
-				<textElement>
-					<font fontName="BrowalliaUPC" size="14" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{ticketNo}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="478" y="19" width="77" height="20" uuid="61155e48-d249-45c4-8b2d-7caa35c1f13f"/>
-				<textElement>
-					<font fontName="BrowalliaUPC" size="14" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{applicationDate}]]></textFieldExpression>
-			</textField>
 			<image>
 				<reportElement x="1" y="2" width="78" height="18" uuid="e8b9c9de-f9fc-4c8d-bf2e-c422f303ee49"/>
 				<imageExpression><![CDATA[$P{SUBREPORT_DIR} +"logo-1.JPG"]]></imageExpression>
@@ -111,6 +98,30 @@
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<text><![CDATA[Nippon Express NEC Logistics (Thailand) Co., Ltd.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="479" y="0" width="13" height="20" uuid="7642e040-eb20-42fd-90c5-86c7ff3573e9"/>
+				<textElement textAlignment="Center">
+					<font fontName="BrowalliaUPC" size="14" isBold="true" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="479" y="19" width="13" height="20" uuid="be2d91c5-278a-468c-b343-345a3253c380"/>
+				<textElement textAlignment="Center">
+					<font fontName="BrowalliaUPC" size="14" isBold="true" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="479" y="38" width="75" height="20" uuid="83d1ebeb-3eef-405c-a246-e29903623603"/>
+				<textElement textAlignment="Center">
+					<font fontName="BrowalliaUPC" size="14" isBold="true" isUnderline="true" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Manual]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -166,7 +177,7 @@
 				<text><![CDATA[Division:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="6" y="41" width="86" height="17" uuid="c0d95df9-e736-47c3-8752-e89f4de84bd1"/>
+				<reportElement x="6" y="41" width="87" height="17" uuid="c0d95df9-e736-47c3-8752-e89f4de84bd1"/>
 				<textElement>
 					<font fontName="BrowalliaUPC" size="14" isBold="true" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
@@ -191,41 +202,6 @@
 			<line>
 				<reportElement x="95" y="4" width="1" height="54" uuid="b8642cdb-52ed-41ae-81fc-ac770024afb7"/>
 			</line>
-			<textField>
-				<reportElement x="99" y="5" width="172" height="17" uuid="0259de56-131c-4856-8e60-abfcf12104ef"/>
-				<textElement>
-					<font fontName="BrowalliaUPC" size="14" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{applicationName}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="99" y="23" width="172" height="17" uuid="1f81468b-acf9-4ecd-80f9-21dbe6d31d10"/>
-				<textElement>
-					<font fontName="BrowalliaUPC" size="14" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{divisionCode}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="375" y="23" width="176" height="17" uuid="bf527293-16af-419e-9ac3-62338fe46958"/>
-				<textElement>
-					<font fontName="BrowalliaUPC" size="14" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{sectionCode}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="375" y="5" width="176" height="17" uuid="6d5e476a-06bb-405a-8396-ea843fc7de68"/>
-				<textElement>
-					<font fontName="BrowalliaUPC" size="14" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{applicationPosition}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="99" y="41" width="452" height="17" uuid="8683c52b-cf8d-46d9-9ef0-370c6fd1e7a8"/>
-				<textElement>
-					<font fontName="BrowalliaUPC" size="14" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{detailHeader}]]></textFieldExpression>
-			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -349,16 +325,14 @@
 			<line>
 				<reportElement x="554" y="-26" width="1" height="27" uuid="8f2305e1-f9e9-4287-9e3f-ffa1e425df40"/>
 			</line>
-			<subreport>
-				<reportElement x="2" y="2" width="552" height="155" uuid="7c24f89a-3383-40ae-a02a-176425a56449"/>
-				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{ticketdetail})]]></dataSourceExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "advance-sub.jasper"]]></subreportExpression>
-			</subreport>
 			<line>
 				<reportElement x="92" y="1" width="1" height="169" uuid="bb106fda-0f5d-4ca9-8499-3bdd9357327c"/>
 			</line>
 		</band>
 		<band height="50">
+			<line>
+				<reportElement x="485" y="49" width="69" height="1" uuid="dc529aa8-3e9f-47bd-8b17-ef9fff3136cd"/>
+			</line>
 			<staticText>
 				<reportElement x="382" y="0" width="100" height="17" uuid="e1b959cb-f7c2-47d3-ae57-3b9a9dca49aa"/>
 				<box rightPadding="4"/>
@@ -366,18 +340,11 @@
 					<font fontName="BrowalliaUPC" size="14" isBold="true" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Total]]></text>
+				<text><![CDATA[Advance]]></text>
 			</staticText>
 			<line>
-				<reportElement x="554" y="0" width="1" height="17" uuid="6e923ff7-48b6-4c7a-9796-29d3294df1e4"/>
+				<reportElement x="554" y="0" width="1" height="50" uuid="6e923ff7-48b6-4c7a-9796-29d3294df1e4"/>
 			</line>
-			<textField pattern="#,##0.00">
-				<reportElement x="485" y="0" width="67" height="17" uuid="2d78060a-9441-4bcc-8a72-7c75746b3b22"/>
-				<textElement textAlignment="Right">
-					<font fontName="BrowalliaUPC" size="14" isBold="true" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{reqTotalAmt}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="2" y="1" width="39" height="17" uuid="24c33850-df03-4a7f-a2e5-c40fc8d5d0fb"/>
 				<textElement>
@@ -386,15 +353,29 @@
 				</textElement>
 				<text><![CDATA[Remark:]]></text>
 			</staticText>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="44" y="1" width="279" height="17" uuid="c10acfb8-1d21-471e-9486-a3ae8d6c823c"/>
-				<textElement>
-					<font fontName="BrowalliaUPC" size="14" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{remarkHeader}==null? "-":$F{remarkHeader}]]></textFieldExpression>
-			</textField>
 			<line>
-				<reportElement x="484" y="0" width="1" height="17" uuid="dadf1c8d-748c-4831-ac2c-9a2c6ad53e7b"/>
+				<reportElement x="484" y="0" width="1" height="50" uuid="dadf1c8d-748c-4831-ac2c-9a2c6ad53e7b"/>
+			</line>
+			<staticText>
+				<reportElement x="382" y="16" width="100" height="17" uuid="487ebb69-b2bf-481f-aed5-41b873a72e1c"/>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="BrowalliaUPC" size="14" isBold="true" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Paid]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="382" y="32" width="100" height="17" uuid="32c64aee-88ed-409b-9a9a-98a000b8f1ae"/>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="BrowalliaUPC" size="14" isBold="true" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Balance / Refund]]></text>
+			</staticText>
+			<line>
+				<reportElement x="485" y="32" width="69" height="1" uuid="6ce2a6c2-c833-48eb-933f-7d7ada2e43b7"/>
 			</line>
 			<line>
 				<reportElement x="485" y="16" width="69" height="1" uuid="d77074bb-82c3-4b8f-8df5-5a43504041bf"/>
@@ -628,27 +609,6 @@
 				</textElement>
 				<text><![CDATA[.........................................................]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="64" y="173" width="106" height="23" uuid="b1755ca3-5975-4bc3-9a7a-79a65928e464"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="AngsanaUPC" size="14" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{applicationDate}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="1" y="128" width="203" height="23" uuid="276a9bf0-566e-4c7c-9111-d24d403dfd86"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="AngsanaUPC" size="14" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{applicationName}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="1" y="147" width="203" height="23" uuid="4629ad2c-08de-4d95-8e93-800681084ac1"/>
-				<textElement textAlignment="Center">
-					<font fontName="AngsanaUPC" size="14" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{applicationPosition}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="227" y="174" width="39" height="23" uuid="70a94893-d47b-492e-b8ca-7cfe8cb68cfd"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -657,20 +617,6 @@
 				</textElement>
 				<text><![CDATA[Date:]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="205" y="128" width="174" height="23" uuid="b51a6176-01a2-4ba3-af53-c8dbc12c428a"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="AngsanaUPC" size="14" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{approvedName1}.equals("-")? $F{approvedName2} : $F{approvedName1}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="259" y="173" width="92" height="23" uuid="a8c519fe-2008-43c6-b1ec-33c9eb649602"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="AngsanaUPC" size="14" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{approvedDate1}.equals("-")?$F{approvedDate2}:$F{approvedDate1}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="205" y="101" width="175" height="20" uuid="a97f3836-f627-41f0-bd80-bddcd5ab4c9d"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -679,13 +625,6 @@
 				</textElement>
 				<text><![CDATA[1st Approval]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="205" y="147" width="174" height="23" uuid="31519850-3efd-4722-b30a-7ee2bce2a499"/>
-				<textElement textAlignment="Center">
-					<font fontName="AngsanaUPC" size="14" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{approvedPosition1}.equals("-")?$F{approvedPosition2}:$F{approvedPosition1}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="403" y="174" width="39" height="23" uuid="f186a181-a5f1-49f7-a316-8d817e3973d3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -694,20 +633,6 @@
 				</textElement>
 				<text><![CDATA[Date:]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="380" y="128" width="175" height="23" uuid="0c15fc55-c197-4e33-83e2-40958bb9c45e"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="AngsanaUPC" size="14" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{approvedName2}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="435" y="173" width="92" height="23" uuid="91afc5b2-913b-4bda-a6d7-465160571a9a"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="AngsanaUPC" size="14" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{approvedDate2}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="379" y="101" width="175" height="20" uuid="774c3345-fadb-4e16-9533-d351497dd903"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -716,13 +641,6 @@
 				</textElement>
 				<text><![CDATA[2nd Approval]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="380" y="147" width="174" height="23" uuid="8ed8093b-16aa-4748-a8dd-cab2ec4f20dd"/>
-				<textElement textAlignment="Center">
-					<font fontName="AngsanaUPC" size="14" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{approvedPosition2}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="8" y="314" width="26" height="19" uuid="cba051be-d65a-4f88-a11a-58695186840e"/>
 				<box>
@@ -1232,13 +1150,6 @@
 				</textElement>
 				<text><![CDATA[FR-HR-007REV.02 ]]></text>
 			</staticText>
-			<textField pattern="dd/MM/yyyy HH.mm.ss">
-				<reportElement x="46" y="10" width="92" height="14" uuid="3c0e72ce-fabb-4c8b-8a3c-83fedb084551"/>
-				<textElement verticalAlignment="Bottom">
-					<font fontName="BrowalliaUPC" size="10" isBold="false" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="0" y="10" width="44" height="14" uuid="afbeb1ea-7a97-40c0-80a5-cd6037543dd7"/>
 				<textElement textAlignment="Left" verticalAlignment="Bottom">
@@ -1246,6 +1157,14 @@
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<text><![CDATA[PRINT DATE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="10" width="10" height="14" uuid="50945d04-f771-4ab7-aa53-f26a8322e7fc"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="BrowalliaUPC" size="10" isBold="true" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
 			</staticText>
 		</band>
 	</pageFooter>

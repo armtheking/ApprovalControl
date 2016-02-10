@@ -27,15 +27,11 @@
 
                     <label for="detailHeader" class="col-sm-2 control-label"><FONT color="red">*</FONT>Objective / Reason:</label>
                     <div class="col-sm-4">
-                        <form:input type="text"  path="detailHeader" class="form-control" placeholder="Objective / Reason"  maxlength="100" required="required"/>
+                        <form:input type="text"  path="detailHeader" class="form-control" placeholder="Objective / Reason"  autofocus="autofocus" maxlength="100" required="required"/>
                         <div class="has-error">
                             <form:errors path="detailHeader" class="help-inline"/>
                         </div>
                     </div>    
-                    <div class="col-sm-5">
-                         <label><span style="color: red;"> ** </span> Car license ( In case for driver ), Submit job to customs / Month Meeting / Support working at branch 
-                            , Contact Officer / Customer  </label>
-                    </div>
 
                 </div>
 
@@ -79,7 +75,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col" width="420px">Description <FONT color="red">**Don't duplicate each line</FONT></th>
+                                <th scope="col" width="420px">Description</th>
                                 <th scope="col">Details</th>
                                 <th scope="col" width="200px">Receipt No</th>
                                 <th scope="col" width="180px">Amount</th>

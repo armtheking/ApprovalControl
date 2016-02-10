@@ -68,7 +68,7 @@
                                             ${ticketHeader.remarkHeader}
                                         </div>
                                     </div>
-                                        <div class="col-md-4">
+                                    <div class="col-md-4">
                                         <c:set var="theTicketNo" value="${ticketHeader.ticketNo}"/>
                                         <c:if test="${fn:contains(theTicketNo, 'C') or fn:contains(theTicketNo, 'PTC')}" >
                                             <label> Attachments </label>
@@ -91,7 +91,7 @@
                                         </div>
                                     </div>
 
-                                    
+
                                 </div>
 
 
@@ -317,7 +317,7 @@
                             </div>
                             <div class = "panel-footer">
                                 <button class="btn btn-primary" onclick="goBack()">Go Back</button>
-                                <c:if test="${principal.username eq ticketHeader.applicationName and ticketHeader.approvedStatus1 eq false or ticketHeader.ticketFinished eq 'R'}"> 
+                                <c:if test="${principal.username eq ticketHeader.applicationName and ticketHeader.approvedStatus1 eq false or (ticketHeader.ticketFinished eq 'R' and principal.username eq ticketHeader.applicationName )}"> 
 
                                     <a style="margin-left: 81%" href="<c:url value='/createticket/delete?id=${ticketHeader.ticketNo}'/>" class="btn btn-danger btn-delete btn-lg" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i> Delete</a>&nbsp;
                                 </c:if>

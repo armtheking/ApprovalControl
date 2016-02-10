@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3d2a9b55-282a-4beb-b346-a92c2c7a120c">
-	<property name="ireport.zoom" value="1.2100000000001125"/>
-	<property name="ireport.x" value="15"/>
-	<property name="ireport.y" value="213"/>
+	<property name="ireport.zoom" value="1.9487171000001817"/>
+	<property name="ireport.x" value="75"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -124,7 +124,7 @@
 				<reportElement x="277" y="3" width="94" height="37" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="fb90d59a-6d3a-477a-8c33-ab0e06dac8bd"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="9" y="5" width="79" height="17" uuid="fd2969de-908b-45c1-a9cd-c454e13b542b"/>
+				<reportElement x="6" y="5" width="79" height="17" uuid="fd2969de-908b-45c1-a9cd-c454e13b542b"/>
 				<textElement>
 					<font fontName="BrowalliaUPC" size="14" isBold="true" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
 					<paragraph lineSpacing="Single"/>
@@ -132,7 +132,7 @@
 				<text><![CDATA[Name:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="286" y="5" width="74" height="17" uuid="df883f96-323a-4949-b80e-c8791626f103"/>
+				<reportElement x="283" y="5" width="74" height="17" uuid="df883f96-323a-4949-b80e-c8791626f103"/>
 				<textElement>
 					<font fontName="BrowalliaUPC" size="14" isBold="true" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
 					<paragraph lineSpacing="Single"/>
@@ -140,7 +140,7 @@
 				<text><![CDATA[Position:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="286" y="23" width="74" height="17" uuid="91bc9942-418c-429a-81b4-9ef5a963731c"/>
+				<reportElement x="283" y="23" width="74" height="17" uuid="91bc9942-418c-429a-81b4-9ef5a963731c"/>
 				<textElement>
 					<font fontName="BrowalliaUPC" size="14" isBold="true" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
 					<paragraph lineSpacing="Single"/>
@@ -160,18 +160,18 @@
 				<reportElement x="1" y="40" width="553" height="1" uuid="22050ff8-558a-4b01-a3fb-72fb4e8e14a6"/>
 			</line>
 			<staticText>
-				<reportElement x="9" y="23" width="79" height="17" uuid="5ca3ae8f-fe4b-40d4-af1c-7c3d5d412ae0"/>
+				<reportElement x="6" y="23" width="79" height="17" uuid="5ca3ae8f-fe4b-40d4-af1c-7c3d5d412ae0"/>
 				<textElement>
 					<font fontName="BrowalliaUPC" size="14" isBold="true" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
 				<text><![CDATA[Division:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="9" y="41" width="79" height="17" uuid="c0d95df9-e736-47c3-8752-e89f4de84bd1"/>
+				<reportElement x="6" y="41" width="87" height="17" uuid="c0d95df9-e736-47c3-8752-e89f4de84bd1"/>
 				<textElement>
 					<font fontName="BrowalliaUPC" size="14" isBold="true" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
-				<text><![CDATA[Objective / Reason]]></text>
+				<text><![CDATA[Objective / Reason:]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1" y="58" width="554" height="1" uuid="fc290fba-c0cf-4fa4-b4f9-6890de2490d1"/>

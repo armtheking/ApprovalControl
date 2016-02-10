@@ -45,7 +45,7 @@
                 </table>
 
                 <center>
-                    <input type="submit" class="btn btn-success btn-lg" value="SUBMIT" />
+                    <input type="submit" class="btn btn-success btn-lg" value="SAVE" />
                     <input type="reset" class="btn btn-danger btn-lg" value="CANCEL"  />
                 </center>
             </form:form>

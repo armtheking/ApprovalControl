@@ -1,0 +1,754 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tree-template" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7ed4da31-d4f7-44a8-a057-8fabab020200">
+	<property name="template.type" value="columnar"/>
+	<property name="ireport.zoom" value="5.559917313492423"/>
+	<property name="ireport.x" value="2276"/>
+	<property name="ireport.y" value="27"/>
+	<style name="Title" forecolor="#000000" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold">
+		<paragraph lineSpacing="Single"/>
+	</style>
+	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman">
+		<paragraph lineSpacing="Single"/>
+	</style>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman">
+		<paragraph lineSpacing="Single"/>
+	</style>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<paragraph lineSpacing="Single"/>
+	</style>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<paragraph lineSpacing="Single"/>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF">
+				<paragraph lineSpacing="Single"/>
+			</style>
+		</conditionalStyle>
+	</style>
+	<subDataset name="dataset1" uuid="1e0315af-bad2-43b6-af11-48c122493020"/>
+	<subDataset name="dataset2" uuid="bf558064-2a01-4467-8f14-0189354e977a"/>
+	<subDataset name="dataset3" uuid="6adf8828-5683-427b-989e-37492b8b3d3b"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["report\\"]]></defaultValueExpression>
+	</parameter>
+	<field name="ticketNo" class="java.lang.String"/>
+	<field name="ticketType" class="java.lang.String"/>
+	<field name="detailHeader" class="java.lang.String"/>
+	<field name="refTicketNo" class="java.lang.String"/>
+	<field name="remarkHeader" class="java.lang.String"/>
+	<field name="dateAlert" class="java.lang.Integer"/>
+	<field name="divisionCode" class="java.lang.String"/>
+	<field name="sectionCode" class="java.lang.String"/>
+	<field name="subSectionCode" class="java.lang.String"/>
+	<field name="applicationID" class="java.lang.String"/>
+	<field name="applicationName" class="java.lang.String"/>
+	<field name="applicationDate" class="java.lang.String"/>
+	<field name="applicationStatus" class="java.lang.Boolean"/>
+	<field name="item" class="java.lang.String"/>
+	<field name="categoryId" class="java.lang.String"/>
+	<field name="checkBy" class="java.lang.String"/>
+	<field name="subCategoryId" class="java.lang.String"/>
+	<field name="checkName" class="java.lang.String"/>
+	<field name="checkPosition" class="java.lang.String"/>
+	<field name="checkStatus" class="java.lang.Boolean"/>
+	<field name="checkDate" class="java.sql.Timestamp"/>
+	<field name="approvedBy1" class="java.lang.String"/>
+	<field name="approvedPosition1" class="java.lang.String"/>
+	<field name="approvedStatus1" class="java.lang.Boolean"/>
+	<field name="approvedName1" class="java.lang.String"/>
+	<field name="approvedDate1" class="java.lang.String"/>
+	<field name="approvedRemark1" class="java.lang.String"/>
+	<field name="approvedBy2" class="java.lang.String"/>
+	<field name="approvedName2" class="java.lang.String"/>
+	<field name="approvedPosition2" class="java.lang.String"/>
+	<field name="approvedStatus2" class="java.lang.Boolean"/>
+	<field name="receiverDate" class="java.sql.Timestamp"/>
+	<field name="receiverStatus" class="java.lang.Boolean"/>
+	<field name="approvedDate2" class="java.lang.String"/>
+	<field name="approvedRemark2" class="java.lang.String"/>
+	<field name="receiverBy" class="java.lang.String"/>
+	<field name="paidBy" class="java.lang.String"/>
+	<field name="paidDate" class="java.sql.Timestamp"/>
+	<field name="paidRemark" class="java.lang.String"/>
+	<field name="reqTotalAmt" class="java.math.BigDecimal"/>
+	<field name="paidTotalAmount" class="java.math.BigDecimal"/>
+	<field name="paidStatus" class="java.lang.Boolean"/>
+	<field name="payBack" class="java.math.BigDecimal"/>
+	<field name="ticketFinished" class="java.lang.String"/>
+	<field name="applicationPosition" class="java.lang.String"/>
+	<field name="ticketdetail" class="java.util.List"/>
+	<group name="Group1">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/15)]]></groupExpression>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="105" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="144" y="52" width="287" height="34" uuid="2e615f56-6c46-421d-8c88-0ff46c1a4a30"/>
+				<textElement textAlignment="Center">
+					<font fontName="BrowalliaUPC" size="20" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[ENTERTAINMENT FORM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="414" y="2" width="55" height="20" uuid="afa11631-05ef-4cea-a18b-fef97af63b14"/>
+				<textElement>
+					<font fontName="BrowalliaUPC" size="14" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Ticket No :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="414" y="22" width="36" height="20" uuid="c2097bdb-1da4-4172-9726-dc715ed24511"/>
+				<textElement markup="none">
+					<font fontName="BrowalliaUPC" size="14" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Date : ]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="78" height="18" uuid="e2217ae7-6ffd-4b13-a07d-7c5384d9f125"/>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR} +"logo-1.JPG"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="47" y="5" width="254" height="23" uuid="d8371dcd-8f9b-4101-8119-ee9cba57eb76"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="BrowalliaUPC" size="14" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Nippon Express NEC Logistics (Thailand) Co., Ltd.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="468" y="2" width="12" height="20" uuid="4e161dd2-b18e-42b7-a807-960c4197244f"/>
+				<textElement textAlignment="Center">
+					<font fontName="BrowalliaUPC" size="14" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="468" y="22" width="12" height="20" uuid="111c0e20-2936-4e61-8584-3a09428f400d"/>
+				<textElement textAlignment="Center">
+					<font fontName="BrowalliaUPC" size="14" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="468" y="41" width="76" height="20" uuid="bc232e7a-edb9-4780-9b03-f6846399a999"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="BrowalliaUPC" size="14" isBold="true" isUnderline="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Manual]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="81" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="88" height="20" uuid="051bb51c-e005-47e2-8883-6617276a1874"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[APPLICATION'S BY :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="22" width="49" height="20" uuid="6c8ea1cd-9c0e-4e7a-9100-43e68dbdc0f1"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[DIVISION :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="43" width="89" height="19" uuid="9d0740a6-9699-4954-8f23-21bc07bbcb85"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[CUSTOMER'S NAME : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="285" y="0" width="54" height="20" uuid="8ba5bcbd-cafa-452f-becf-c77429012717"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[POSITION :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="285" y="21" width="50" height="20" uuid="19ca3513-6a6f-4514-855f-447edd68fe88"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[SECTION :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="285" y="42" width="87" height="20" uuid="e88aeea3-e70d-45f6-809d-a168892560c1"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[PURPOSE / REASON :]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="32" y="0" width="56" height="26" uuid="f2659690-df58-4f66-9c6d-c017f4a4da00"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[ACC. CODE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="89" y="0" width="183" height="26" uuid="48154bb9-8f11-44af-b03f-5da01164ec2e"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[DESCRIPTION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="0" width="30" height="26" uuid="4d9ddb25-eeab-4fe4-a424-f977ae28c04e"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[NO.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="0" width="151" height="26" uuid="7590fc9c-553a-468e-9bf3-5340809de50d"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[NUMBER & LIST OF PARTICIPANT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="273" y="0" width="68" height="26" uuid="93b34633-aeab-44db-ac73-58e45cfa9703"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[PLACE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="492" y="0" width="62" height="26" uuid="f9032653-bfd3-4b9f-a8a5-3f80261c8f60"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[AMOUNT]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="555" height="1" uuid="4e15681f-0af7-4827-8a2e-e850bd448c27"/>
+			</line>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="25" width="555" height="1" uuid="73cdea30-47e5-41c3-9738-d7e1cfe4ac5b"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="175" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="174" width="555" height="1" uuid="18887f39-db32-4a68-85ba-5c0ec4d38938"/>
+			</line>
+			<line>
+				<reportElement x="31" y="-26" width="1" height="200" uuid="da0b56e6-8208-4b34-8363-18dd02c266f4"/>
+			</line>
+			<line>
+				<reportElement x="88" y="-26" width="1" height="200" uuid="835137df-6be7-4b71-ad71-a8ea83d9203f"/>
+			</line>
+			<line>
+				<reportElement x="340" y="-26" width="1" height="200" uuid="237682d6-b704-4f92-aff4-d99bb918adeb"/>
+			</line>
+			<line>
+				<reportElement x="272" y="-26" width="1" height="200" uuid="a21d4c07-e6c2-47ce-865f-9476eaf881c8"/>
+			</line>
+			<line>
+				<reportElement x="554" y="-26" width="1" height="201" uuid="f2197530-187d-445c-bb65-f87099bdfb33"/>
+			</line>
+			<line>
+				<reportElement x="491" y="-26" width="1" height="200" uuid="4764c790-41be-47d7-9c1a-d14eb95e1e90"/>
+			</line>
+			<line>
+				<reportElement x="0" y="-26" width="1" height="200" uuid="9d9fc36d-e23f-49f3-b797-33756b80e136"/>
+			</line>
+			<line>
+				<reportElement x="554" y="-1" width="1" height="21" uuid="5bbe35cb-879c-43a8-bd51-c440c9bc9bc0"/>
+			</line>
+		</band>
+		<band height="21">
+			<line>
+				<reportElement x="491" y="20" width="64" height="1" uuid="1f59478e-127e-40c1-a1f7-1a4fc5108139"/>
+			</line>
+			<staticText>
+				<reportElement x="391" y="1" width="100" height="20" uuid="f4e90782-ab42-45bf-b718-f2deaf6347b2"/>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="BrowalliaUPC" size="13" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<line>
+				<reportElement x="554" y="-1" width="1" height="22" uuid="d7281514-b4a0-4b2d-821e-71e2c4b72e35"/>
+			</line>
+			<line>
+				<reportElement x="491" y="0" width="1" height="20" uuid="fdd1fd7b-1bf1-457c-a029-bf5c4bc7c412"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="300" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="132" width="555" height="1" uuid="f4f92fba-f9a2-477c-85b0-002d9549063b"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="49" y="259" width="315" height="20" uuid="45e9c47a-f738-4ec8-a04b-2da235cb4a78"/>
+				<textElement>
+					<font fontName="BrowalliaUPC" size="12" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1. Total 0 - 5,000 :    Approve by (1st) ASM - SMG  , Approve by (2nd) ADM - DMG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="49" y="272" width="315" height="23" uuid="5b03bc6e-2e3f-49df-8764-7fec5dbb97cc"/>
+				<textElement>
+					<font fontName="BrowalliaUPC" size="12" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[2. More than 5,000 : Approve by (1st) ADM - DMG , Approve by (2nd) MD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="49" y="240" width="216" height="18" uuid="e2738cef-9edf-49cb-81a9-f82293968234"/>
+				<textElement>
+					<font fontName="BrowalliaUPC" size="12" isItalic="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Approve Level (Entertain)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="240" width="48" height="20" uuid="58660cb1-9223-48ac-b086-a5d805250d81"/>
+				<textElement>
+					<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Remark : ]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="1" y="155" width="555" height="69" uuid="ba4e1f27-21ca-44de-b0a6-effd1e22d29e"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement x="43" y="5" width="100" height="20" uuid="8c5bf779-445a-4944-b12a-c9c0d7c2b914"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[CHECK BY]]></text>
+				</staticText>
+				<line>
+					<reportElement x="181" y="0" width="1" height="69" uuid="b4d54d08-532e-430a-96d1-954fc3369af3"/>
+				</line>
+				<staticText>
+					<reportElement x="23" y="43" width="33" height="20" uuid="0522ce39-90db-4dc1-be18-d715db88e2e6"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[DATE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="237" y="5" width="100" height="20" uuid="5c05f25b-b751-40cf-ba09-5ae3a5fbe4b6"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[PAID BY]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="403" y="43" width="33" height="20" uuid="a97f8ff0-3edb-4ca4-bc26-210f5143021e"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[DATE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="417" y="5" width="100" height="20" uuid="f0f151c9-e538-47db-9750-85269bc3c70f"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[RECEIVER]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="222" y="43" width="33" height="20" uuid="b2e97ece-e0c6-4e2d-883d-f91545bf1f28"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[DATE]]></text>
+				</staticText>
+				<line>
+					<reportElement x="388" y="0" width="1" height="69" uuid="1a95ac8c-8664-43ca-afcd-28a95824c3fd"/>
+				</line>
+				<staticText>
+					<reportElement x="23" y="24" width="149" height="20" uuid="4c9573f6-1698-44c6-b905-b944eb34eb54"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[......................................................................]]></text>
+				</staticText>
+			</frame>
+			<staticText>
+				<reportElement x="1" y="135" width="555" height="20" uuid="4ce674ec-d827-4c0c-b8cf-0f9954e5fc90"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="BrowalliaUPC" size="15" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[FINANCE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="36" y="92" width="37" height="20" uuid="e6ae9a7d-9c90-482a-82f7-57fbdf98b568"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="BrowalliaUPC" size="13" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Date :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="27" width="123" height="21" uuid="a3610b2c-3a3b-41f0-b69d-91cdf2ae8016"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="BrowalliaUPC" size="13" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Application By]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="216" y="27" width="120" height="20" uuid="9b8671ba-cb48-4828-bd79-ae5bab3a6553"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="BrowalliaUPC" size="13" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Approved By (1)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="224" y="92" width="37" height="20" uuid="86f872bd-930d-47fe-b026-29ec44b39945"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="BrowalliaUPC" size="13" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Date :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="409" y="27" width="118" height="20" uuid="1a3d67f8-d5e4-410a-a7fa-83beb53c6522"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="BrowalliaUPC" size="13" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Approved By (2)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="418" y="92" width="37" height="20" uuid="32b7617d-f88b-487e-89ed-113a052255d6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="BrowalliaUPC" size="13" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Date :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="207" width="149" height="20" uuid="e5a6b2dd-ef28-4116-b61d-aea9dc086cdb"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[......................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="223" y="179" width="149" height="20" uuid="f77cb63f-deff-487a-83a4-1fbe96cf1bad"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[......................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="223" y="207" width="149" height="20" uuid="228412cf-ba73-45f9-83d2-b1983a90dde9"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[......................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="404" y="207" width="149" height="20" uuid="811622c2-da35-4583-9351-c5408e9d53ef"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[......................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="404" y="179" width="142" height="20" uuid="91a588d2-8354-45fc-bd69-b58c947e737c"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[......................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="61" width="149" height="20" uuid="7b331178-1d66-46e0-9b66-97c2647fe1f6"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[......................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="102" width="149" height="20" uuid="0dcbe4cd-83c8-473b-8436-03d727a528ef"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[......................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="212" y="101" width="149" height="20" uuid="c3261439-389e-4c59-a940-13db48918107"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[......................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="212" y="62" width="149" height="20" uuid="9de62020-e64f-44c3-85fb-ca778278d5ab"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[......................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="408" y="102" width="149" height="20" uuid="8b8b6428-4335-42ff-878b-4c936cc3b99d"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[......................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="408" y="62" width="149" height="20" uuid="7b2d820a-c3c0-47d5-b531-d73898e5d008"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[......................................................................]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="14" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="2" y="0" width="553" height="14" forecolor="#D0B48E" backcolor="#9DB1B8" uuid="7fb55e1b-f8a0-4e3d-882d-5181f3d8b9b8"/>
+				<staticText>
+					<reportElement x="2" y="3" width="53" height="11" forecolor="#FFFFFF" uuid="256785f5-0c42-4400-aa3b-4ed76d728f5e"/>
+					<textElement>
+						<font fontName="BrowalliaUPC" size="8" isBold="true" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[Print Date :   -]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="451" y="1" width="100" height="13" uuid="6c9b8c7d-c23b-46dd-9d50-b320247e5f1d"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="BrowalliaUPC" size="10" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[FR-HR-010REV.02]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

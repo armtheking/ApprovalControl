@@ -34,11 +34,7 @@
                             <form:errors path="detailHeader" class="help-inline"/>
                         </div>
                     </div>    
-                    <div class="col-sm-5">
-                         <label><span style="color: red;"> ** </span> Car license ( In case for driver ), Submit job to customs / Month Meeting / Support working at branch 
-                            , Contact Officer / Customer  </label>
-                    </div>
-
+               
                 </div>
 
                 <div class="form-group form-group-sm">
@@ -77,7 +73,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col" width="420px">Description <FONT color="red">**Don't duplicate each line</FONT></th>
+                                <th scope="col" width="420px">Description</th>
                                 <th scope="col">Details</th>
                                 <th scope="col" width="200px">Receipt No</th>
                                 <th scope="col" width="180px">Amount</th>

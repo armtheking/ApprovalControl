@@ -460,7 +460,7 @@
                             </div>
                             <div class = "panel-footer">
                                 <button class="btn btn-primary" onclick="goBack()">Go Back</button>
-                                <c:if test="${principal.username eq ticketHTraining.ticketHeader.applicationName and ticketHTraining.ticketHeader.approvedStatus1 eq false or ticketHTraining.ticketHeader.ticketFinished eq 'R'}"> 
+                                <c:if test="${principal.username eq ticketHTraining.ticketHeader.applicationName and ticketHTraining.ticketHeader.approvedStatus1 eq false or (ticketHTraining.ticketHeader.ticketFinished eq 'R' and principal.username eq ticketHTraining.ticketHeader.applicationName)}"> 
 
                                     <a style="margin-left: 81%" href="<c:url value='/createticket/delete?id=${ticketHTraining.ticketHeader.ticketNo}'/>" class="btn btn-danger btn-delete btn-lg" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i> Delete</a>&nbsp;
                                 </c:if>
