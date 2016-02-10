@@ -32,7 +32,7 @@
                             <form:errors path="detailHeader" class="help-inline" cssClass="error"/>
                         </div>
                     </div>    
-                   
+
 
                 </div>
                 <div class="form-group form-group-sm">
@@ -141,6 +141,8 @@
                     <input type="submit" class="btn btn-primary" value="NEXT"  style="width: 70px;"/>
                     <button type="reset" class="btn btn-danger">CANCEL</button>
                 </center>
+                <br>
+
             </form:form>
 
         </div>

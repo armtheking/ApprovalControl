@@ -60,7 +60,7 @@
                     <label for="dateAlert" class="col-sm-2 control-label"><FONT color="red">*</FONT>File Input: </label>
                     <div class="col-sm-3">
                         <input type="file" class="filestyle" id="file" name="file" accept="application/pdf"  required   />
-                      </div>
+                    </div>
 
                 </div>   
                 <div class="form-group form-group-sm">
@@ -169,10 +169,10 @@
                 </div>
 
                 <center>
-
                     <input type="submit" class="btn btn-primary" value="NEXT"  style="width: 70px;"/>
                     <button type="reset" class="btn btn-danger">CANCEL</button>
                 </center>
+                <br>
             </form:form>
 
         </div>

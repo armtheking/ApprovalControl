@@ -42,7 +42,7 @@
                 </div>        
 
                 <div class="form-group form-group-sm">
-                     <label for="dateAlert" class="col-sm-2 control-label"><FONT color="red">*</FONT>File Input: </label>
+                    <label for="dateAlert" class="col-sm-2 control-label"><FONT color="red">*</FONT>File Input: </label>
                     <div class="col-sm-3">
                         <input type="file" class="filestyle" id="file" name="file" accept="application/pdf"  required   />
                         <p class="help-block"><FONT color="red">require .pdf</FONT></p>
@@ -141,6 +141,7 @@
                     <input type="submit" class="btn btn-primary" value="SUBMIT"  style="width: 70px;"/>
                     <button type="reset" class="btn btn-danger">CANCEL</button>
                 </center>
+                <br>
             </form:form>
 
 

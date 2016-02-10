@@ -170,6 +170,7 @@
                     <input type="submit" class="btn btn-primary" value="SUBMIT"  style="width: 70px;"/>
                     <button type="reset" class="btn btn-danger">CANCEL</button>
                 </center>
+                <br>
             </form:form>
 
         </div>
