@@ -86,8 +86,29 @@ public class ClearTicketController {
                 attr.addFlashAttribute("ticketHeader", ticketHeader);
                 return "redirect:/clearticket";
             }
+
+            List<FinanceChargeCode> fc = new ArrayList<>();
+
+            for (Iterator<TicketDetail> iter = ticketHeader.getTicketdetail().listIterator(); iter.hasNext();) {
+                TicketDetail td = iter.next();
+                //ถ้า ไม่ได้เลือก dropdown ให้ลบ row ตัวนั้น
+                if (td.getFinanceChargeCode().getId() == 0 || td.getAmount() == null) {
+                    iter.remove();
+                } else {
+                    // หา description แล้วเก็บไว้ใน list
+                    FinanceChargeCode financeChargeCode = finChargeCodeService.findById(td.getFinanceChargeCode().getId());
+                    fc.add(financeChargeCode);
+
+                }
+            }
+
+            for (int i = 0; i < fc.size(); i++) {
+                //set ค่าใน list ไว้ใน header
+                ticketHeader.getTicketdetail().get(i).setFinanceChargeCode(fc.get(i));
+            }
+
             TicketHeader ticketHeaderNonClear = ticketHeaderService.findById(ticketHeader.getTicketNo());
-            System.out.println("ENT_NAME: "+ticketHeader.getApplicationName());
+            System.out.println("ENT_NAME: " + ticketHeader.getApplicationName());
             setDetailTicketHeaderBeforeSave(ticketHeader, ticketHeaderNonClear.getReqTotalAmt());
 
             handlerFileUpload.handleFileUploadToPath(ticketHeader.getFile(), ticketHeader.getTicketNo());
@@ -105,8 +126,6 @@ public class ClearTicketController {
 
         return null;
     }
-
-   
 
     @RequestMapping(value = "/clearticket/save", method = RequestMethod.POST)
     public String saveTicket(@ModelAttribute("ticketHeaderCS") TicketHeader ticketHeader, SessionStatus status) throws Exception {
@@ -140,15 +159,19 @@ public class ClearTicketController {
 
         ticketHeader.setTicketFinished("C");
         ticketHeader.setTicketNo(numberTicket);
+
+        for (int i = 0; i < ticketHeader.getTicketdetail().size(); i++) {
+            ticketHeader.getTicketdetail().get(i).setTicketHeader(ticketHeader);
+        }
+
         ticketHeader.setReqTotalAmt(CalculateCost.getTotalCost(ticketHeader));
         BigDecimal payBack = reqTotal.subtract(ticketHeader.getReqTotalAmt());
         ticketHeader.setPayBack(payBack);
 
 //         Set ChargeCode each detail 16/12/2015
-        ticketHeader.getTicketdetail().stream().forEach((ticketDetail) -> {
-            ticketDetail.setFinanceChargeCode(finChargeCodeService.findById(ticketDetail.getFinanceChargeCode().getId()));
-        });
-
+//        ticketHeader.getTicketdetail().stream().forEach((ticketDetail) -> {
+//            ticketDetail.setFinanceChargeCode(finChargeCodeService.findById(ticketDetail.getFinanceChargeCode().getId()));
+//        });
 //        return ticketHeader;
     }
 

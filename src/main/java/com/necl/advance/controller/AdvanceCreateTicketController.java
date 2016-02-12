@@ -54,7 +54,7 @@ public class AdvanceCreateTicketController {
 
     @Autowired
     TicketDetailService ticketDetailService;
-    
+
     @Autowired
     @Qualifier("mailService")
     SendMailService sendMailService;
@@ -289,8 +289,7 @@ public class AdvanceCreateTicketController {
 
                 if (ticketHeader.getTicketdetail().get(i).getFinanceChargeCode().getId() == 0 || ticketHeader.getTicketdetail().get(i).getAmount() == null) {
                     ticketDetailService.delete(ticketHeader2.getTicketdetail().get(i).getId());
-                }
-                else {
+                } else {
                     ticketHeader.getTicketdetail().get(i).setId(ticketHeader2.getTicketdetail().get(i).getId());
                 }
             }
@@ -316,8 +315,8 @@ public class AdvanceCreateTicketController {
                 ticketHeader.getTicketdetail().get(i).setFinanceChargeCode(fc.get(i));
                 System.out.println("vv: " + ticketHeader.getTicketdetail().get(i).getFinanceChargeCode());
             }
-            
-          System.out.println("check2");
+
+            System.out.println("check2");
             // การ edit ticket ไม่จำเป้นต้อง run ticket ใหม่
             String ticketNo = ticketHeader.getTicketNo();
             System.out.println("check3:" + ticketNo);
@@ -468,6 +467,10 @@ public class AdvanceCreateTicketController {
 
         ticketHeader.setTicketFinished("C");
         ticketHeader.setTicketNo(numberTicket);
+        for (int i = 0; i < ticketHeader.getTicketdetail().size(); i++) {
+            ticketHeader.getTicketdetail().get(i).setTicketHeader(ticketHeader);
+        }
+
         ticketHeader.setReqTotalAmt(CalculateCost.getTotalCost(ticketHeader));
         BigDecimal payBack = reqTotal.subtract(ticketHeader.getReqTotalAmt());
         ticketHeader.setPayBack(payBack);
