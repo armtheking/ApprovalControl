@@ -41,7 +41,9 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-     $('#example2').DataTable();
+     $('#example2').DataTable({
+         "order": [[ 1, "desc" ]]
+     });
     });
 
 

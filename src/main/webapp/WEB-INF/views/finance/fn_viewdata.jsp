@@ -13,12 +13,12 @@
 
         <%@ include file="../template/pageTitle.jspf" %>
 
-        <div class="container">
+        <div class="container-fluid">
             ${search}
             <div class="row">
                 <!-- Table Condensed -->
                 <div class="panel panel-success">
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="example2">
                         <div class="panel-heading">
                             <h3 class="panel-title">Finance Approve</h3>
                         </div>
@@ -26,15 +26,15 @@
                          
                        <thead>
                             <tr>
-                                <th> # </th>
-                                <th> Ticket No </th>
-                                <th> Date </th>
+                                <th width="10px"> # </th>
+                                <th width="100px"> Ticket No </th>
+                                <th  width="120px"> Date </th>
                                 <th> Topic </th>
-                                <th> Application By </th>
-                                <th> 1st Approve </th>
-                                <th> 2nd Approve </th>
-                                <th> Payment </th>
-                                <th> Paid By </th>
+                                <th width="110px"> Application By </th>
+                                <th width="110px"> 1st Approve </th>
+                                <th width="110  px"> 2nd Approve </th>
+                                <th width="20px"> Payment </th>
+                                <th width="110px"> Paid By </th>
                             </tr>
                         </thead>
                         <tbody>

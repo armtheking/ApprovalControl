@@ -63,7 +63,7 @@
             <div class="row">
                 <!-- Table Condensed -->
                 <div class="panel panel-success">
-                    <table class="table table-striped" id="example">
+                    <table class="table table-striped" id="example2">
                         <div class="panel-heading ">
                             <h3>View Data In Your Division [${month}, ${year}]</h3>
                           

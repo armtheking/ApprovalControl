@@ -25,10 +25,10 @@
         <div class="collapse navbar-collapse" id="id_nav1">
             <ul class="nav navbar-nav">
                 <li <c:if test="${active eq 'advance'}">class="active"</c:if> > <a href="${pageContext.request.contextPath}/advance">
-                    <i class="glyphicon glyphicon-shopping-cart"></i> Advance(Test)
+                    <i class="glyphicon glyphicon-shopping-cart"></i> Advance
                 </a> </li>
                 <li <c:if test="${active eq 'pettycash'}">class="active"</c:if> > <a href="${pageContext.request.contextPath}/pettycash">
-                     <i class="glyphicon glyphicon-shopping-cart"></i> Petty Cash(Test)
+                     <i class="glyphicon glyphicon-shopping-cart"></i> Petty Cash
                 </a> </li>
                 <li <c:if test="${active eq 'entertain'}">class="active"</c:if> >  <a href="${pageContext.request.contextPath}/entertain">
                     <i class="fa fa-cutlery"></i> Entertain

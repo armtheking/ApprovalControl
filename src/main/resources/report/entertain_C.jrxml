@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tree-template" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="68d04fc7-17b4-4915-8956-b7648975ef63">
 	<property name="template.type" value="columnar"/>
-	<property name="ireport.zoom" value="1.272292855117462"/>
-	<property name="ireport.x" value="17"/>
-	<property name="ireport.y" value="432"/>
+	<property name="ireport.zoom" value="1.5394743546921292"/>
+	<property name="ireport.x" value="252"/>
+	<property name="ireport.y" value="594"/>
 	<style name="Title" forecolor="#000000" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold">
 		<paragraph lineSpacing="Single"/>
 	</style>
@@ -916,7 +916,7 @@
 						<font fontName="BrowalliaUPC" size="10" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 						<paragraph lineSpacing="Single"/>
 					</textElement>
-					<text><![CDATA[FR-HR-010REV.02]]></text>
+					<text><![CDATA[FR-HR-010REV.02 (07/01/16)]]></text>
 				</staticText>
 			</frame>
 		</band>
