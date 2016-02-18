@@ -47,7 +47,8 @@ public class FinChargeCodeDaoImpl implements FinChargeCodeDao {
                 + " ON tblMaster_FinChargeCodeType.BranchID = dbApproval.dbo.tblMaster_FinChargeCode.BranchID"
                 + " AND tblMaster_FinChargeCodeType.ItemFIN = dbApproval.dbo.tblMaster_FinChargeCode.ItemFIN"
                 + " WHERE     (dbApproval.dbo.tblMaster_FinChargeCode.BranchID = '"+idBranch+"')"
-                + " AND (tblMaster_FinChargeCodeType.TypeItem = '"+typeItem+"')";
+                + " AND (tblMaster_FinChargeCodeType.TypeItem = '"+typeItem+"')"
+                + "ORDER BY dbApproval.dbo.tblMaster_FinChargeCode.Description ASC";
  
         SQLQuery query = getSession().createSQLQuery(sql);
         query.addEntity(FinanceChargeCode.class);

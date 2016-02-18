@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3d2a9b55-282a-4beb-b346-a92c2c7a120c">
-	<property name="ireport.zoom" value="1.7715610000001651"/>
-	<property name="ireport.x" value="412"/>
-	<property name="ireport.y" value="806"/>
+	<property name="ireport.zoom" value="1.2100000000001125"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -53,22 +53,6 @@
 	<title>
 		<band height="87" splitType="Stretch">
 			<staticText>
-				<reportElement x="426" y="0" width="54" height="20" uuid="a3505c40-8f1a-4cbf-b3e3-c099a3375398"/>
-				<textElement>
-					<font fontName="BrowalliaUPC" size="14" isBold="true" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Ticket No. ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="426" y="19" width="54" height="20" uuid="fc9318a6-a191-4294-94c2-d0e543884322"/>
-				<textElement>
-					<font fontName="BrowalliaUPC" size="14" isBold="true" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Date]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="167" y="49" width="219" height="28" uuid="ffaa6254-c66f-4301-a335-ea151a098eae"/>
 				<textElement textAlignment="Center">
 					<font fontName="BrowalliaUPC" size="22" isBold="true" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
@@ -99,28 +83,44 @@
 				<text><![CDATA[Nippon Express NEC Logistics (Thailand) Co., Ltd.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="479" y="0" width="13" height="20" uuid="0a3fd4d7-dbb5-4618-9fdf-49516f218e1b"/>
-				<textElement textAlignment="Center">
-					<font fontName="BrowalliaUPC" size="14" isBold="true" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[-]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="479" y="19" width="13" height="20" uuid="ad58f98f-73d0-4558-bd26-92bafa357e8e"/>
-				<textElement textAlignment="Center">
-					<font fontName="BrowalliaUPC" size="14" isBold="true" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[-]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="479" y="38" width="75" height="20" uuid="2f74a3f4-9f82-41e9-9c8a-a34dfbb684b3"/>
 				<textElement textAlignment="Center">
 					<font fontName="BrowalliaUPC" size="14" isBold="true" isUnderline="true" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<text><![CDATA[Manual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="0" width="40" height="20" uuid="2051e4c5-b321-4bde-ae1e-108cc5fe87b6"/>
+				<textElement>
+					<font fontName="BrowalliaUPC" size="12" isBold="true" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Ticket No:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="19" width="40" height="20" uuid="8bdf5d1e-508f-48bf-bc8d-c1c6ca475aa6"/>
+				<textElement>
+					<font fontName="BrowalliaUPC" size="12" isBold="true" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Date:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="464" y="0" width="14" height="20" uuid="c3bd14e4-7db7-4c6e-bcde-fa1d0ac236f3"/>
+				<textElement textAlignment="Center">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="464" y="19" width="14" height="20" uuid="41024de5-79c9-49b8-adbe-875f1e33c071"/>
+				<textElement textAlignment="Center">
+					<font fontName="BrowalliaUPC" size="12" isBold="true" isStrikeThrough="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
 			</staticText>
 		</band>
 	</title>

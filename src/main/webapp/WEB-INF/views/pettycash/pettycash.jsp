@@ -57,9 +57,9 @@
                 </div>
 
                 <div class="form-group form-group-sm">
-                    <label for="dateAlert" class="col-sm-2 control-label"><FONT color="red">*</FONT>File Input: </label>
+                    <label for="dateAlert" class="col-sm-2 control-label">File Input: </label>
                     <div class="col-sm-3">
-                        <input type="file" class="filestyle" id="file" name="file" accept="application/pdf"  required   />
+                        <input type="file" class="filestyle" id="file" name="file" accept="application/pdf"  />
                     </div>
 
                 </div>   

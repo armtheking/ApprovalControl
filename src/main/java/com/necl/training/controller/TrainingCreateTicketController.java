@@ -235,7 +235,7 @@ public class TrainingCreateTicketController extends HttpServlet {
             ticketHeader2 = ticketHeaderService.findById(ticketHTraining.getTicketHeader().getTicketNo());
 
             for (int i = 0; i < ticketHeader2.getTicketDTraining().size(); i++) {
-                System.out.println("i: "+i);
+                System.out.println("i: " + i);
                 if (ticketHTraining.getTicketHeader().getTicketDTraining().size() <= i) {
                     System.out.println("aoi");
                     ticketDTrainingService.delete(ticketHeader2.getTicketDTraining().get(i).getId());
@@ -325,6 +325,10 @@ public class TrainingCreateTicketController extends HttpServlet {
 
         for (int i = 0; i < ticketHTraining.getTicketHeader().getTicketDTraining().size(); i++) {
             ticketHTraining.getTicketHeader().getTicketDTraining().get(i).setTicketHeader(ticketHTraining.getTicketHeader());
+        }
+
+        for (int i = 0; i < ticketHTraining.getTicketHeader().getTrainingParticipant().size(); i++) {
+            ticketHTraining.getTicketHeader().getTrainingParticipant().get(i).setTicketHeader(ticketHTraining.getTicketHeader());
         }
 
         ticketHTraining.getTicketHeader().setTicketType(configSystem.getConfigPrefix());

@@ -77,7 +77,7 @@ public class UserDaoImpl implements UserDao {
                 + "APP_USER ON tblMaster_Position.PositionCode = APP_USER.positionCode LEFT OUTER JOIN\n"
                 + "tblTicketsH LEFT OUTER JOIN\n"
                 + "tblMaster_PermitApproval ON tblTicketsH.Item = tblMaster_PermitApproval.Item ON tblMaster_Position.PositionCode = tblMaster_PermitApproval.PositionCode\n"
-                + "WHERE     (APP_USER.positionCode = 'MD')";
+                + "WHERE     (APP_USER.positionCode = 'MD') AND (STATE = 'Active')";
         SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql);
 
         query.addEntity(User.class);
