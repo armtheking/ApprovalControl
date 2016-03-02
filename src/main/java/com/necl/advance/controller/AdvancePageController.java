@@ -149,7 +149,7 @@ public class AdvancePageController {
             ModelAndView model = new ModelAndView();
             model.addObject("ticketHeader", ticketHeader);
 
-            model.setViewName("enadvancetertain/advanceedit_clear");
+            model.setViewName("advance/advanceedit_clear");
             return model;
         } catch (Exception e) {
 

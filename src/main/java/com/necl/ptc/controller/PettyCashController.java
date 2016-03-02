@@ -6,6 +6,7 @@ import com.necl.core.function.RedirectPageByType;
 import com.necl.core.function.RunConfigNumber;
 import com.necl.core.model.ConfigSystem;
 import com.necl.core.model.FinanceChargeCode;
+import com.necl.core.model.History;
 import com.necl.core.model.TicketDetail;
 import com.necl.core.model.TicketDetailNumber;
 import com.necl.core.model.TicketHeader;
@@ -13,6 +14,7 @@ import com.necl.core.model.User;
 import com.necl.core.service.ConfigSystemService;
 import com.necl.core.service.FinChargeCodeService;
 import com.necl.core.service.HandlerFileUpload;
+import com.necl.core.service.HistoryService;
 import com.necl.core.service.SendMailService;
 import com.necl.core.service.TicketDetailService;
 import com.necl.core.service.TicketHeaderService;
@@ -21,7 +23,10 @@ import com.necl.login.controller.HomeController;
 import java.io.File;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import javax.validation.Valid;
@@ -53,6 +58,9 @@ public class PettyCashController {
 
     @Autowired
     TicketDetailService ticketDetailService;
+
+    @Autowired
+    HistoryService historyService;
 
     @Autowired
     @Qualifier("mailService")
@@ -302,6 +310,58 @@ public class PettyCashController {
             TicketHeader ticketHeader2 = new TicketHeader();
             ticketHeader2 = ticketHeaderService.findById(ticketHeader.getTicketNo());
 
+            if (ticketHeader2.getTicketFinished().equals("R")) {
+                History history = new History();
+                System.out.println("checcccc");
+                Calendar now = Calendar.getInstance();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+                if (ticketHeader2.getApprovedStatus1() == true) {
+
+                    Date startDate = dateFormat.parse(ticketHeader2.getApprovedDate1());
+                    Calendar startDate2 = Calendar.getInstance();
+                    startDate2.setTime(startDate);
+                    history.setApprovedDate1(startDate2);
+                    history.setApprovedName1(ticketHeader2.getApprovedName1());
+
+                    System.out.println("ch4");
+                    history.setApprovedRemark2(ticketHeader2.getApprovedRemark2());
+                    history.setApprovedStatus1(ticketHeader2.getApprovedStatus1());
+                    history.setApprovedStatus2(ticketHeader2.getApprovedStatus2());
+                    history.setApprovedName2(ticketHeader2.getApprovedName2());
+                } else {
+                    history.setApprovedName1(ticketHeader2.getApprovedName1());
+                    history.setApprovedRemark1(ticketHeader2.getApprovedRemark1());
+                    history.setApprovedStatus1(ticketHeader2.getApprovedStatus1());
+                    history.setApprovedStatus2(ticketHeader2.getApprovedStatus2());
+                }
+
+                List<History> findHistory = new ArrayList<>();
+                findHistory = historyService.findByTicketNo(ticketHeader.getTicketNo());
+                String revNo = "";
+                if (findHistory.size() > 0) {
+                    historyService.updateStatus(ticketHeader.getTicketNo() + "-RV" + String.format("%02d", findHistory.size() - 1));
+                    revNo = ticketHeader.getTicketNo() + "-RV" + String.format("%02d", findHistory.size());
+                    ticketHeader.setShowTicket(ticketHeader.getTicketNo() + "-RV" + String.format("%02d", findHistory.size() + 1));
+                    System.out.println(">0: " + revNo);
+
+                } else {
+
+                    revNo = ticketHeader.getTicketNo() + "-RV00";
+                    ticketHeader.setShowTicket(ticketHeader.getTicketNo() + "-RV01");
+                    System.out.println("<=0: " + revNo);
+                }
+                //  int number = Integer.parseInt(ti);
+                history.setTicketRev(revNo);
+                history.setStatus(true);
+
+                Calendar date2 = Calendar.getInstance();
+                history.setDate(date2);
+
+                history.setReqTotalAmt(ticketHeader2.getReqTotalAmt());
+                ticketHeader.getHistory().add(history);
+                ticketHeader.getHistory().get(0).setTicketHeader(ticketHeader);
+            }
+
             for (int i = 0; i < ticketHeader2.getTicketdetail().size(); i++) {
                 System.out.println("checkWOI: " + ticketHeader2.getTicketdetail().get(i).getId());
 
@@ -333,25 +393,20 @@ public class PettyCashController {
                 ticketHeader.getTicketdetail().get(i).setFinanceChargeCode(fc.get(i));
                 System.out.println("vv: " + ticketHeader.getTicketdetail().get(i).getFinanceChargeCode());
             }
-            System.out.println("check2");
+
+            if (ticketHeader2.getShowTicket() != null) {
+                ticketHeader.setShowTicket(ticketHeader2.getShowTicket());
+            }
             // การ edit ticket ไม่จำเป้นต้อง run ticket ใหม่
             String ticketNo = ticketHeader.getTicketNo();
-            System.out.println("check3:" + ticketNo);
             String oldItem = ticketHeader.getItem();
-            System.out.println("check4");
             String oldStatus = ticketHeader.getTicketFinished();
-            System.out.println("check5");
             setDetailTicketHeaderBeforeSave(ticketHeader);
             handlerFileUpload.handleFileUploadToPath(ticketHeader.getFile(), ticketNo);
-            System.out.println("check6: " + ticketNo);
             ticketHeader.setTicketNo(ticketNo);
-            System.out.println("check7");
             ticketHeaderService.save(ticketHeader);
-            System.out.println("check8");
             setNameWaitingApprove1(ticketHeader);
-            System.out.println("check9");
             ticketHeaderService.save(ticketHeader);
-            System.out.println("check10");
             if (!oldItem.equals(ticketHeader.getItem()) || oldStatus.equals("R")) {
 
                 sendMailService.sendMailUserApprove(ticketHeader);

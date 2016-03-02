@@ -52,8 +52,8 @@
 
                     <div class="form-group">
                         <label for="exampleInputFile" class="col-sm-2 control-label">File input : </label>
-                        <div class="col-sm-5">
-                            <input type="file" name="file" size="60" accept="application/pdf" required="true"/>
+                        <div class="col-sm-3">
+                            <input type="file" class="filestyle" name="file"  accept="application/pdf" required/>
                             <p class="help-block">require .pdf</p>
                         </div>
 

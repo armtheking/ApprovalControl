@@ -170,29 +170,21 @@ public class ReportController {
         try {
 
             TicketHTraining ticketHTraining = ticketHTrainingService.findByTicketNo(id);
-
+            System.out.println("1: ");
             String ownerPositionName = positionService.findById(ticketHTraining.getTicketHeader().getApplicationPosition()).getPositionName();
+             System.out.println("2: "+ownerPositionName);
             String ownerDivision = divisionService.findById(ticketHTraining.getTicketHeader().getDivisionCode()).getDivisionName();
+              System.out.println("3: "+ownerDivision);
             String ownerSection = sectionService.findById(ticketHTraining.getTicketHeader().getDivisionCode(), ticketHTraining.getTicketHeader().getSectionCode()).getSectionName();
+              System.out.println("4: "+ownerSection);
             String firstApprovePositionName = null;
 
-            Position find_position = positionService.findById(ticketHTraining.getTicketHeader().getApprovedPosition1());
-
-            if (find_position == null) {
-                firstApprovePositionName = "-";
-            } else {
-                firstApprovePositionName = find_position.getPositionName();
-            }
-
-            String secondApprovePositionName = positionService.findById(ticketHTraining.getTicketHeader().getApprovedPosition2()).getPositionName();
 
             ticketHTraining.getTicketHeader().setApplicationPosition(ownerPositionName);
             ticketHTraining.getTicketHeader().setDivisionCode(ownerDivision);
             ticketHTraining.getTicketHeader().setSectionCode(ownerSection);
 
-            ticketHTraining.getTicketHeader().setApprovedPosition1(firstApprovePositionName);
-            ticketHTraining.getTicketHeader().setApprovedPosition2(secondApprovePositionName);
-
+         
             List<TicketHeader> ticketHeader = new ArrayList<>();
             ticketHeader.add(ticketHTraining.getTicketHeader());
 

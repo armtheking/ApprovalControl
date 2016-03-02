@@ -6,8 +6,10 @@ import com.necl.core.service.HandlerFileUpload;
 import com.necl.core.model.TicketHeader;
 import com.necl.core.function.RunConfigNumber;
 import com.necl.core.model.ConfigSystem;
+import com.necl.core.model.History;
 import com.necl.core.model.User;
 import com.necl.core.service.ConfigSystemService;
+import com.necl.core.service.HistoryService;
 import com.necl.core.service.SendMailService;
 import com.necl.core.service.TicketHeaderService;
 import com.necl.core.service.UserService;
@@ -23,6 +25,7 @@ import com.necl.training.model.TrainingType;
 import com.necl.training.service.DivisionBudgetService;
 import com.necl.training.service.TicketDTrainingService;
 import com.necl.training.service.TicketHTrainingService;
+import com.necl.training.service.TrainingParticipantService;
 //import com.necl.training.service.TrainingBudgetDescriptionService;
 import com.necl.training.service.TrainingPaymentService;
 import com.necl.training.service.TrainingPlanService;
@@ -31,8 +34,10 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -75,6 +80,12 @@ public class TrainingCreateTicketController extends HttpServlet {
 
     @Autowired
     TicketDTrainingService ticketDTrainingService;
+
+    @Autowired
+    TrainingParticipantService trainingParticipantService;
+
+    @Autowired
+    HistoryService historyService;
 
     @Autowired
     @Qualifier("mailService")
@@ -234,14 +245,78 @@ public class TrainingCreateTicketController extends HttpServlet {
             TicketHeader ticketHeader2 = new TicketHeader();
             ticketHeader2 = ticketHeaderService.findById(ticketHTraining.getTicketHeader().getTicketNo());
 
+            if (ticketHeader2.getTicketFinished().equals("R")) {
+                History history = new History();
+                System.out.println("checcccc");
+                Calendar now = Calendar.getInstance();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+                if (ticketHeader2.getApprovedStatus1() == true) {
+
+                    Date startDate = dateFormat.parse(ticketHeader2.getApprovedDate1());
+                    Calendar startDate2 = Calendar.getInstance();
+                    startDate2.setTime(startDate);
+                    history.setApprovedDate1(startDate2);
+                    history.setApprovedName1(ticketHeader2.getApprovedName1());
+
+                    System.out.println("ch4");
+                    history.setApprovedRemark2(ticketHeader2.getApprovedRemark2());
+                    history.setApprovedStatus1(ticketHeader2.getApprovedStatus1());
+                    history.setApprovedStatus2(ticketHeader2.getApprovedStatus2());
+                    history.setApprovedName2(ticketHeader2.getApprovedName2());
+                } else {
+                    history.setApprovedName1(ticketHeader2.getApprovedName1());
+                    history.setApprovedRemark1(ticketHeader2.getApprovedRemark1());
+                    history.setApprovedStatus1(ticketHeader2.getApprovedStatus1());
+                    history.setApprovedStatus2(ticketHeader2.getApprovedStatus2());
+                }
+
+                List<History> findHistory = new ArrayList<>();
+                findHistory = historyService.findByTicketNo(ticketHTraining.getTicketHeader().getTicketNo());
+                String revNo = "";
+                if (findHistory.size() > 0) {
+                    historyService.updateStatus(ticketHTraining.getTicketHeader().getTicketNo() + "-RV" + String.format("%02d", findHistory.size() - 1));
+                    revNo = ticketHTraining.getTicketHeader().getTicketNo() + "-RV" + String.format("%02d", findHistory.size());
+                    ticketHTraining.getTicketHeader().setShowTicket(ticketHTraining.getTicketHeader().getTicketNo() + "-RV" + String.format("%02d", findHistory.size() + 1));
+                    System.out.println(">0: " + revNo);
+
+                } else {
+
+                    revNo = ticketHTraining.getTicketHeader().getTicketNo() + "-RV00";
+                    ticketHTraining.getTicketHeader().setShowTicket(ticketHTraining.getTicketHeader().getTicketNo() + "-RV01");
+                    System.out.println("<=0: " + revNo);
+                }
+                //  int number = Integer.parseInt(ti);
+                history.setTicketRev(revNo);
+                history.setStatus(true);
+
+                Calendar date2 = Calendar.getInstance();
+                history.setDate(date2);
+
+                history.setReqTotalAmt(ticketHeader2.getReqTotalAmt());
+                ticketHTraining.getTicketHeader().getHistory().add(history);
+                ticketHTraining.getTicketHeader().getHistory().get(0).setTicketHeader(ticketHTraining.getTicketHeader());
+            }
+
             for (int i = 0; i < ticketHeader2.getTicketDTraining().size(); i++) {
                 System.out.println("i: " + i);
                 if (ticketHTraining.getTicketHeader().getTicketDTraining().size() <= i) {
-                    System.out.println("aoi");
                     ticketDTrainingService.delete(ticketHeader2.getTicketDTraining().get(i).getId());
                 } else {
                     ticketHTraining.getTicketHeader().getTicketDTraining().get(i).setId(ticketHeader2.getTicketDTraining().get(i).getId());
                 }
+            }
+
+            for (int i = 0; i < ticketHeader2.getTrainingParticipant().size(); i++) {
+                System.out.println("i: " + i);
+                if (ticketHTraining.getTicketHeader().getTrainingParticipant().size() <= i) {
+                    trainingParticipantService.delete(ticketHeader2.getTrainingParticipant().get(i).getId());
+                } else {
+                    ticketHTraining.getTicketHeader().getTrainingParticipant().get(i).setId(ticketHeader2.getTrainingParticipant().get(i).getId());
+                }
+            }
+
+            if (ticketHeader2.getShowTicket() != null) {
+                ticketHTraining.getTicketHeader().setShowTicket(ticketHeader2.getShowTicket());
             }
 
             // การ edit ticket ไม่จำเป้นต้อง run ticket ใหม่
@@ -271,15 +346,17 @@ public class TrainingCreateTicketController extends HttpServlet {
             BigDecimal head = new BigDecimal(ticketHTraining.getTotalPerson());
             ticketHTraining.getTicketHeader().setReqTotalAmt(sumCost);
             ticketHTraining.setCostPerHead(sumCost.divide(head, 2, RoundingMode.CEILING));
-
+            System.out.println("organizeby1: " + ticketHTraining.getOrganizeBy());
             ticketHTrainingService.update(ticketHTraining);
-
-            System.out.println("organizeby2: " + ticketHTraining.getOrganizeBy());
+            ticketHeaderService.save(ticketHTraining.getTicketHeader());
             LOGGER.info("first save ticket is excuted!");
 
             setNameWaitingApprove1(ticketHTraining);
-            ticketHeaderService.save(ticketHTraining.getTicketHeader());
+            System.out.println("APP1: " + ticketHTraining.getTicketHeader().getApprovedName1());
 
+            System.out.println("organizeby2: " + ticketHTraining.getOrganizeBy());
+            ticketHeaderService.save(ticketHTraining.getTicketHeader());
+            ticketHeaderService.update(ticketHTraining.getTicketHeader());
             if (!oldItem.equals(ticketHTraining.getTicketHeader().getItem())) {
                 sendMailService.sendMailUserApprove(ticketHTraining.getTicketHeader());
                 LOGGER.info("send mail edit ticket change item is exeuted!");
@@ -360,66 +437,74 @@ public class TrainingCreateTicketController extends HttpServlet {
     }
 
     private void setNameWaitingApprove1(TicketHTraining ticketHTraining) throws Exception {
-        List<User> userList = userService.findMailUserApprove(ticketHTraining.getTicketHeader().getTicketNo());
-        int rule = 1;
-        int not_approve2 = 1;
-        if (userList.size() == 0) {
-//set next approved
-            ticketHTraining.getTicketHeader().setApprovedStatus1(true);
-            ticketHTraining.getTicketHeader().setTicketFinished("1");
-            ticketHTrainingService.save(ticketHTraining);
-            rule = 2;
-            userList = userService.findMailUserApprove(ticketHTraining.getTicketHeader().getTicketNo());
-            System.out.println("list: " + userList);
+        try {
+            System.out.println("NAME: " + ticketHTraining.getTicketHeader().getApplicationName());
+            System.out.println("TOTAL AMOUNT: " + ticketHTraining.getTicketHeader().getReqTotalAmt());
+            System.out.println("TicketNO: " + ticketHTraining.getTicketHeader().getTicketNo());
+            List<User> userList = userService.findMailUserApprove(ticketHTraining.getTicketHeader().getTicketNo());
+
+            int rule = 1;
+            int not_approve2 = 1;
             if (userList.size() == 0) {
-                System.out.println("check1:" + userList.size());
-                not_approve2 = 2;
-            }
-
-        }
-
-        String nameUserapprove = "";
-        for (User user : userList) {
-            if (nameUserapprove.length() < 1) {
-                nameUserapprove = "Waiting : " + user.getSsoId();
-            } else {
-                nameUserapprove = nameUserapprove + ", " + user.getSsoId();
-            }
-        }
-
-        if (nameUserapprove.isEmpty() || !nameUserapprove.contains("Waiting")) {
-            nameUserapprove = "Empty";
-        }
-
-        //ถ้าคนแรกหาไม่เจอ แต่คนที่ 2 หาเจอ Approve Step2
-        if (rule == 2 && not_approve2 == 1) {
-
-            ticketHTraining.getTicketHeader().setApprovedName2(nameUserapprove);
-            ticketHTraining.getTicketHeader().setApprovedName1("-");
-            ticketHTraining.getTicketHeader().setApprovedPosition1("-");
-        } //ถ้าคนแรกหาไม่เจอ และคนที่2 หาไม่เจอ Approve Step3
-        else if (rule == 2 && not_approve2 == 2) {
-            if (not_approve2 == 2) {
-                System.out.println("check2:");
-                userList = userService.getMD();
-                nameUserapprove = "";
-                for (User user : userList) {
-                    if (nameUserapprove.length() < 1) {
-                        nameUserapprove = "Waiting : " + user.getSsoId();
-                    } else {
-                        nameUserapprove = nameUserapprove + ", " + user.getSsoId();
-                    }
+//set next approved
+                ticketHTraining.getTicketHeader().setApprovedStatus1(true);
+                ticketHTraining.getTicketHeader().setTicketFinished("1");
+                ticketHTrainingService.save(ticketHTraining);
+                rule = 2;
+                userList = userService.findMailUserApprove(ticketHTraining.getTicketHeader().getTicketNo());
+                System.out.println("list: " + userList);
+                if (userList.size() == 0) {
+                    System.out.println("check1:" + userList.size());
+                    not_approve2 = 2;
                 }
-                System.out.println("userList: " + userList);
+
+            }
+
+            String nameUserapprove = "";
+            for (User user : userList) {
+                if (nameUserapprove.length() < 1) {
+                    System.out.println("userWOIIII: " + user.getSsoId());
+                    nameUserapprove = "Waiting : " + user.getSsoId();
+                } else {
+                    nameUserapprove = nameUserapprove + ", " + user.getSsoId();
+                }
+            }
+
+            if (nameUserapprove.isEmpty() || !nameUserapprove.contains("Waiting")) {
+                nameUserapprove = "Empty";
+            }
+
+            //ถ้าคนแรกหาไม่เจอ แต่คนที่ 2 หาเจอ Approve Step2
+            if (rule == 2 && not_approve2 == 1) {
+
+                ticketHTraining.getTicketHeader().setApprovedName2(nameUserapprove);
                 ticketHTraining.getTicketHeader().setApprovedName1("-");
                 ticketHTraining.getTicketHeader().setApprovedPosition1("-");
-                ticketHTraining.getTicketHeader().setApprovedName2(nameUserapprove);
+            } //ถ้าคนแรกหาไม่เจอ และคนที่2 หาไม่เจอ Approve Step3
+            else if (rule == 2 && not_approve2 == 2) {
+                if (not_approve2 == 2) {
+                    System.out.println("check2:");
+                    userList = userService.getMD();
+                    nameUserapprove = "";
+                    for (User user : userList) {
+                        if (nameUserapprove.length() < 1) {
+                            nameUserapprove = "Waiting : " + user.getSsoId();
+                        } else {
+                            nameUserapprove = nameUserapprove + ", " + user.getSsoId();
+                        }
+                    }
+                    System.out.println("userList: " + userList);
+                    ticketHTraining.getTicketHeader().setApprovedName1("-");
+                    ticketHTraining.getTicketHeader().setApprovedPosition1("-");
+                    ticketHTraining.getTicketHeader().setApprovedName2(nameUserapprove);
 
+                }
+            } else {
+                ticketHTraining.getTicketHeader().setApprovedName1(nameUserapprove);
             }
-        } else {
-            ticketHTraining.getTicketHeader().setApprovedName1(nameUserapprove);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
     }
 
 //    private void setNameWaitingApprove1_edit(TicketHeader ticketHeader) throws Exception {

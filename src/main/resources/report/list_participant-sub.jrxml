@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="list_participant_sub" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d02d623f-9529-4f9e-b48e-65d81dd6e56a">
-	<property name="ireport.zoom" value="1.4641000000000028"/>
-	<property name="ireport.x" value="102"/>
+	<property name="ireport.zoom" value="2.357947691000007"/>
+	<property name="ireport.x" value="477"/>
 	<property name="ireport.y" value="0"/>
 	<field name="empID" class="java.lang.String"/>
 	<field name="firstName" class="java.lang.String"/>
@@ -14,37 +14,37 @@
 		<band height="21" splitType="Stretch">
 			<textField>
 				<reportElement x="59" y="0" width="101" height="20" uuid="99fdb0d0-b6b6-40fc-90bc-2c96f194055d"/>
-				<textElement textAlignment="Left">
-					<font fontName="BrowalliaUPC" size="12" isBold="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="BrowalliaUPC" size="14" isBold="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{empID}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="2" y="0" width="43" height="20" uuid="124804f3-bd08-47ff-a129-ee19bd8ff37a"/>
-				<textElement textAlignment="Center">
-					<font fontName="BrowalliaUPC" size="12" isBold="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="BrowalliaUPC" size="14" isBold="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="178" y="0" width="111" height="20" uuid="62c23dd3-8d12-4f7d-8239-bb1baeb7d741"/>
-				<textElement textAlignment="Left">
-					<font fontName="BrowalliaUPC" size="12" isBold="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="BrowalliaUPC" size="14" isBold="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{firstName}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="423" y="0" width="121" height="20" uuid="88ea7254-14e1-4d34-9750-1097bc0b51f2"/>
-				<textElement textAlignment="Left">
-					<font fontName="BrowalliaUPC" size="12" isBold="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="BrowalliaUPC" size="14" isBold="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{section}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="306" y="0" width="101" height="20" uuid="e8da9aae-d88a-418c-8695-2cc869cb3e63"/>
-				<textElement textAlignment="Left">
-					<font fontName="BrowalliaUPC" size="12" isBold="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="BrowalliaUPC" size="14" isBold="false" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{lastName}]]></textFieldExpression>
 			</textField>

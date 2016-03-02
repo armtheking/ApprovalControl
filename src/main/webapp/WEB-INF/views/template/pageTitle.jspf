@@ -1,9 +1,8 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" trimDirectiveWhitespaces="true" %>
-<div class="container" style="margin-top:20px">
+
++<%@ page contentType="text/html;charset=UTF-8" language="java" trimDirectiveWhitespaces="true" %>
+<div class="container" style="margin-top:50px">
     <div class="row">
-        <div class="page-header">
-            <!--<h1> Approval  <small> Control V 1.0 </small></h1>-->
-        </div>
+
     </div>
 </div>
 
@@ -28,7 +27,7 @@
                     <i class="glyphicon glyphicon-shopping-cart"></i> Advance
                 </a> </li>
                 <li <c:if test="${active eq 'pettycash'}">class="active"</c:if> > <a href="${pageContext.request.contextPath}/pettycash">
-                     <i class="glyphicon glyphicon-shopping-cart"></i> Petty Cash
+                    <i class="glyphicon glyphicon-shopping-cart"></i> Petty Cash
                 </a> </li>
                 <li <c:if test="${active eq 'entertain'}">class="active"</c:if> >  <a href="${pageContext.request.contextPath}/entertain">
                     <i class="fa fa-cutlery"></i> Entertain
@@ -61,12 +60,13 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle"
                            data-toggle="dropdown"
-                           href=""> Finance <span class="caret"></span></a> 
+                           href=""> <i class="fa fa-btc"></i> Finance <span class="caret"></span></a> 
                         <ul class="dropdown-menu">
                             <li> <a href="${pageContext.request.contextPath}/finance/entertain"> Entertain </a></li>
                             <li> <a href="${pageContext.request.contextPath}/finance/advance"> Advance </a></li>
                             <li> <a href="${pageContext.request.contextPath}/finance/pettycash"> Petty Cash </a></li>
                             <li> <a href="${pageContext.request.contextPath}/finance/viewData"> View Data </a></li>
+                            <li> <a href="${pageContext.request.contextPath}/finance/print"> Print </a></li>
                         </ul>
                     </li>
                 </sec:authorize>
@@ -81,7 +81,7 @@
 
 
             <ul class="nav navbar-nav navbar-right">
-                <li <c:if test="${active eq 'viewdata'}"></c:if> >  <a href="${pageContext.request.contextPath}/viewdata_all/">
+                <li <c:if test="${active eq 'viewdata'}">class="active"</c:if> >   <a href="${pageContext.request.contextPath}/viewdata_all/">
                     <i class="fa fa-bars"></i> View data
                 </a> 
                 </li>

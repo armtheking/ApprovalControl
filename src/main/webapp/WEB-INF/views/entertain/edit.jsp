@@ -27,7 +27,7 @@
                     <input type="hidden" name="refTicketNo" value="${ticketHeader.refTicketNo}"/>
 
                     <div class="form-group">
-                          <label for="detailHeader" class="col-sm-3 control-label"> Customer's Name : </label>
+                        <label for="detailHeader" class="col-sm-3 control-label"> Customer's Name : </label>
                         <div class="col-sm-4">
 
                             <form:input type="text" path="detailHeader" id="detailHeader" class="form-control" placeholder="Customer's Name" autofocus="autofocus"/>
@@ -37,12 +37,12 @@
                             </div>
                         </div>
                         <div class="col-sm-5">
-                                  <label><span style="color: red;"> ** </span>Company Name</label>
+                            <label><span style="color: red;"> ** </span>Company Name</label>
                         </div>
                     </div>
 
                     <div class="form-group">
-                         <label for="remarkHeader" class="col-sm-3 control-label">Purpose / Reason : </label>
+                        <label for="remarkHeader" class="col-sm-3 control-label">Purpose / Reason : </label>
                         <div class="col-sm-4">
                             <form:input type="text" path="remarkHeader" class="form-control" placeholder="Purpose / Reason"/>
                             <div class="has-error">
@@ -50,8 +50,8 @@
                             </div>
                         </div>
                         <div class="col-sm-5">
-                             <label><span style="color: red;"> ** </span> Customer / Guest Visit, Reception Party, ISO Audit, Souvenir / Gift for customer 
-           
+                            <label><span style="color: red;"> ** </span> Customer / Guest Visit, Reception Party, ISO Audit, Souvenir / Gift for customer 
+
                             </label>
                         </div>
                     </div>

@@ -190,6 +190,9 @@ public class TicketHeader implements Serializable {
     @Column(name = "RemarkOverRequest", length = 150)
     private String remarkOverRequestAmount;
 
+    @Column(name = "ShowTicket", length = 20)
+    private String showTicket;
+
     @Transient
     private CommonsMultipartFile file;
 
@@ -199,17 +202,21 @@ public class TicketHeader implements Serializable {
 //    @Valid
 //    private List<TicketDetail> ticketdetail = new ArrayList<>();
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "ticketHeader")
-   @Fetch(value = FetchMode.SUBSELECT)
+    @Fetch(value = FetchMode.SUBSELECT)
     @Valid
     private List<TicketDetail> ticketdetail = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "ticketHeader")
-   @Fetch(value = FetchMode.SUBSELECT)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<TrainingParticipant> trainingParticipant = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "ticketHeader")
     @Fetch(value = FetchMode.SUBSELECT)
     private List<TicketDTraining> ticketDTraining = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "ticketHeader")
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<History> history = new ArrayList<>();
 
 //    @OneToOne(mappedBy = "ticketHeader", cascade = CascadeType.ALL)
 //    private TicketHTraining ticketHTraining;
@@ -366,6 +373,14 @@ public class TicketHeader implements Serializable {
         this.reqTotalAmt = reqTotalAmt;
     }
 
+    public String getShowTicket() {
+        return showTicket;
+    }
+
+    public void setShowTicket(String showTicket) {
+        this.showTicket = showTicket;
+    }
+    
     public List<TicketDetail> getTicketdetail() {
         return ticketdetail;
     }
@@ -388,6 +403,14 @@ public class TicketHeader implements Serializable {
 
     public void setTrainingParticipant(List<TrainingParticipant> trainingParticipant) {
         this.trainingParticipant = trainingParticipant;
+    }
+
+    public List<History> getHistory() {
+        return history;
+    }
+
+    public void setHistory(List<History> history) {
+        this.history = history;
     }
 
     public List<MultipartFile> getFiles() {

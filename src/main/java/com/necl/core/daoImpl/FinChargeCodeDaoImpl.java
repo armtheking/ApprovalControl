@@ -31,25 +31,19 @@ public class FinChargeCodeDaoImpl implements FinChargeCodeDao {
 
     @Override
     public List<FinanceChargeCode> findChargeCodeAsType(String idBranch, String typeItem) {
-        
-        if(typeItem.equals("ADV")){
-            typeItem="PTC";
-        }        
-        String sql = "SELECT dbApproval.dbo.tblMaster_FinChargeCode.ChargeCodeId"
-                + ", dbApproval.dbo.tblMaster_FinChargeCode.BranchID"
-                + ", dbApproval.dbo.tblMaster_FinChargeCode.ItemFIN"
-                + ", dbApproval.dbo.tblMaster_FinChargeCode.Description"
-                + ", dbApproval.dbo.tblMaster_FinChargeCode.Stop"
-                + ", dbApproval.dbo.tblMaster_FinChargeCode.Update_Time"
-                + ", dbApproval.dbo.tblMaster_FinChargeCode.Acc_Code"
-                + " FROM tblMaster_FinChargeCodeType"
-                + " INNER JOIN dbApproval.dbo.tblMaster_FinChargeCode"
-                + " ON tblMaster_FinChargeCodeType.BranchID = dbApproval.dbo.tblMaster_FinChargeCode.BranchID"
-                + " AND tblMaster_FinChargeCodeType.ItemFIN = dbApproval.dbo.tblMaster_FinChargeCode.ItemFIN"
-                + " WHERE     (dbApproval.dbo.tblMaster_FinChargeCode.BranchID = '"+idBranch+"')"
-                + " AND (tblMaster_FinChargeCodeType.TypeItem = '"+typeItem+"')"
-                + "ORDER BY dbApproval.dbo.tblMaster_FinChargeCode.Description ASC";
- 
+
+        if (typeItem.equals("ADV")) {
+            typeItem = "PTC";
+        }
+        String sql = "SELECT     tblMaster_FinChargeCode.ChargeCodeId, tblMaster_FinChargeCode.BranchID, tblMaster_FinChargeCode.ItemFIN, tblMaster_FinChargeCode.Description, \n"
+                + "tblMaster_FinChargeCode.Stop, tblMaster_FinChargeCode.Update_Time, tblMaster_FinChargeCode.Acc_Code, tblMaster_FinChargeCode.Stop AS Expr1\n"
+                + "FROM         tblMaster_FinChargeCodeType INNER JOIN\n"
+                + "tblMaster_FinChargeCode ON tblMaster_FinChargeCodeType.BranchID = tblMaster_FinChargeCode.BranchID AND \n"
+                + "tblMaster_FinChargeCodeType.ItemFIN = tblMaster_FinChargeCode.ItemFIN\n"
+                + "WHERE    ((tblMaster_FinChargeCode.BranchID = '00') AND (tblMaster_FinChargeCodeType.TypeItem = '"+typeItem+"') AND (tblMaster_FinChargeCode.Stop = 'False')) OR\n"
+                + "(tblMaster_FinChargeCode.BranchID = '"+idBranch+"') AND (tblMaster_FinChargeCodeType.TypeItem = '"+typeItem+"') AND (tblMaster_FinChargeCode.Stop = 'False') \n"
+                + "ORDER BY tblMaster_FinChargeCode.Description";
+
         SQLQuery query = getSession().createSQLQuery(sql);
         query.addEntity(FinanceChargeCode.class);
         List results = query.list();

@@ -74,8 +74,8 @@
                                                         <thead>
                                                             <tr>
                                                                 <th> No </th>
-                                                                <th> Ticket No </th>
                                                                 <th> Description </th>
+                                                                <th> Place </th>
                                                                 <th> Number & List of Participant </th>
                                                                 <th> Amount </th>
                                                             </tr>
@@ -83,13 +83,13 @@
                                                         <tbody>
 
                                                             <c:set var="count" value="0" scope="page" />
-                                                            <c:forEach var="ticketdetail" items="${ticketHeader.ticketdetail}">
+                                                            <c:forEach var="ticketdetail" items="${ticketDetail}">
                                                                 <tr>
 
                                                                     <td><c:set var="count" value="${count + 1}" scope="page"/> 
                                                                         <c:out value="${count}" />
                                                                     </td>
-                                                                    <td>${ticketdetail.financeChargeCode.description}</td>
+                                                                    <td>${ticketdetail.description}</td>
                                                                     <td>${ticketdetail.place}</td>
                                                                     <td>
                                                                         ${ticketdetail.detail}
@@ -120,7 +120,7 @@
                                         </div>
                                         <div class="col-xs-2">
                                             <strong>
-                                                <span class="doubleUnderline">${ticketHeader.reqTotalAmt}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+                                                <span class="doubleUnderline">${number_sumAmount}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
 
                                             </strong>
                                         </div>

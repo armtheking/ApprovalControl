@@ -66,7 +66,7 @@ public class User implements Serializable {
     @NotEmpty
     @Column(name = "STATE", nullable = false)
     private String state = State.ACTIVE.getState();
-
+    
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "APP_USER_USER_PROFILE",
             joinColumns = {
@@ -180,7 +180,7 @@ public class User implements Serializable {
     public void setState(String state) {
         this.state = state;
     }
-
+       
     public Set<UserProfile> getUserProfiles() {
         return userProfiles;
     }

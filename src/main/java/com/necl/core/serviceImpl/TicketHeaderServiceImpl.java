@@ -96,6 +96,11 @@ public class TicketHeaderServiceImpl implements TicketHeaderService {
     }
 
     @Override
+    public List<TicketHeader> findByTypeArea(String type, String area) throws Exception {
+        return ticketHeaderDao.findByTypeArea(type, area);
+    }
+
+    @Override
     public List<TicketHeader> findMonthYear(int month, int year, String division) throws Exception {
         return ticketHeaderDao.findMonthYear(month, year, division);
     }
@@ -108,6 +113,16 @@ public class TicketHeaderServiceImpl implements TicketHeaderService {
     @Override
     public List<TicketHeader> findFinish() throws Exception {
         return ticketHeaderDao.findFinish();
+    }
+
+    @Override
+    public List<TicketHeader> findFinish(String area) throws Exception {
+        return ticketHeaderDao.findFinish(area);
+    }
+
+    @Override
+    public List<TicketHeader> findMonthYearArea(int month, int year, String division, String area) throws Exception {
+        return ticketHeaderDao.findMonthYearArea(month, year, division, area);
     }
 
 }

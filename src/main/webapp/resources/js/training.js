@@ -19,10 +19,8 @@ var check_budget = true;
 
 $(document).ready(function () {
 
-    $('#example').DataTable( {
-        "order": [[ 1, "desc" ]]
-    } );
-   
+    $('#example').DataTable();
+    $('#example2').DataTable();
     $(function () {
 
         $('#startDate').datetimepicker();
@@ -41,14 +39,19 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-     $('#example2').DataTable({
-         "order": [[ 1, "desc" ]]
-     });
-    });
+    $('#all').DataTable();
+    $('#thaniya').DataTable();
+    $('#blc').DataTable();
+    $('#nlc').DataTable();
+    $('#airport').DataTable();
+    $('#ncc').DataTable();
+    $('#laemchabang').DataTable();
+    $('#korat').DataTable();
+});
 
 
 function addRowParticipant() {
-    
+
     var rowCount = $('#myTbl tr').length;
     count_line = rowCount + 1;
     count = rowCount;
@@ -58,18 +61,18 @@ function addRowParticipant() {
         var first = $('#firstname' + i).val();
         var last = $('#lastname' + i).val();
         var sec = $('#section' + i).val();
-        if (emp == "" ||first == "" ||last == "" ||sec == "" ) {
+        if (emp == "" || first == "" || last == "" || sec == "") {
             check = false;
         }
 
     }
     if (check == true) {
         var tr = "<tr>";
-        tr = tr + "<td>"+count_line+++".&nbsp;</td>"; 
-        tr = tr + "<td style=\'width:200px\'><input type=\'text\'  id=\'empid"+count+"\' name=\'ticketHeader.trainingParticipant[" +  count + "].empID\' class=\'form-control\' placeholder=\'EmployeeID\' required/></td>";
-        tr = tr + "<td style=\'width:200px\'><input type=\'text\'  id=\'firstname"+count+"\' name=\'ticketHeader.trainingParticipant[" +  count + "].firstName\' class=\'form-control\' placeholder=\'Firstname\' required/></td>";
-        tr = tr + "<td style=\'width:200px\'><input type=\'text\'  id=\'lastname"+count+"\' name=\'ticketHeader.trainingParticipant[" +  count + "].lastName\' class=\'form-control\' placeholder=\'Lastname\' required/></td>";
-        tr = tr + "<td style=\'width:200px\'><input type=\'text\'  id=\'section"+count+"\' name=\'ticketHeader.trainingParticipant[" +  count + "].section\' class=\'form-control\' placeholder=\'Section\' required/></td>";
+        tr = tr + "<td>" + count_line++ + ".&nbsp;</td>";
+        tr = tr + "<td style=\'width:200px\'><input type=\'text\'  id=\'empid" + count + "\' name=\'ticketHeader.trainingParticipant[" + count + "].empID\' class=\'form-control\' placeholder=\'EmployeeID\' required/></td>";
+        tr = tr + "<td style=\'width:200px\'><input type=\'text\'  id=\'firstname" + count + "\' name=\'ticketHeader.trainingParticipant[" + count + "].firstName\' class=\'form-control\' placeholder=\'Firstname\' required/></td>";
+        tr = tr + "<td style=\'width:200px\'><input type=\'text\'  id=\'lastname" + count + "\' name=\'ticketHeader.trainingParticipant[" + count + "].lastName\' class=\'form-control\' placeholder=\'Lastname\' required/></td>";
+        tr = tr + "<td style=\'width:200px\'><input type=\'text\'  id=\'section" + count + "\' name=\'ticketHeader.trainingParticipant[" + count + "].section\' class=\'form-control\' placeholder=\'Section\' required/></td>";
         tr = tr + "</tr>";
 
         $('#myTbl > tbody:last').append(tr);
@@ -91,7 +94,7 @@ function deleteRowParticipant() {
 function addRowBudget() {
 
     var rowCount = $('#tbbudget tr').length;
-    
+
     num_index = rowCount - 1;
     num = rowCount;
     for (i = 0; i <= num_index; i++)

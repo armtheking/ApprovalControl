@@ -145,6 +145,44 @@ public class SendMailService {
 
         sendEmail(mail);
     }
+    
+        public void sendMailRejectToApproveone(TicketHeader ticketHeader) throws Exception {
+
+        Mail mail = new Mail();
+        Map<String, Object> modelMap = new HashMap<>();
+
+        /*
+         get Config assign email from DB
+         */
+        String assign = configSystemService.findByKey("EMAIL").getConfigText();
+
+        User user = userService.findBySso(ticketHeader.getApprovedName1());
+
+        String emailTo = user.getEmail() + assign;
+
+        //set variable show in vm file
+        modelMap.put("ticketNo", ticketHeader.getTicketNo());
+        modelMap.put("ticketType", ticketHeader.getTicketType());
+        modelMap.put("applicationName", ticketHeader.getApplicationName());
+
+        // set detail Mail Object
+        mail.setMailFrom(mail.getMailFrom());
+        mail.setMailTo(emailTo);
+        
+        // 29/12/58
+        if (ticketHeader.getTicketFinished().equals("R")) {
+            mail.setMailSubject("Your ticket approval was rejected. ( "+ticketHeader.getTicketNo()+" )");
+            mail.setTemplateName("/mail/reject_to_approveone.vm.vm");
+        }  
+
+        //set body message
+        String message = VelocityEngineUtils.mergeTemplateIntoString(
+                velocityEngine, mail.getTemplateName(), "UTF-8", modelMap);
+
+        mail.setMailMessage(message);
+
+        sendEmail(mail);
+    }
 
 //    Convert multiple email address
     private String convertEmailAddress(String ticketNo) throws Exception {

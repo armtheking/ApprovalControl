@@ -22,7 +22,12 @@
                     <div class="col-md-12">
                         <div class="panel panel-danger">
                             <div class="panel-heading">
-                                <h3>Ticket Number : ${ticketHeader.ticketNo}</h3>
+                                <h3>Ticket Number : <c:if test="${empty ticketHeader.showTicket}">
+                                            ${ticketHeader.ticketNo}
+                                        </c:if>
+                                         <c:if test="${not empty ticketHeader.showTicket}">
+                                            ${ticketHeader.showTicket}
+                                        </c:if></h3>
                             </div>
                             <div class="panel-body">
                                 <div class="row">

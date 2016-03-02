@@ -122,15 +122,35 @@ public class TrainingPageController {
             ModelAndView model = new ModelAndView();
             TicketHTraining ticketHTraining = ticketHTrainingService.findByTicketNo(id);
 
+            
+                        String number_sumAmount;
+            String number_costPerHead;
+            DecimalFormat numFormat;
+            numFormat = new DecimalFormat("#,##0.00");
+
+            number_sumAmount = numFormat.format(ticketHTraining.getTicketHeader().getReqTotalAmt());
+            number_costPerHead = numFormat.format(ticketHTraining.getCostPerHead());
+
+            List<TicketDTrainingNumber> number2 = new ArrayList<>();
+
+            for (int i = 0; i < ticketHTraining.getTicketHeader().getTicketDTraining().size(); i++) {
+                TicketDTrainingNumber number = new TicketDTrainingNumber();
+                number.setItem(ticketHTraining.getTicketHeader().getTicketDTraining().get(i).getItem());
+                number.setBudgetDetail(ticketHTraining.getTicketHeader().getTicketDTraining().get(i).getBudgetDetail());
+                number.setAmount(numFormat.format(ticketHTraining.getTicketHeader().getTicketDTraining().get(i).getAmount()));
+                number2.add(number);
+            }
+
+            model.addObject("ticketHTraining", ticketHTraining);
+            model.addObject("number_sumAmount", number_sumAmount);
+            model.addObject("number_costPerHead", number_costPerHead);
+            model.addObject("ticketDTraining", number2);
+            
             ticketHTraining.getTicketHeader().setTicketFinished("F");
             ticketHeaderService.save(ticketHTraining.getTicketHeader());
             model.addObject("ticketHTraining", ticketHTraining);
-            if (ticketHTraining == null) {
-                model.addObject("search", "No results found for " + id);
-                model.setViewName("redirect:/home");
-            } else {
-                model.setViewName("showtraining");
-            }
+             model.setViewName("showtraining");
+            
 
             return model;
         } catch (Exception e) {

@@ -26,7 +26,13 @@
                         <div class="panel panel-danger">
 
                             <div class="panel-heading clearfix">
-                                <h3 class="panel-title pull-left" style="padding-top: 15px; font-weight: bold;">Ticket Number : ${ticketHeader.ticketNo}</h3>
+                                <h3 class="panel-title pull-left" style="padding-top: 15px; font-weight: bold;">Ticket Number : <c:if test="${empty ticketHeader.showTicket}">
+                                        ${ticketHeader.ticketNo}
+                                    </c:if>
+                                    <c:if test="${not empty ticketHeader.showTicket}">
+                                        ${ticketHeader.showTicket}
+                                        &nbsp;<a href="<c:url value='../showRevise?id=${ticketHeader.ticketNo}'/>" style="font-weight: bold; color: #FFFFFF;" class="btn btn-danger" target="_blank"> <i class="fa fa-search"> View</i></a>               
+                                    </c:if></h3>
                                 <div class="btn-group pull-right">
 
                                     <c:if test="${(fn:contains(ticketHeader.ticketNo, '-C'))}"> 
@@ -337,7 +343,7 @@
                                 </sec:authorize>
                             </div>
                             <div class = "panel-footer">
-                                <button class="btn btn-primary" onclick="goBack()">Go Back</button>
+<!--                                <button class="btn btn-primary" onclick="goBack()">Go Back</button>-->
                                 <c:if test="${principal.username eq ticketHeader.applicationName and ticketHeader.approvedStatus1 eq false or (ticketHeader.ticketFinished eq 'R' and principal.username eq ticketHeader.applicationName )}"> 
 
                                     <a style="margin-left: 81%" href="<c:url value='/createticket/delete?id=${ticketHeader.ticketNo}'/>" class="btn btn-danger btn-delete btn-lg" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i> Delete</a>&nbsp;
@@ -376,8 +382,10 @@
                                                 </div>
                                             </c:if>
 
-                                            <c:if test="${ticketHeader.ticketFinished eq '1' and (fn:contains(ticketHeader.approvedName2, principal.username))}"> 
-                                                <a href="<c:url value='/approve/persontwo?id=${ticketHeader.ticketNo}'/>" class="btn btn-danger btn-lg "> 2nd Approved <span class="fa fa-hand-pointer-o"></span></a>
+                                            <c:if test="${(ticketHeader.ticketFinished eq '1' or ticketHeader.ticketFinished eq 'P') and (fn:contains(ticketHeader.approvedName2, principal.username))}"> 
+                                                <c:if test="${ticketHeader.ticketFinished eq '1'}">
+                                                    <a href="<c:url value='/approve/persontwo?id=${ticketHeader.ticketNo}'/>" class="btn btn-danger btn-lg "> 2nd Approved <span class="fa fa-hand-pointer-o"></span></a>
+                                                </c:if>
                                                 <!-- Button trigger modal -->
                                                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
                                                     Reject <i class="fa fa-reply"></i>

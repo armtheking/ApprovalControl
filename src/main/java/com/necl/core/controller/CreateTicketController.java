@@ -8,11 +8,13 @@ import com.necl.core.model.TicketHeader;
 import com.necl.core.function.RunConfigNumber;
 import com.necl.core.model.ConfigSystem;
 import com.necl.core.model.FinanceChargeCode;
+import com.necl.core.model.History;
 import com.necl.core.model.TicketDetail;
 import com.necl.core.model.TicketDetailNumber;
 import com.necl.core.model.User;
 import com.necl.core.service.ConfigSystemService;
 import com.necl.core.service.FinChargeCodeService;
+import com.necl.core.service.HistoryService;
 import com.necl.core.service.SendMailService;
 import com.necl.core.service.TicketDetailService;
 import com.necl.core.service.TicketHeaderService;
@@ -21,7 +23,10 @@ import com.necl.training.model.TicketHTraining;
 import com.necl.training.service.TicketHTrainingService;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import javax.validation.Valid;
@@ -68,6 +73,9 @@ public class CreateTicketController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    HistoryService historyService;
 
     @Autowired
     private FinChargeCodeService finChargeCodeService;
@@ -140,6 +148,7 @@ public class CreateTicketController {
             number2.add(number);
         }
         model.addObject("ticketDetail", number2);
+        model.addObject("number_sumAmount", number_sumAmount);
         model.addObject("ticketHeader", ticketHeader);
         model.addObject("ticketHeaderS", ticketHeader);
         model.setViewName("preview");
@@ -259,6 +268,58 @@ public class CreateTicketController {
             TicketHeader ticketHeader2 = new TicketHeader();
             ticketHeader2 = ticketHeaderService.findById(ticketHeader.getTicketNo());
 
+            if (ticketHeader2.getTicketFinished().equals("R")) {
+                History history = new History();
+                System.out.println("checcccc");
+                Calendar now = Calendar.getInstance();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+                if (ticketHeader2.getApprovedStatus1() == true) {
+
+                    Date startDate = dateFormat.parse(ticketHeader2.getApprovedDate1());
+                    Calendar startDate2 = Calendar.getInstance();
+                    startDate2.setTime(startDate);
+                    history.setApprovedDate1(startDate2);
+                    history.setApprovedName1(ticketHeader2.getApprovedName1());
+
+                    System.out.println("ch4");
+                    history.setApprovedRemark2(ticketHeader2.getApprovedRemark2());
+                    history.setApprovedStatus1(ticketHeader2.getApprovedStatus1());
+                    history.setApprovedStatus2(ticketHeader2.getApprovedStatus2());
+                    history.setApprovedName2(ticketHeader2.getApprovedName2());
+                } else {
+                    history.setApprovedName1(ticketHeader2.getApprovedName1());
+                    history.setApprovedRemark1(ticketHeader2.getApprovedRemark1());
+                    history.setApprovedStatus1(ticketHeader2.getApprovedStatus1());
+                    history.setApprovedStatus2(ticketHeader2.getApprovedStatus2());
+                }
+
+                List<History> findHistory = new ArrayList<>();
+                findHistory = historyService.findByTicketNo(ticketHeader.getTicketNo());
+                String revNo = "";
+                if (findHistory.size() > 0) {
+                    historyService.updateStatus(ticketHeader.getTicketNo() + "-RV" + String.format("%02d", findHistory.size() - 1));
+                    revNo = ticketHeader.getTicketNo() + "-RV" + String.format("%02d", findHistory.size());
+                    ticketHeader.setShowTicket(ticketHeader.getTicketNo() + "-RV" + String.format("%02d", findHistory.size() + 1));
+                    System.out.println(">0: " + revNo);
+
+                } else {
+
+                    revNo = ticketHeader.getTicketNo() + "-RV00";
+                    ticketHeader.setShowTicket(ticketHeader.getTicketNo() + "-RV01");
+                    System.out.println("<=0: " + revNo);
+                }
+                //  int number = Integer.parseInt(ti);
+                history.setTicketRev(revNo);
+                history.setStatus(true);
+
+                Calendar date2 = Calendar.getInstance();
+                history.setDate(date2);
+
+                history.setReqTotalAmt(ticketHeader2.getReqTotalAmt());
+                ticketHeader.getHistory().add(history);
+                ticketHeader.getHistory().get(0).setTicketHeader(ticketHeader);
+            }
+
             for (int i = 0; i < ticketHeader2.getTicketdetail().size(); i++) {
                 System.out.println("checkWOI: " + ticketHeader2.getTicketdetail().get(i).getId());
 
@@ -289,6 +350,10 @@ public class CreateTicketController {
                 System.out.println("i: " + i);
                 ticketHeader.getTicketdetail().get(i).setFinanceChargeCode(fc.get(i));
                 System.out.println("vv: " + ticketHeader.getTicketdetail().get(i).getFinanceChargeCode());
+            }
+
+            if (ticketHeader2.getShowTicket() != null) {
+                ticketHeader.setShowTicket(ticketHeader2.getShowTicket());
             }
 
             // การ edit ticket ไม่จำเป้นต้อง run ticket ใหม่
@@ -325,24 +390,110 @@ public class CreateTicketController {
     @RequestMapping(value = {"/editClear"}, method = RequestMethod.POST)
     public ModelAndView editTicketClear(@ModelAttribute("ticketHeader") TicketHeader ticketHeader) {
         try {
+
+            TicketHeader ticketHeader2 = new TicketHeader();
+            ticketHeader2 = ticketHeaderService.findById(ticketHeader.getTicketNo());
+
+            if (ticketHeader2.getTicketFinished().equals("R")) {
+                History history = new History();
+                System.out.println("checcccc");
+                Calendar now = Calendar.getInstance();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+                if (ticketHeader2.getApprovedStatus1() == true) {
+
+                    Date startDate = dateFormat.parse(ticketHeader2.getApprovedDate1());
+                    Calendar startDate2 = Calendar.getInstance();
+                    startDate2.setTime(startDate);
+                    history.setApprovedDate1(startDate2);
+                    history.setApprovedName1(ticketHeader2.getApprovedName1());
+
+                    System.out.println("ch4");
+                    history.setApprovedRemark2(ticketHeader2.getApprovedRemark2());
+                    history.setApprovedStatus1(ticketHeader2.getApprovedStatus1());
+                    history.setApprovedStatus2(ticketHeader2.getApprovedStatus2());
+                    history.setApprovedName2(ticketHeader2.getApprovedName2());
+                } else {
+                    System.out.println("ffff3");
+                    history.setApprovedName1(ticketHeader2.getApprovedName1());
+                    history.setApprovedRemark1(ticketHeader2.getApprovedRemark1());
+                    history.setApprovedStatus1(ticketHeader2.getApprovedStatus1());
+                    history.setApprovedStatus2(ticketHeader2.getApprovedStatus2());
+                }
+
+                List<History> findHistory = new ArrayList<>();
+                findHistory = historyService.findByTicketNo(ticketHeader.getTicketNo());
+                String revNo = "";
+                if (findHistory.size() > 0) {
+                    historyService.updateStatus(ticketHeader.getTicketNo() + "-RV" + String.format("%02d", findHistory.size() - 1));
+                    revNo = ticketHeader.getTicketNo() + "-RV" + String.format("%02d", findHistory.size());
+                    ticketHeader.setShowTicket(ticketHeader.getTicketNo() + "-RV" + String.format("%02d", findHistory.size() + 1));
+                    System.out.println(">0: " + revNo);
+
+                } else {
+                    System.out.println("ffff4");
+                    revNo = ticketHeader.getTicketNo() + "-RV00";
+                    ticketHeader.setShowTicket(ticketHeader.getTicketNo() + "-RV01");
+                    System.out.println("<=0: " + revNo);
+                }
+                //  int number = Integer.parseInt(ti);
+                history.setTicketRev(revNo);
+                history.setStatus(true);
+
+                Calendar date2 = Calendar.getInstance();
+                history.setDate(date2);
+
+                history.setReqTotalAmt(ticketHeader2.getReqTotalAmt());
+                ticketHeader.getHistory().add(history);
+                ticketHeader.getHistory().get(0).setTicketHeader(ticketHeader);
+            }
+            for (int i = 0; i < ticketHeader2.getTicketdetail().size(); i++) {
+                System.out.println("checkWOI: " + ticketHeader2.getTicketdetail().get(i).getId());
+
+                if (ticketHeader.getTicketdetail().get(i).getFinanceChargeCode().getId() == 0 || ticketHeader.getTicketdetail().get(i).getAmount() == null) {
+                    ticketDetailService.delete(ticketHeader2.getTicketdetail().get(i).getId());
+                } else {
+                    ticketHeader.getTicketdetail().get(i).setId(ticketHeader2.getTicketdetail().get(i).getId());
+                }
+            }
+
+            List<FinanceChargeCode> fc = new ArrayList<>();
+            for (Iterator<TicketDetail> iter = ticketHeader.getTicketdetail().listIterator(); iter.hasNext();) {
+                TicketDetail td = iter.next();
+                //ถ้า ไม่ได้เลือก dropdown ให้ลบ row ตัวนั้น
+                if (td.getFinanceChargeCode().getId() == 0 || td.getAmount() == null) {
+                    iter.remove();
+                } else {
+                    // หา description แล้วเก็บไว้ใน list
+                    FinanceChargeCode financeChargeCode = finChargeCodeService.findById(td.getFinanceChargeCode().getId());
+                    fc.add(financeChargeCode);
+
+                }
+            }
+
+            for (int i = 0; i < fc.size(); i++) {
+                //set ค่าใน list ไว้ใน header
+                ticketHeader.getTicketdetail().get(i).setFinanceChargeCode(fc.get(i));
+            }
+
+            if (ticketHeader2.getShowTicket() != null) {
+                ticketHeader.setShowTicket(ticketHeader2.getShowTicket());
+            }
+
             // การ edit ticket ไม่จำเป้นต้อง run ticket ใหม่
             String ticketNo = ticketHeader.getTicketNo();
 
             String oldItem = ticketHeader.getItem();
 
             String oldStatus = ticketHeader.getTicketFinished();
-            LOGGER.info("@@@@@@@@@@@@@@ - - -- - :: " + ticketHeader.getTicketdetail().get(0).getAmount());
+
             setDetailTicketHeaderBeforeSave(ticketHeader);
-
+            ticketHeader.setRefTicketNo(ticketHeader2.getRefTicketNo());
             BigDecimal withdraw = ticketHeaderService.findById(ticketHeader.getRefTicketNo()).getReqTotalAmt();
-
             BigDecimal payBack = withdraw.subtract(ticketHeader.getReqTotalAmt());
             ticketHeader.setPayBack(payBack);
 
             ticketHeader.setTicketNo(ticketNo);
-            LOGGER.info("save edit is exeuted!");
             ticketHeaderService.save(ticketHeader);
-            LOGGER.info("first save ticket is excuted!");
             handlerFileUpload.handleFileUploadToPath(ticketHeader.getFile(), ticketHeader.getTicketNo());
             setNameWaitingApprove1(ticketHeader);
             ticketHeaderService.save(ticketHeader);
@@ -350,12 +501,12 @@ public class CreateTicketController {
             if (!oldItem.equals(ticketHeader.getItem()) || oldStatus.equals("R")) {
 
                 sendMailService.sendMailUserApprove(ticketHeader);
-                LOGGER.info("send mail edit ticket change item is exeuted!");
+
             }
 
             return new ModelAndView("redirect:/home");
         } catch (Exception e) {
-            LOGGER.info("save edit Exception!");
+
             e.printStackTrace();
         }
         return null;
@@ -363,10 +514,11 @@ public class CreateTicketController {
 
     private TicketHeader setDetailTicketHeaderBeforeSave(TicketHeader ticketHeader) throws Exception {
         configSystem = configSystemService.findByKey(ticketHeader.getTicketType());
+        System.out.println("sout" + ticketHeader.getTicketType());
         configSystem = RunConfigNumber.getNumberTicket(configSystem);
 
         String numberTicket = configSystem.getConfigMemo();
-
+        System.out.println("number: " + numberTicket);
         //29/12/58
         if (ticketHeader.getTicketFinished().equals("R") && ticketHeader.getTicketNo().contains("-C")) {
             ticketHeader.setTicketFinished("C");
@@ -374,6 +526,7 @@ public class CreateTicketController {
             ticketHeader.setTicketFinished("0");
         }
         // Set TicketNumber & Type from database config
+
         ticketHeader.setTicketNo(numberTicket);
         for (int i = 0; i < ticketHeader.getTicketdetail().size(); i++) {
             ticketHeader.getTicketdetail().get(i).setTicketHeader(ticketHeader);
@@ -383,14 +536,11 @@ public class CreateTicketController {
         // Calculate Cost in founction 
         ticketHeader.setReqTotalAmt(CalculateCost.getTotalCost(ticketHeader));
 
+        System.out.println("total: " + ticketHeader.getReqTotalAmt());
         // Get Username from login
         ticketHeader.setApplicationName(HomeController.getPrincipal());
 
         // Set ChargeCode each detail 15/12/2015
-        ticketHeader.getTicketdetail().stream().forEach((ticketDetail) -> {
-            ticketDetail.setFinanceChargeCode(finChargeCodeService.findById(ticketDetail.getFinanceChargeCode().getId()));
-        });
-
         return ticketHeader;
     }
 

@@ -43,7 +43,7 @@
 			<textField>
 				<reportElement x="39" y="0" width="48" height="14" uuid="cdc58a37-059b-452e-9297-c048ba4c5f66"/>
 				<textElement textAlignment="Center">
-					<font fontName="BrowalliaUPC" size="12" pdfFontName="fonts/BROWAU.TTF" isPdfEmbedded="true"/>
+					<font fontName="BrowalliaUPC" size="12" pdfFontName="fonts/BROWAU.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{financeChargeCode}.getAccessCode()]]></textFieldExpression>
 			</textField>

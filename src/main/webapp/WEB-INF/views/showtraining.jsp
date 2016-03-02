@@ -28,7 +28,13 @@
                     <div class="col-md-12">
                         <div class="panel panel-danger">
                             <div class="panel-heading clearfix">
-                                <h3 class="panel-title pull-left" style="padding-top: 15px; font-weight: bold;">Ticket No: ${ticketHTraining.ticketHeader.ticketNo}</h3>
+                                <h3 class="panel-title pull-left" style="padding-top: 15px; font-weight: bold;">Ticket No: <c:if test="${empty ticketHTraining.ticketHeader.showTicket}">
+                                        ${ticketHTraining.ticketHeader.ticketNo}
+                                    </c:if>
+                                    <c:if test="${not empty ticketHTraining.ticketHeader.showTicket}">
+                                        ${ticketHTraining.ticketHeader.showTicket}
+                                        &nbsp;<a href="<c:url value='../showRevise?id=${ticketHTraining.ticketHeader.ticketNo}'/>" style="font-weight: bold; color: #FFFFFF;" class="btn btn-danger" target="_blank"> <i class="fa fa-search"> View</i></a>               
+                                    </c:if></h3>
 
                                 <div class="btn-group pull-right">
                                     <c:if test="${principal.username eq ticketHTraining.ticketHeader.applicationName and ticketHTraining.ticketHeader.approvedStatus1 eq false or ticketHTraining.ticketHeader.ticketFinished eq 'R'}"> 
@@ -177,6 +183,12 @@
                                             List of Participant
                                         </div>
                                     </div>
+                                    <div class="col-md-3">
+                                        <label> Place </label>
+                                        <div class="well">
+                                            ${ticketHTraining.place}
+                                        </div>
+                                    </div>   
                                     <div class="col-md-3">
                                         <label> Total Person </label>
                                         <div class="well">
@@ -341,7 +353,12 @@
                                                     <div class="col-md-4">
                                                         <label> Note </label>
                                                         <div class="well well-sm">
-                                                            ${ticketHTraining.ticketHeader.approvedRemark1}
+
+                                                            <c:if test="${ticketHTraining.ticketHeader.approvedRemark1 eq null or ticketHTraining.ticketHeader.approvedRemark1 eq ''}">
+                                                                <font style="color: red; font-weight: bold">-</font>
+                                                            </c:if>
+
+                                                            <font style="color: red;font-weight: bold">${ticketHTraining.ticketHeader.approvedRemark1}</font>
                                                         </div>
                                                     </div>
 
@@ -364,7 +381,11 @@
                                                     <div class="col-md-4">
                                                         <label> Note </label>
                                                         <div class="well well-sm">
-                                                            ${ticketHTraining.ticketHeader.approvedRemark2}
+                                                            <c:if test="${ticketHTraining.ticketHeader.approvedRemark2 eq null or ticketHTraining.ticketHeader.approvedRemark2 eq ''}">
+                                                                <font style="color: red; font-weight: bold">-</font>
+                                                            </c:if>
+
+                                                            <font style="color: red;font-weight: bold">${ticketHTraining.ticketHeader.approvedRemark2}</font>
                                                         </div>
                                                     </div>
 
@@ -459,7 +480,7 @@
                                 </sec:authorize>
                             </div>
                             <div class = "panel-footer">
-                                <button class="btn btn-primary" onclick="goBack()">Go Back</button>
+<!--                                <button class="btn btn-primary" onclick="goBack()">Go Back</button>-->
                                 <c:if test="${principal.username eq ticketHTraining.ticketHeader.applicationName and ticketHTraining.ticketHeader.approvedStatus1 eq false or (ticketHTraining.ticketHeader.ticketFinished eq 'R' and principal.username eq ticketHTraining.ticketHeader.applicationName)}"> 
 
                                     <a style="margin-left: 81%" href="<c:url value='/createticket/delete?id=${ticketHTraining.ticketHeader.ticketNo}'/>" class="btn btn-danger btn-delete btn-lg" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i> Delete</a>&nbsp;
@@ -499,8 +520,11 @@
                                                 </div>
                                             </c:if>
 
-                                            <c:if test="${ticketHTraining.ticketHeader.ticketFinished eq '1' and (fn:contains(ticketHTraining.ticketHeader.approvedName2, principal.username))}"> 
-                                                <a href="<c:url value='/approve/persontwo?id=${ticketHTraining.ticketHeader.ticketNo}'/>" class="btn btn-danger btn-lg "> 2nd Approved <span class="fa fa-hand-pointer-o"></span></a>
+                                            <c:if test="${(ticketHTraining.ticketHeader.ticketFinished eq '1' or ticketHTraining.ticketHeader.ticketFinished eq 'P') and (fn:contains(ticketHTraining.ticketHeader.approvedName2, principal.username))}"> 
+
+                                                <c:if test="${ticketHTraining.ticketHeader.ticketFinished eq '1'}">  
+                                                    <a href="<c:url value='/approve/persontwo?id=${ticketHTraining.ticketHeader.ticketNo}'/>" class="btn btn-danger btn-lg "> 2nd Approved <span class="fa fa-hand-pointer-o"></span></a>
+                                                </c:if>
                                                 <!-- Button trigger modal -->
                                                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
                                                     Reject <i class="fa fa-reply"></i>

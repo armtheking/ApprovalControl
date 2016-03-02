@@ -76,7 +76,7 @@
                                                                 <th class="col-md-1"> No </th>
                                                                 <th class="col-md-4"> Description </th>
                                                                 <th class="col-md-2"> Place </th>
-                                                                <th class="col-md-4"> Participant </th>
+                                                                <th class="col-md-4"> Number & List of Participant  </th>
                                                                 <th class="col-md-1"> Amount </th>
                                                             </tr>
                                                         </thead>
@@ -120,7 +120,7 @@
                                         </div>
                                         <div class="col-xs-2">
                                             <strong>
-                                                <span class="doubleUnderline">${ticketHeader.reqTotalAmt}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+                                                <span class="doubleUnderline">${number_sumAmount}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
 
                                             </strong>
                                         </div>

@@ -86,7 +86,6 @@ public class ClearTicketController {
                 attr.addFlashAttribute("ticketHeader", ticketHeader);
                 return "redirect:/clearticket";
             }
-
             List<FinanceChargeCode> fc = new ArrayList<>();
 
             for (Iterator<TicketDetail> iter = ticketHeader.getTicketdetail().listIterator(); iter.hasNext();) {
@@ -101,20 +100,37 @@ public class ClearTicketController {
 
                 }
             }
-
             for (int i = 0; i < fc.size(); i++) {
                 //set ค่าใน list ไว้ใน header
                 ticketHeader.getTicketdetail().get(i).setFinanceChargeCode(fc.get(i));
             }
-
             TicketHeader ticketHeaderNonClear = ticketHeaderService.findById(ticketHeader.getTicketNo());
-            System.out.println("ENT_NAME: " + ticketHeader.getApplicationName());
+
+            String number_sumAmount;
+            DecimalFormat numFormat;
+            numFormat = new DecimalFormat("#,##0.00");
+
+            List<TicketDetailNumber> number2 = new ArrayList<>();
+
+            for (int i = 0; i < ticketHeader.getTicketdetail().size(); i++) {
+
+                System.out.println("scscsc" + ticketHeader.getTicketdetail().get(i).getFinanceChargeCode().getDescription());
+                TicketDetailNumber number = new TicketDetailNumber();
+                number.setDescription(ticketHeader.getTicketdetail().get(i).getFinanceChargeCode().getDescription());
+                number.setDetail(ticketHeader.getTicketdetail().get(i).getDetail());
+                number.setAmount(numFormat.format(ticketHeader.getTicketdetail().get(i).getAmount()));
+                number.setPlace(ticketHeader.getTicketdetail().get(i).getPlace());
+                number2.add(number);
+            }
+
             setDetailTicketHeaderBeforeSave(ticketHeader, ticketHeaderNonClear.getReqTotalAmt());
-
+            number_sumAmount = numFormat.format(ticketHeader.getReqTotalAmt());
             handlerFileUpload.handleFileUploadToPath(ticketHeader.getFile(), ticketHeader.getTicketNo());
-
             //setTicketHeader(ticketHeader, type);
             //handlerFileUpload.handleFileUploadToPath(ticketHeader.getFile(), ticketHeader.getTicketNo());
+            model.addAttribute("number_sumAmount", number_sumAmount);
+            model.addAttribute("ticketDetail", number2);
+
             model.addAttribute("ticketHeader", ticketHeader);
             model.addAttribute("ticketHeaderCS", ticketHeader);
             System.out.println("check1:" + ticketHeader.getTicketNo());

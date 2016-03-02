@@ -19,7 +19,6 @@ public class TicketDTrainngDaoImpl implements TicketDTrainingDao{
         SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql);
         query.addEntity(TicketDTraining.class);
         query.setParameter("id", id);
-        System.out.println("xx: "+id);
         query.executeUpdate();
         return true;
     }

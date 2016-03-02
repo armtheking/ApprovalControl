@@ -41,7 +41,7 @@ public class PettyCashPageController {
             model.addAttribute("ticketHeader", new TicketHeader());
         }
         model.addAttribute("pettycash", "pettycash");
-
+         model.addAttribute("active", "pettycash");
         return "pettycash/pettycash";
     }
 
