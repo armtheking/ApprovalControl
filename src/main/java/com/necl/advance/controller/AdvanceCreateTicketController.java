@@ -106,7 +106,14 @@ public class AdvanceCreateTicketController {
                 //set ค่าใน list ไว้ใน header
                 ticketHeader.getTicketdetail().get(i).setFinanceChargeCode(fc.get(i));
             }
-
+     
+            for (int i = 0; i < ticketHeader.getTicketdetail().size(); i++) {
+                if(ticketHeader.getTicketdetail().get(i).getFinanceChargeCode().getAccessCode().equals("218200") && ticketHeader.getTicketdetail().get(i).getAmount().compareTo(BigDecimal.ZERO) > 0){
+                    
+                    ticketHeader.getTicketdetail().get(i).setAmount(BigDecimal.ZERO.subtract(ticketHeader.getTicketdetail().get(i).getAmount()));
+                }
+             }
+            
             BigDecimal sumCost = new BigDecimal("0");;
             for (TicketDetail ticketDe : ticketHeader.getTicketdetail()) {
                 sumCost = sumCost.add(ticketDe.getAmount());

@@ -18,6 +18,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.Transformers;
 import org.hibernate.type.BigDecimalType;
+import org.hibernate.type.BooleanType;
 import org.hibernate.type.CalendarType;
 import org.hibernate.type.StringType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,7 +127,7 @@ public class TicketHeaderDaoImpl implements TicketHeaderDao {
     @Override
     public List<TicketHeader> findMonthYear(int month, int year, String division) throws Exception {
 
-        String sql = "SELECT  ticketNo, ticketType,  applicationDate, detailHeader, reqTotalAmt,applicationName, approvedName1, approvedName2 FROM tblTicketsH "
+        String sql = "SELECT  ticketNo, ticketType,  applicationDate, detailHeader, reqTotalAmt,applicationName, approvedName1, approvedStatus1, approvedName2, approvedStatus2 FROM tblTicketsH "
                 + "WHERE (YEAR(ApplicationDate) = :paramYear) AND (MONTH(ApplicationDate) = :paramMonth) AND (DivisionCode = :division) AND (TicketsFinished != 'D')"
                 + "ORDER BY ApplicationDate DESC ";
         Query query = sessionFactory.getCurrentSession().createSQLQuery(sql)
@@ -137,7 +138,9 @@ public class TicketHeaderDaoImpl implements TicketHeaderDao {
                 .addScalar("reqTotalAmt", BigDecimalType.INSTANCE)
                 .addScalar("applicationName", StringType.INSTANCE)
                 .addScalar("approvedName1", StringType.INSTANCE)
+                .addScalar("approvedStatus1", BooleanType.INSTANCE)
                 .addScalar("approvedName2", StringType.INSTANCE)
+                .addScalar("approvedStatus2", BooleanType.INSTANCE)
                 .setResultTransformer(Transformers.aliasToBean(TicketHeader.class));
         query.setParameter("paramYear", year);
         query.setParameter("paramMonth", month);
@@ -207,21 +210,23 @@ public class TicketHeaderDaoImpl implements TicketHeaderDao {
 
     @Override
     public List<TicketHeader> findMonthYearArea(int month, int year, String division, String area) throws Exception {
-        String sql = "SELECT  ticketNo, ticketType,  applicationDate, detailHeader, reqTotalAmt,applicationName, approvedName1, approvedName2 \n"
+        String sql = "SELECT  ticketNo, ticketType,  applicationDate, detailHeader, reqTotalAmt,applicationName, approvedName1, approvedStatus1, approvedName2, approvedStatus2 \n"
                 + "FROM APP_USER LEFT OUTER JOIN\n"
                 + "tblMaster_Branch ON APP_USER.branchId = tblMaster_Branch.BranchID RIGHT OUTER JOIN\n"
                 + "tblTicketsH ON APP_USER.SSO_ID = tblTicketsH.ApplicationName\n"
                 + "WHERE (tblMaster_Branch.Area = '" + area + "') AND (YEAR(tblTicketsH.ApplicationDate) = :paramYear) AND (MONTH(tblTicketsH.ApplicationDate) = :paramMonth) AND (tblTicketsH.DivisionCode = :division) AND (tblTicketsH.TicketsFinished != 'D')\n"
                 + "ORDER BY ApplicationDate DESC ";
         Query query = sessionFactory.getCurrentSession().createSQLQuery(sql)
-             .addScalar("ticketNo", StringType.INSTANCE)
+                .addScalar("ticketNo", StringType.INSTANCE)
                 .addScalar("ticketType", StringType.INSTANCE)
                 .addScalar("applicationDate", CalendarType.INSTANCE)
                 .addScalar("detailHeader", StringType.INSTANCE)
                 .addScalar("reqTotalAmt", BigDecimalType.INSTANCE)
                 .addScalar("applicationName", StringType.INSTANCE)
                 .addScalar("approvedName1", StringType.INSTANCE)
+                .addScalar("approvedStatus1", BooleanType.INSTANCE)
                 .addScalar("approvedName2", StringType.INSTANCE)
+                .addScalar("approvedStatus2", BooleanType.INSTANCE)
                 .setResultTransformer(Transformers.aliasToBean(TicketHeader.class));
         query.setParameter("paramYear", year);
         query.setParameter("paramMonth", month);

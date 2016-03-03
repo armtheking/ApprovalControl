@@ -19,7 +19,7 @@
             <form:form id="form1" class="form-horizontal" enctype="multipart/form-data"
                        method="post" action="create?${_csrf.parameterName}=${_csrf.token}" >
                 <fieldset>
-                    <legend>Advance</legend>
+                    <legend>Petty Cash</legend>
                 </fieldset>
 
                 </br>
