@@ -15,6 +15,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
+import java.util.Calendar;
+import java.util.Date;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,27 +31,27 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class DownloadFileController {
-    
+
     @Autowired
     ConfigSystemService configSystemService;
 
     @RequestMapping(value = "/download", method = RequestMethod.GET)
     public void downloadFile(HttpServletResponse response, @RequestParam String id) throws IOException, Exception {
         String pre_year = "20";
-        String post_year= id.substring (3, 5);
+        String post_year = id.substring(3, 5);
         String full_year = pre_year + post_year + "/";
         String keyFind = "PATH";
         ConfigSystem configSystem = configSystemService.findByKey(keyFind);
         String saveDirectory = configSystem.getConfigText() + full_year;
-        System.out.println("directory: "+saveDirectory);
+        System.out.println("directory: " + saveDirectory);
         File file = null;
 
         String name = id.replace("/", "_");
         String type = ".pdf";
-        String pathDirectory = saveDirectory+name+type;
-        System.out.println("path:"+pathDirectory);
-            file = new File(pathDirectory);
-            
+        String pathDirectory = saveDirectory + name + type;
+        System.out.println("path:" + pathDirectory);
+        file = new File(pathDirectory);
+
         if (!file.exists()) {
             String errorMessage = "Sorry. The file you are looking for does not exist";
             System.out.println(errorMessage);
@@ -82,21 +84,24 @@ public class DownloadFileController {
         //Copy bytes from source to destination(outputstream in this example), closes both streams.
         FileCopyUtils.copy(inputStream, response.getOutputStream());
     }
-    
-     @RequestMapping(value = "/downloadTraining", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/downloadTraining", method = RequestMethod.GET)
     public void downloadFileTraining(HttpServletResponse response, @RequestParam String id) throws IOException, Exception {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+      
         String keyFind = "PATH";
         ConfigSystem configSystem = configSystemService.findByKey(keyFind);
-        String saveDirectory = configSystem.getConfigText() + configSystem.getConfigPrefix();
-
+        String saveDirectory = configSystem.getConfigText() + year + "/";
+        System.out.println("xxxx: " + saveDirectory);
         File file = null;
 
         String name = id.replace("/", "_");
         String type = ".pdf";
-        String pathDirectory = saveDirectory+name+type;
-        System.out.println("pthDi: "+pathDirectory);
-            file = new File(pathDirectory);
-            
+        String pathDirectory = saveDirectory + name + type;
+        System.out.println("pthDi: " + pathDirectory);
+        file = new File(pathDirectory);
+
         if (!file.exists()) {
             String errorMessage = "Sorry. The file you are looking for does not exist";
             System.out.println(errorMessage);
@@ -129,8 +134,7 @@ public class DownloadFileController {
         //Copy bytes from source to destination(outputstream in this example), closes both streams.
         FileCopyUtils.copy(inputStream, response.getOutputStream());
     }
-    
-    
+
     @RequestMapping(value = "/downloadManual", method = RequestMethod.GET)
     public void downloadFileManual(HttpServletResponse response) throws IOException, Exception {
         String keyFind = "PATH";
@@ -140,10 +144,10 @@ public class DownloadFileController {
         File file = null;
 
         String type = ".pdf";
-        String pathDirectory = saveDirectory+"ApprovalControlManual"+type;
-        System.out.println("pthDi: "+pathDirectory);
-            file = new File(pathDirectory);
-            
+        String pathDirectory = saveDirectory + "ApprovalControlManual" + type;
+        System.out.println("pthDi: " + pathDirectory);
+        file = new File(pathDirectory);
+
         if (!file.exists()) {
             String errorMessage = "Sorry. The file you are looking for does not exist";
             System.out.println(errorMessage);
@@ -176,7 +180,7 @@ public class DownloadFileController {
         //Copy bytes from source to destination(outputstream in this example), closes both streams.
         FileCopyUtils.copy(inputStream, response.getOutputStream());
     }
-    
+
     @RequestMapping(value = "/downloadApprovalCriteria", method = RequestMethod.GET)
     public void downloadApprovalCriteria(HttpServletResponse response) throws IOException, Exception {
         String keyFind = "PATH";
@@ -186,10 +190,10 @@ public class DownloadFileController {
         File file = null;
 
         String type = ".pdf";
-        String pathDirectory = saveDirectory+"ApprovalCriteria"+type;
-        System.out.println("pthDi: "+pathDirectory);
-            file = new File(pathDirectory);
-            
+        String pathDirectory = saveDirectory + "ApprovalCriteria" + type;
+        System.out.println("pthDi: " + pathDirectory);
+        file = new File(pathDirectory);
+
         if (!file.exists()) {
             String errorMessage = "Sorry. The file you are looking for does not exist";
             System.out.println(errorMessage);
@@ -222,5 +226,5 @@ public class DownloadFileController {
         //Copy bytes from source to destination(outputstream in this example), closes both streams.
         FileCopyUtils.copy(inputStream, response.getOutputStream());
     }
-    
+
 }

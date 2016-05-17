@@ -172,7 +172,7 @@ public class SendMailService {
         // 29/12/58
         if (ticketHeader.getTicketFinished().equals("R")) {
             mail.setMailSubject("Your ticket approval was rejected. ( "+ticketHeader.getTicketNo()+" )");
-            mail.setTemplateName("/mail/reject_to_approveone.vm.vm");
+            mail.setTemplateName("/mail/reject_to_approveone.vm");
         }  
 
         //set body message

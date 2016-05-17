@@ -22,6 +22,9 @@ public class Branch {
     
     @Column(name = "BranchName", length = 50)
     private String branchName;
+    
+    @Column(name = "Area", length = 15)
+    private String area;
 
     public String getBranchId() {
         return branchId;
@@ -45,6 +48,14 @@ public class Branch {
 
     public void setBranchName(String branchName) {
         this.branchName = branchName;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
     
     

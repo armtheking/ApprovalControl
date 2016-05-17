@@ -65,7 +65,7 @@ public class FinanceController {
         model.addAttribute("NCC", ticketHeaderService.findByTypeArea("ENT", "NCC"));
         model.addAttribute("LAEMCHABANG", ticketHeaderService.findByTypeArea("ENT", "LAEMCHABANG"));
         model.addAttribute("KORAT", ticketHeaderService.findByTypeArea("ENT", "KORAT"));
-
+        model.addAttribute("areaTab", "all");
         LOGGER.debug("fn_Entertain Page !");
 
         return "finance/fn_entertain";
@@ -82,6 +82,7 @@ public class FinanceController {
         model.addAttribute("NCC", ticketHeaderService.findByTypeArea("ADV", "NCC"));
         model.addAttribute("LAEMCHABANG", ticketHeaderService.findByTypeArea("ADV", "LAEMCHABANG"));
         model.addAttribute("KORAT", ticketHeaderService.findByTypeArea("ADV", "KORAT"));
+        model.addAttribute("areaTab", "all");
         LOGGER.debug("fn_Advance Page !");
 
         return "finance/fn_advance";
@@ -98,6 +99,8 @@ public class FinanceController {
         model.addAttribute("NCC", ticketHeaderService.findByTypeArea("PTC", "NCC"));
         model.addAttribute("LAEMCHABANG", ticketHeaderService.findByTypeArea("PTC", "LAEMCHABANG"));
         model.addAttribute("KORAT", ticketHeaderService.findByTypeArea("PTC", "KORAT"));
+        model.addAttribute("areaTab", "all");
+
         LOGGER.debug("fn_Pettycash Page !");
 
         return "finance/fn_pettycash";
@@ -114,6 +117,7 @@ public class FinanceController {
         model.addAttribute("NCC", ticketHeaderService.findFinish("NCC"));
         model.addAttribute("LAEMCHABANG", ticketHeaderService.findFinish("LAEMCHABANG"));
         model.addAttribute("KORAT", ticketHeaderService.findFinish("KORAT"));
+
         return "finance/fn_viewdata";
 
     }
@@ -198,7 +202,7 @@ public class FinanceController {
     }
 
     @RequestMapping(value = "/show", method = RequestMethod.GET)
-    public ModelAndView showTicket(@RequestParam String id) {
+    public ModelAndView showTicket(@RequestParam String id, @RequestParam String areaTab) {
         try {
             LOGGER.info("show is exeuted!");
             ModelAndView model = new ModelAndView();
@@ -225,6 +229,7 @@ public class FinanceController {
 
             model.addObject("number_sumAmount", number_sumAmount);
             model.addObject("ticketDetail", number2);
+               model.addObject("areaTab", areaTab);
 
             model.addObject("ticketHeader", ticketHeader);
             if (ticketHeader == null) {
@@ -243,7 +248,7 @@ public class FinanceController {
     }
 
     @RequestMapping(value = "/showAdvance", method = RequestMethod.GET)
-    public ModelAndView showAdvance(@RequestParam String id) {
+    public ModelAndView showAdvance(@RequestParam String id, @RequestParam String areaTab) {
         try {
             LOGGER.info("show is exeuted!");
             ModelAndView model = new ModelAndView();
@@ -268,6 +273,7 @@ public class FinanceController {
             }
 
             model.addObject("ticketDetail", number2);
+            model.addObject("areaTab", areaTab);
             model.addObject("number_sumAmount", number_sumAmount);
             model.addObject("ticketHeader", ticketHeader);
             if (ticketHeader == null) {
@@ -286,7 +292,7 @@ public class FinanceController {
     }
 
     @RequestMapping(value = "/showPettycash", method = RequestMethod.GET)
-    public ModelAndView showPettycash(@RequestParam String id) {
+    public ModelAndView showPettycash(@RequestParam String id, @RequestParam String areaTab) {
         try {
             LOGGER.info("show is exeuted!");
             ModelAndView model = new ModelAndView();
@@ -313,7 +319,7 @@ public class FinanceController {
 
             model.addObject("ticketDetail", number2);
             model.addObject("number_sumAmount", number_sumAmount);
-
+            model.addObject("areaTab", areaTab);
             model.addObject("ticketHeader", ticketHeader);
             if (ticketHeader == null) {
                 model.addObject("search", "No results found for " + id);
@@ -331,8 +337,9 @@ public class FinanceController {
     }
 
     @RequestMapping(value = "/approve", method = RequestMethod.POST)
-    public ModelAndView financeApprove(@ModelAttribute("ticketHeader") TicketHeader ticketHeader) {
+    public ModelAndView financeApprove(@ModelAttribute("ticketHeader") TicketHeader ticketHeader, @RequestParam String areaTab) {
         try {
+
             String referanceTicketNo = "";
 
             LOGGER.info("find data current: No. " + ticketHeader.getTicketNo());
@@ -369,11 +376,44 @@ public class FinanceController {
             LOGGER.info("save data success");
 
             if (ticketHeader.getTicketNo().contains("ENT")) {
-                return new ModelAndView("redirect:/finance/entertain");
+                ModelAndView model = new ModelAndView();
+                model.addObject("ticketHeaderListFinance", ticketHeaderService.findByType("ENT"));
+                model.addObject("THANIYA", ticketHeaderService.findByTypeArea("ENT", "THANIYA"));
+                model.addObject("BLC", ticketHeaderService.findByTypeArea("ENT", "BLC"));
+                model.addObject("NLC", ticketHeaderService.findByTypeArea("ENT", "NLC"));
+                model.addObject("AIRPORT", ticketHeaderService.findByTypeArea("ENT", "AIRPORT"));
+                model.addObject("NCC", ticketHeaderService.findByTypeArea("ENT", "NCC"));
+                model.addObject("LAEMCHABANG", ticketHeaderService.findByTypeArea("ENT", "LAEMCHABANG"));
+                model.addObject("KORAT", ticketHeaderService.findByTypeArea("ENT", "KORAT"));
+                model.addObject("areaTab", areaTab);
+                model.setViewName("finance/fn_entertain");
+                return model;
             } else if (ticketHeader.getTicketNo().contains("ADV")) {
-                return new ModelAndView("redirect:/finance/advance");
+                ModelAndView model = new ModelAndView();
+                model.addObject("ticketHeaderListFinance", ticketHeaderService.findByType("ADV"));
+                model.addObject("THANIYA", ticketHeaderService.findByTypeArea("ADV", "THANIYA"));
+                model.addObject("BLC", ticketHeaderService.findByTypeArea("ADV", "BLC"));
+                model.addObject("NLC", ticketHeaderService.findByTypeArea("ADV", "NLC"));
+                model.addObject("AIRPORT", ticketHeaderService.findByTypeArea("ADV", "AIRPORT"));
+                model.addObject("NCC", ticketHeaderService.findByTypeArea("ADV", "NCC"));
+                model.addObject("LAEMCHABANG", ticketHeaderService.findByTypeArea("ADV", "LAEMCHABANG"));
+                model.addObject("KORAT", ticketHeaderService.findByTypeArea("ADV", "KORAT"));
+                model.addObject("areaTab", areaTab);
+                model.setViewName("finance/fn_advance");
+                return model;
             } else if (ticketHeader.getTicketNo().contains("PTC")) {
-                return new ModelAndView("redirect:/finance/pettycash");
+                ModelAndView model = new ModelAndView();
+                model.addObject("ticketHeaderListFinance", ticketHeaderService.findByType("PTC"));
+                model.addObject("THANIYA", ticketHeaderService.findByTypeArea("PTC", "THANIYA"));
+                model.addObject("BLC", ticketHeaderService.findByTypeArea("PTC", "BLC"));
+                model.addObject("NLC", ticketHeaderService.findByTypeArea("PTC", "NLC"));
+                model.addObject("AIRPORT", ticketHeaderService.findByTypeArea("PTC", "AIRPORT"));
+                model.addObject("NCC", ticketHeaderService.findByTypeArea("PTC", "NCC"));
+                model.addObject("LAEMCHABANG", ticketHeaderService.findByTypeArea("PTC", "LAEMCHABANG"));
+                model.addObject("KORAT", ticketHeaderService.findByTypeArea("PTC", "KORAT"));
+                model.addObject("areaTab", areaTab);
+                model.setViewName("finance/fn_pettycash");
+                return model;
             }
 
         } catch (Exception e) {

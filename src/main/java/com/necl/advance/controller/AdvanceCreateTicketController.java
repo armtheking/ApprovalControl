@@ -106,14 +106,14 @@ public class AdvanceCreateTicketController {
                 //set ค่าใน list ไว้ใน header
                 ticketHeader.getTicketdetail().get(i).setFinanceChargeCode(fc.get(i));
             }
-     
+
             for (int i = 0; i < ticketHeader.getTicketdetail().size(); i++) {
-                if(ticketHeader.getTicketdetail().get(i).getFinanceChargeCode().getAccessCode().equals("218200") && ticketHeader.getTicketdetail().get(i).getAmount().compareTo(BigDecimal.ZERO) > 0){
-                    
+                if (ticketHeader.getTicketdetail().get(i).getFinanceChargeCode().getAccessCode().equals("218200") && ticketHeader.getTicketdetail().get(i).getAmount().compareTo(BigDecimal.ZERO) > 0) {
+
                     ticketHeader.getTicketdetail().get(i).setAmount(BigDecimal.ZERO.subtract(ticketHeader.getTicketdetail().get(i).getAmount()));
                 }
-             }
-            
+            }
+
             BigDecimal sumCost = new BigDecimal("0");;
             for (TicketDetail ticketDe : ticketHeader.getTicketdetail()) {
                 sumCost = sumCost.add(ticketDe.getAmount());
@@ -303,10 +303,12 @@ public class AdvanceCreateTicketController {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
                 if (ticketHeader2.getApprovedStatus1() == true) {
 
-                    Date startDate = dateFormat.parse(ticketHeader2.getApprovedDate1());
-                    Calendar startDate2 = Calendar.getInstance();
-                    startDate2.setTime(startDate);
-                    history.setApprovedDate1(startDate2);
+                    if (!ticketHeader2.getApprovedDate1().equals("-")) {
+                        Date appDate1 = dateFormat.parse(ticketHeader2.getApprovedDate1());
+                        Calendar date = Calendar.getInstance();
+                        date.setTime(appDate1);
+                        history.setApprovedDate1(date);
+                    }
                     history.setApprovedName1(ticketHeader2.getApprovedName1());
 
                     System.out.println("ch4");
@@ -322,12 +324,12 @@ public class AdvanceCreateTicketController {
                 }
 
                 List<History> findHistory = new ArrayList<>();
-                findHistory = historyService.findByTicketNo(ticketHeader.getTicketNo());
+                findHistory = historyService.findByTicketNo(ticketHeader2.getTicketNo());
                 String revNo = "";
                 if (findHistory.size() > 0) {
                     historyService.updateStatus(ticketHeader.getTicketNo() + "-RV" + String.format("%02d", findHistory.size() - 1));
                     revNo = ticketHeader.getTicketNo() + "-RV" + String.format("%02d", findHistory.size());
-                    ticketHeader.setShowTicket(ticketHeader.getTicketNo() + "-RV" + String.format("%02d", findHistory.size() + 1));
+                    ticketHeader2.setShowTicket(ticketHeader.getTicketNo() + "-RV" + String.format("%02d", findHistory.size() + 1));
                     System.out.println(">0: " + revNo);
 
                 } else {
@@ -420,10 +422,12 @@ public class AdvanceCreateTicketController {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
                 if (ticketHeader2.getApprovedStatus1() == true) {
 
-                    Date startDate = dateFormat.parse(ticketHeader2.getApprovedDate1());
-                    Calendar startDate2 = Calendar.getInstance();
-                    startDate2.setTime(startDate);
-                    history.setApprovedDate1(startDate2);
+                    if (!ticketHeader2.getApprovedDate1().equals("-")) {
+                        Date appDate1 = dateFormat.parse(ticketHeader2.getApprovedDate1());
+                        Calendar date = Calendar.getInstance();
+                        date.setTime(appDate1);
+                        history.setApprovedDate1(date);
+                    }
                     history.setApprovedName1(ticketHeader2.getApprovedName1());
 
                     System.out.println("ch4");

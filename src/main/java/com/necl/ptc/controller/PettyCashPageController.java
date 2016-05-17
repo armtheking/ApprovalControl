@@ -41,7 +41,7 @@ public class PettyCashPageController {
             model.addAttribute("ticketHeader", new TicketHeader());
         }
         model.addAttribute("pettycash", "pettycash");
-         model.addAttribute("active", "pettycash");
+        model.addAttribute("active", "pettycash");
         return "pettycash/pettycash";
     }
 
@@ -124,6 +124,46 @@ public class PettyCashPageController {
             model.addObject("ticketHeader", ticketHeader);
 
             model.setViewName("pettycash/pettycashedit");
+            return model;
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @RequestMapping(value = {"/adminPay"}, method = RequestMethod.GET)
+    public ModelAndView adminPay(@RequestParam String id,@RequestParam String areaTab) {
+        try {
+            TicketHeader ticketHeader = ticketHeaderService.findById(id);
+
+            String number_sumAmount;
+            DecimalFormat numFormat;
+            numFormat = new DecimalFormat("#,##0.00");
+
+            number_sumAmount = numFormat.format(ticketHeader.getReqTotalAmt());
+
+            List<TicketDetailNumber> number2 = new ArrayList<>();
+
+            for (int i = 0; i < ticketHeader.getTicketdetail().size(); i++) {
+
+                System.out.println("scscsc" + ticketHeader.getTicketdetail().get(i).getFinanceChargeCode().getDescription());
+                TicketDetailNumber number = new TicketDetailNumber();
+                number.setDescription(ticketHeader.getTicketdetail().get(i).getFinanceChargeCode().getDescription());
+                number.setDetail(ticketHeader.getTicketdetail().get(i).getDetail());
+                number.setAmount(numFormat.format(ticketHeader.getTicketdetail().get(i).getAmount()));
+                number.setReceiptNo(ticketHeader.getTicketdetail().get(i).getDescription());
+                number2.add(number);
+
+            }
+            ModelAndView model = new ModelAndView();
+            
+            model.addObject("ticketDetail", number2);
+            model.addObject("areaTab", areaTab);
+            model.addObject("number_sumAmount", number_sumAmount);
+            model.addObject("ticketHeader", ticketHeader);
+
+            model.setViewName("pettycash/admin_pay");
             return model;
         } catch (Exception e) {
 

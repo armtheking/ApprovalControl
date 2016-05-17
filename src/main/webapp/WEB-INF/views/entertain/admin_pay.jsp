@@ -4,8 +4,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
 <html>
     <head>
+
         <%@ include file="../template/head.jspf" %>
 
     </head>
@@ -16,24 +18,28 @@
         <div class="container">
 
             <fieldset>
-                <legend>Show Detail</legend>
+                <legend>Details</legend>
+
                 <!-- Row 2 -->
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-danger">
-                            <div class="panel-heading">
-                                <h3>Ticket Number : <c:if test="${empty ticketHeader.showTicket}">
+
+                            <div class="panel-heading clearfix">
+                                <h3 class="panel-title pull-left" style="padding-top: 15px; font-weight: bold;">Ticket Number : <c:if test="${empty ticketHeader.showTicket}">
                                         ${ticketHeader.ticketNo}
                                     </c:if>
                                     <c:if test="${not empty ticketHeader.showTicket}">
                                         ${ticketHeader.showTicket}
+                                        &nbsp;<a href="<c:url value='../showRevise?id=${ticketHeader.ticketNo}'/>" style="font-weight: bold; color: #FFFFFF;" class="btn btn-danger" target="_blank"> <i class="fa fa-search"> View</i></a>               
                                     </c:if></h3>
                             </div>
-                            <div class="panel-body">
+
+                                                       <div class="panel-body">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label> Topic </label>
-                                        <div class="well" style="width:540px; word-wrap: break-word; display:block;">
+                                        <label> Customer's Name </label>
+                                        <div class="well">
                                             ${ticketHeader.detailHeader}
                                         </div>
                                     </div>
@@ -54,12 +60,23 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label> Reason </label>
+                                        <label> Purpose / Reason </label>
                                         <div class="well">
                                             ${ticketHeader.remarkHeader}
                                         </div>
                                     </div>
+                                    <c:if test="${!fn:contains(ticketHeader.ticketNo, 'C')}" >
+                                        <div class="col-md-2">
 
+                                            <label> Settlement Within </label>
+                                            <div class="well">
+                                                ${ticketHeader.dateAlert}
+                                            </div>
+
+
+
+                                        </div>
+                                    </c:if>
                                     <div class="col-md-4">
                                         <c:set var="theTicketNo" value="${ticketHeader.ticketNo}"/>
                                         <c:if test="${fn:contains(theTicketNo, 'C') or fn:contains(theTicketNo, 'PTC')}" >
@@ -76,20 +93,23 @@
                                     </div>
                                 </div>
 
+
+
+
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="panel panel-success">
                                             <div class="panel-heading">
-                                                <h4>Detail</h4>
+                                                <h4 style=" font-weight: bold;">Detail</h4>
                                             </div>
                                             <div class="panel-body">
                                                 <table class="table table-striped">
-                                                    <thead>
+                                                   <thead>
                                                         <tr>
                                                             <th class="col-md-1"> No </th>
                                                             <th class="col-md-4"> Description </th>
                                                             <th class="col-md-2"> Place </th>
-                                                            <th class="col-md-4"> Detail </th>
+                                                            <th class="col-md-4"> Number & List of Participant </th>
                                                             <th class="col-md-1"> Amount </th>
                                                         </tr>
                                                     </thead>
@@ -102,7 +122,7 @@
                                                                 </td>
                                                                 <td>${ticketdetail.description}</td>
                                                                 <td>${ticketdetail.place}</td>
-                                                                <td>
+                                                                <td style="width:400px; word-wrap: break-word; display:block;">
                                                                     ${ticketdetail.detail}
                                                                 </td>
                                                                 <td>
@@ -119,17 +139,37 @@
                                     </div>
                                 </div>
 
+
+
+
+                                <div class="row text-right">
+                                    <div class="col-xs-2 col-xs-offset-8">
+                                        <p>
+                                            <strong>
+                                                Total amount : <br>
+
+                                            </strong>
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <strong>
+                                            <span class="doubleUnderline">${number_sumAmount}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+
+                                        </strong>
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="panel panel-warning">
                                             <div class="panel-heading">
-                                                <h4>Status Approve</h4>
+                                                <h4 style=" font-weight: bold;">Approval Status</h4>
                                             </div>
                                             <div class="panel-body">
 
                                                 <div class="row">
                                                     <div class="col-md-5">
-                                                        <label> 1st Approve </label>
+                                                        <label> 1st Approval </label>
                                                         <div class="well well-sm">
                                                             ${ticketHeader.approvedName1}
                                                         </div>
@@ -143,7 +183,10 @@
                                                     <div class="col-md-4">
                                                         <label> Note </label>
                                                         <div class="well well-sm">
-                                                            ${ticketHeader.approvedRemark1}
+                                                            <c:if test="${ticketHeader.approvedRemark1 eq null or ticketHeader.approvedRemark1 eq ''}">
+                                                                <font style="color: red; font-weight: bold">-</font>
+                                                            </c:if>
+                                                            <font style="color: red;font-weight: bold"> ${ticketHeader.approvedRemark1} </font> 
                                                         </div>
                                                     </div>
 
@@ -152,7 +195,7 @@
 
                                                 <div class="row">
                                                     <div class="col-md-5">
-                                                        <label> 2nd Approve </label>
+                                                        <label> 2nd Approval </label>
                                                         <div class="well well-sm">
                                                             ${ticketHeader.approvedName2}
                                                         </div>
@@ -166,108 +209,78 @@
                                                     <div class="col-md-4">
                                                         <label> Note </label>
                                                         <div class="well well-sm">
-                                                            ${ticketHeader.approvedRemark2}
+                                                            <c:if test="${ticketHeader.approvedRemark2 eq null or ticketHeader.approvedRemark2 eq ''}">
+                                                                <font style="color: red;font-weight: bold">-</font>
+                                                            </c:if>
+
+                                                            <font style="color: red;font-weight: bold"> ${ticketHeader.approvedRemark2} </font> 
                                                         </div>
                                                     </div>
 
                                                 </div>
-
-
-
-
-
-
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="panel panel-primary">
-                                            <div class="panel-heading">
-                                                <h4>Finance Approve</h4>
-                                            </div>
-                                            <div class="panel-body">
-
-                                                <form:form class="form-horizontal" action="approve?${_csrf.parameterName}=${_csrf.token}" method="post" modelAttribute="ticketHeader" enctype="multipart/form-data">
-                                                    <input type="hidden"  name="areaTab" value="${areaTab}">
-                                                    <div class="form-group">
-                                                        <input type="hidden" name="ticketNo" value="${ticketHeader.ticketNo}" id="ticketNo"/>
-
-                                                        <label class="col-sm-12">Receiver && Paid By  </label>
-
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label  class="col-sm-3 control-label">Request Total Amount : </label>
-
-                                                        <div class="col-sm-5" style="margin-top: 8px;">
-                                                            <ins><b>${number_sumAmount}</b></ins>
-                                                        </div>
-                                                    </div>
-                                                    <c:if test="${not empty ticketHeader.paidByAdmin}">
-                                                        <div class="form-group">
-                                                            <label  class="col-sm-3 control-label"><FONT style="color: #FF0000; font-weight: bold;">Admin Paid : </FONT></label>
-
-                                                            <div class="col-sm-5" style="margin-top: 8px;">
-                                                                <FONT style="color: #FF0000; font-weight: bold;"><ins><b>${ticketHeader.paidByAdmin}</b></ins></FONT>
-                                                            </div>
-                                                        </div>
-                                                    </c:if>
-
-                                                    <div class="form-group">
-                                                        <label for="receiverBy" class="col-sm-3 control-label">Receiver By : </label>
-                                                        <div class="col-sm-4">
-
-                                                            <input type="text"  id="receiverBy" name="receiverBy" class="form-control" placeholder="Receiver By" autofocus="autofocus"/>
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="payment" class="col-sm-3 control-label">Payment : </label>
-                                                        <div class="col-sm-4">
-
-                                                            <select id="payment" name="payment">
-                                                                <option value="Cash">Cash</option>
-                                                                <option value="Cheque">Cheque / Credit Card</option>
-                                                            </select> 
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="form-group">
-                                                        <label for="paidRemark" class="col-sm-3 control-label">Paid Note : </label>
-                                                        <div class="col-sm-4">
-
-                                                            <textarea class="form-control" rows="2" id="paidRemark" name="paidRemark"></textarea>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row">
-                                                        <div class="col-md-8 col-md-offset-5">
-                                                            <button type="submit" class="btn btn-primary btn-lg">SAVE</button>
-                                                        </div>
-                                                    </div>
-
-                                                </form:form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                            <div class = "panel-footer">
-
-                            </div>
-
-
 
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h4>Admin Pay</h4>
+                            </div>
+                            <div class="panel-body">
+
+                                <form:form class="form-horizontal" action="adminPaySuccess?${_csrf.parameterName}=${_csrf.token}" method="post" modelAttribute="ticketHeader" enctype="multipart/form-data">
+
+                                    <input type="hidden"  name="areaTab" value="${areaTab}">
+                                    <div class="form-group">
+                                        <input type="hidden" name="ticketNo" value="${ticketHeader.ticketNo}" id="ticketNo"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label  class="col-sm-3 control-label">Request Total Amount : </label>
+
+                                        <div class="col-sm-5"  style="margin-top:5px">
+                                            <ins><b>${number_sumAmount}</b></ins>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="receiverBy" class="col-sm-3 control-label">Amount : </label>
+                                        <div class="col-sm-4">
+
+                                            <input type="text"  id="paidByAdmin" name="paidByAdmin" class="form-control" placeholder="Amount" autofocus="autofocus"/>
+
+                                        </div>
+                                    </div>
+
+                            
+
+                                    <div class="row">
+                                        <div class="col-md-8 col-md-offset-5">
+                                            <button type="submit" class="btn btn-primary btn-lg">Paid</button>
+                                        </div>
+                                    </div>
+
+                                </form:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>                             
+
+
+
+
             </fieldset>
         </div>
+
+
         <%@ include file="../template/footer.jspf" %>
         <%@ include file="../template/scripts.jspf" %>
 

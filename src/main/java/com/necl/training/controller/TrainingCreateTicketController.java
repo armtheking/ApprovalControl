@@ -252,10 +252,13 @@ public class TrainingCreateTicketController extends HttpServlet {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
                 if (ticketHeader2.getApprovedStatus1() == true) {
 
-                    Date startDate = dateFormat.parse(ticketHeader2.getApprovedDate1());
-                    Calendar startDate2 = Calendar.getInstance();
-                    startDate2.setTime(startDate);
-                    history.setApprovedDate1(startDate2);
+                    if (!ticketHeader2.getApprovedDate1().equals("-")) {
+                        Date appDate1 = dateFormat.parse(ticketHeader2.getApprovedDate1());
+                        Calendar date = Calendar.getInstance();
+                        date.setTime(appDate1);
+                        history.setApprovedDate1(date);
+                    }
+
                     history.setApprovedName1(ticketHeader2.getApprovedName1());
 
                     System.out.println("ch4");
@@ -271,12 +274,12 @@ public class TrainingCreateTicketController extends HttpServlet {
                 }
 
                 List<History> findHistory = new ArrayList<>();
-                findHistory = historyService.findByTicketNo(ticketHTraining.getTicketHeader().getTicketNo());
+                findHistory = historyService.findByTicketNo(ticketHeader2.getTicketNo());
                 String revNo = "";
                 if (findHistory.size() > 0) {
                     historyService.updateStatus(ticketHTraining.getTicketHeader().getTicketNo() + "-RV" + String.format("%02d", findHistory.size() - 1));
                     revNo = ticketHTraining.getTicketHeader().getTicketNo() + "-RV" + String.format("%02d", findHistory.size());
-                    ticketHTraining.getTicketHeader().setShowTicket(ticketHTraining.getTicketHeader().getTicketNo() + "-RV" + String.format("%02d", findHistory.size() + 1));
+                    ticketHeader2.setShowTicket(ticketHTraining.getTicketHeader().getTicketNo() + "-RV" + String.format("%02d", findHistory.size() + 1));
                     System.out.println(">0: " + revNo);
 
                 } else {
@@ -418,7 +421,11 @@ public class TrainingCreateTicketController extends HttpServlet {
         ticketHTraining.getTicketHeader().setApplicationName(HomeController.getPrincipal());
         String keyFind = "PATH";
         ConfigSystem configSystem2 = configSystemService.findByKey(keyFind);
-        String saveDirectory = configSystem2.getConfigText() + configSystem2.getConfigPrefix();
+
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+
+        String saveDirectory = configSystem2.getConfigText() + year + "/";
 
         File folder = new File(saveDirectory + HomeController.getPrincipal() + ".pdf");
         System.out.println("numberTicket: " + numberTicket);

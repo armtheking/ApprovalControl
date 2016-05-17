@@ -81,7 +81,8 @@ public class HomeController {
     @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
     public String accessDeniedPage(ModelMap model) {
         model.addAttribute("user", getPrincipal());
-        return "accessDenied";
+//        return "accessDenied";
+        return "login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

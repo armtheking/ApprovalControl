@@ -16,6 +16,9 @@ public class TicketHeaderNumber implements Serializable {
     String approvedName2;
     Boolean approvedStatus2;
     String showTicket;
+    String paidByAdmin;
+    String adminBy;
+
     public String getTicketNo() {
         return ticketNo;
     }
@@ -103,7 +106,7 @@ public class TicketHeaderNumber implements Serializable {
     public void setApprovedStatus2(Boolean approvedStatus2) {
         this.approvedStatus2 = approvedStatus2;
     }
-    
+
     public String getShowTicket() {
         return showTicket;
     }
@@ -112,5 +115,20 @@ public class TicketHeaderNumber implements Serializable {
         this.showTicket = showTicket;
     }
 
+    public String getPaidByAdmin() {
+        return paidByAdmin;
+    }
+
+    public void setPaidByAdmin(String paidByAdmin) {
+        this.paidByAdmin = paidByAdmin;
+    }
+
+    public String getAdminBy() {
+        return adminBy;
+    }
+
+    public void setAdminBy(String adminBy) {
+        this.adminBy = adminBy;
+    }
 
 }

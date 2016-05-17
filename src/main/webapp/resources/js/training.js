@@ -17,8 +17,9 @@ var check_budget = true;
 //var check_plan = null;
 //var check_payment = null;
 
-$(document).ready(function () {
 
+$(document).ready(function () {
+ 
     $('#example').DataTable();
     $('#example2').DataTable();
     $(function () {

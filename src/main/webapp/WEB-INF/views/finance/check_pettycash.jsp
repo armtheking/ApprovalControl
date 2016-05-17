@@ -23,11 +23,11 @@
                         <div class="panel panel-danger">
                             <div class="panel-heading">
                                 <h3>Ticket Number : <c:if test="${empty ticketHeader.showTicket}">
-                                            ${ticketHeader.ticketNo}
-                                        </c:if>
-                                         <c:if test="${not empty ticketHeader.showTicket}">
-                                            ${ticketHeader.showTicket}
-                                        </c:if></h3>
+                                        ${ticketHeader.ticketNo}
+                                    </c:if>
+                                    <c:if test="${not empty ticketHeader.showTicket}">
+                                        ${ticketHeader.showTicket}
+                                    </c:if></h3>
                             </div>
                             <div class="panel-body">
                                 <div class="row">
@@ -53,7 +53,7 @@
 
                                 </div>
                                 <div class="row">
-                                     <div class="col-md-4">
+                                    <div class="col-md-4">
                                         <c:set var="theTicketNo" value="${ticketHeader.ticketNo}"/>
                                         <c:if test="${fn:contains(theTicketNo, 'C') or fn:contains(theTicketNo, 'PTC')}" >
                                             <label> Attachments </label>
@@ -76,7 +76,7 @@
                                                 <h4>Detail</h4>
                                             </div>
                                             <div class="panel-body">
-                                                 <table class="table table-striped">
+                                                <table class="table table-striped">
                                                     <thead>
                                                         <tr>
                                                             <th class="col-md-1"> No </th>
@@ -188,7 +188,7 @@
 
                                                 <form:form class="form-horizontal" action="approve?${_csrf.parameterName}=${_csrf.token}" method="post" modelAttribute="ticketHeader" enctype="multipart/form-data">
 
-
+                                                    <input type="hidden"  name="areaTab" value="${areaTab}">
                                                     <div class="form-group">
                                                         <input type="hidden" name="ticketNo" value="${ticketHeader.ticketNo}" id="ticketNo"/>
 
@@ -198,10 +198,19 @@
                                                     <div class="form-group">
                                                         <label  class="col-sm-3 control-label">Request Total Amount : </label>
 
-                                                        <div class="col-sm-5">
+                                                        <div class="col-sm-5" style="margin-top: 8px;">
                                                             <ins><b>${number_sumAmount}</b></ins>
                                                         </div>
                                                     </div>
+                                                            <c:if test="${not empty ticketHeader.paidByAdmin}">
+                                                    <div class="form-group">
+                                                        <label  class="col-sm-3 control-label"><FONT style="color: #FF0000; font-weight: bold;">Admin Paid : </FONT></label>
+
+                                                        <div class="col-sm-5" style="margin-top: 8px;">
+                                                            <FONT style="color: #FF0000; font-weight: bold;"><ins><b>${ticketHeader.paidByAdmin}</b></ins></FONT>
+                                                        </div>
+                                                    </div>
+                                                            </c:if>
 
                                                     <div class="form-group">
                                                         <label for="receiverBy" class="col-sm-3 control-label">Receiver By : </label>

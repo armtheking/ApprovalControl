@@ -127,7 +127,7 @@ public class TicketHeaderDaoImpl implements TicketHeaderDao {
     @Override
     public List<TicketHeader> findMonthYear(int month, int year, String division) throws Exception {
 
-        String sql = "SELECT  ticketNo, ticketType,  applicationDate, detailHeader, reqTotalAmt,applicationName, approvedName1, approvedStatus1, approvedName2, approvedStatus2 FROM tblTicketsH "
+        String sql = "SELECT  ticketNo, ticketType,  applicationDate, detailHeader, reqTotalAmt,applicationName, approvedName1, approvedStatus1, approvedName2, approvedStatus2, ticketsFinished AS ticketFinished FROM tblTicketsH "
                 + "WHERE (YEAR(ApplicationDate) = :paramYear) AND (MONTH(ApplicationDate) = :paramMonth) AND (DivisionCode = :division) AND (TicketsFinished != 'D')"
                 + "ORDER BY ApplicationDate DESC ";
         Query query = sessionFactory.getCurrentSession().createSQLQuery(sql)
@@ -141,6 +141,7 @@ public class TicketHeaderDaoImpl implements TicketHeaderDao {
                 .addScalar("approvedStatus1", BooleanType.INSTANCE)
                 .addScalar("approvedName2", StringType.INSTANCE)
                 .addScalar("approvedStatus2", BooleanType.INSTANCE)
+                .addScalar("ticketFinished", StringType.INSTANCE)
                 .setResultTransformer(Transformers.aliasToBean(TicketHeader.class));
         query.setParameter("paramYear", year);
         query.setParameter("paramMonth", month);
@@ -210,7 +211,7 @@ public class TicketHeaderDaoImpl implements TicketHeaderDao {
 
     @Override
     public List<TicketHeader> findMonthYearArea(int month, int year, String division, String area) throws Exception {
-        String sql = "SELECT  ticketNo, ticketType,  applicationDate, detailHeader, reqTotalAmt,applicationName, approvedName1, approvedStatus1, approvedName2, approvedStatus2 \n"
+        String sql = "SELECT  ticketNo, ticketType,  applicationDate, detailHeader, reqTotalAmt,applicationName, approvedName1, approvedStatus1, approvedName2, approvedStatus2, ticketsFinished AS ticketFinished, paidByAdmin, adminBy \n"
                 + "FROM APP_USER LEFT OUTER JOIN\n"
                 + "tblMaster_Branch ON APP_USER.branchId = tblMaster_Branch.BranchID RIGHT OUTER JOIN\n"
                 + "tblTicketsH ON APP_USER.SSO_ID = tblTicketsH.ApplicationName\n"
@@ -227,6 +228,9 @@ public class TicketHeaderDaoImpl implements TicketHeaderDao {
                 .addScalar("approvedStatus1", BooleanType.INSTANCE)
                 .addScalar("approvedName2", StringType.INSTANCE)
                 .addScalar("approvedStatus2", BooleanType.INSTANCE)
+                .addScalar("ticketFinished", StringType.INSTANCE)
+                .addScalar("paidByAdmin", BigDecimalType.INSTANCE)
+                .addScalar("adminBy", StringType.INSTANCE)
                 .setResultTransformer(Transformers.aliasToBean(TicketHeader.class));
         query.setParameter("paramYear", year);
         query.setParameter("paramMonth", month);

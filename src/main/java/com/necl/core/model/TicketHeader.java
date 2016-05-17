@@ -193,6 +193,12 @@ public class TicketHeader implements Serializable {
     @Column(name = "ShowTicket", length = 20)
     private String showTicket;
 
+    @Column(name = "PaidByAdmin", precision = 18, scale = 2)
+    private BigDecimal paidByAdmin;
+
+    @Column(name = "AdminBy", length = 14)
+    private String adminBy;
+
     @Transient
     private CommonsMultipartFile file;
 
@@ -380,7 +386,7 @@ public class TicketHeader implements Serializable {
     public void setShowTicket(String showTicket) {
         this.showTicket = showTicket;
     }
-    
+
     public List<TicketDetail> getTicketdetail() {
         return ticketdetail;
     }
@@ -673,6 +679,22 @@ public class TicketHeader implements Serializable {
 
     public void setRemarkOverRequestAmount(String remarkOverRequestAmount) {
         this.remarkOverRequestAmount = remarkOverRequestAmount;
+    }
+
+    public BigDecimal getPaidByAdmin() {
+        return paidByAdmin;
+    }
+
+    public void setPaidByAdmin(BigDecimal paidByAdmin) {
+        this.paidByAdmin = paidByAdmin;
+    }
+
+    public String getAdminBy() {
+        return adminBy;
+    }
+
+    public void setAdminBy(String adminBy) {
+        this.adminBy = adminBy;
     }
 
     @PrePersist
